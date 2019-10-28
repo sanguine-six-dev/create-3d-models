@@ -6,7 +6,7 @@ const path = require('path'),
     exampleRouter = require('../routes/examples.server.routes');
 
 module.exports.init = () => {
-    /* 
+    /*
         connect to database
         - reference README for db uri
     */
