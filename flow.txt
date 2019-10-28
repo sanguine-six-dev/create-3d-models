@@ -8,6 +8,7 @@ you understand how to use GitHub and utilize the git flow.
 Place your name here:
 
 1.  Ken Wilkinson
+2.  Ashleigh Hillebrand
 
 If you are having a hard time, please be sure to follow the steps
 below to merge upstream.
