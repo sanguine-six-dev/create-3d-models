@@ -8,7 +8,7 @@ you understand how to use GitHub and utilize the git flow.
 Place your name here:
 
 1.  Ken Wilkinson (This text has been added after creating a branch)
-2.  Ashleigh Hillebrand
+2.  Ashleigh Hillebrand (Updated with branch)
 3.  Connor R Wolfe
 4.  Matt Rabe
 
