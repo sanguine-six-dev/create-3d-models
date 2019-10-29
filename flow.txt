@@ -10,6 +10,7 @@ Place your name here:
 1.  Ken Wilkinson
 2.  Ashleigh Hillebrand
 3.  Connor Wolfe
+4.  Matt Rabe
 
 If you are having a hard time, please be sure to follow the steps
 below to merge upstream.
