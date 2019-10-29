@@ -43,14 +43,14 @@ Work flow:
 
 5.  Next, use:
 
-    git pull
+    git pull https://github.com/sanguine-six-dev/create-3d-models
 
     to check any potential conflicts with future merging by comparing currently developed code
     with the newest version of the repository.
 
 6.  After resolving all possible merge conflicts, use
 
-    git push [branch_name] https://github.com/sanguine-six-dev/create-3d-models/
+    git push https://github.com/sanguine-six-dev/create-3d-models [branch_name] 
 
     to stage a merge request.  You will need to follow the steps provided in the link
     github displays as a return to this request to finalize the merge request.
