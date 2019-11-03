@@ -5,36 +5,17 @@ class UpdateEmail extends Component {
         super(props);
 
         this.state = {
-            name: '',
             email: '',
-            nameFieldError: '',
             emailFieldError: ''
         };
-    };
-
-    handleNameChange = event => {
-        this.setState({
-            name: event.target.value
-        }, () => {
-            this.nameValidation();
-        })
     };
 
     handleEmailChange = event => {
         this.setState({
             email: event.target.value
         }, () => {
-            this.nameValidation();
+            this.emailValidation();
         })
-    };
-
-    nameValidation = () => {
-        const name = this.state.name;
-        this.setState({
-                nameFieldError: name.length > 1 ? null :
-                    'Name must be longer than 1 character'
-            }
-        )
     };
 
     emailValidation = () => {
@@ -46,24 +27,13 @@ class UpdateEmail extends Component {
 
     handleSubmit = event => {
         event.preventDefault();
-        const {name, email} = this.state;
-        alert(`name: ${name}\n email: ${email}`)
+        const {email} = this.state;
+        alert(`email address: ${email}`)
     };
 
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
-                <div className="form-group">
-                    <label htmlFor="name">Name</label>
-                    <input name="name"
-                           className={`form-control ${this.state.nameFieldError ? 'is-invalid' : ''}`}
-                           id="name" placeholder="Enter name"
-                           value={this.state.name}
-                           onChange={this.handleNameChange}
-                           onBlur={this.nameValidation}
-                    />
-                    <div className='invalid-feedback'>{this.state.nameFieldError}</div>
-                </div>
                 <div className="form-group">
                     <label htmlFor="email">Email</label>
                     <input name="email"
@@ -82,7 +52,6 @@ class UpdateEmail extends Component {
                 </button>
             </form>
         )
-
     }
 }
 
