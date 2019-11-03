@@ -20,15 +20,22 @@ class UpdateEmail extends Component {
 
     emailValidation = () => {
         const email = this.state.email;
+        const emailValid = email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
+
         this.setState({
-            emailFieldError: email.length > 1 ? null : 'Email address must be longer than 3 characters'
+            emailFieldError: emailValid ? null : 'Email address entered is not in a valid format'
         })
     };
 
     handleSubmit = event => {
         event.preventDefault();
         const {email} = this.state;
-        alert(`email address: ${email}`)
+        if (this.email !== "" && !this.state.emailFieldError) {
+            alert(`Updated Email Address: ${email}`)
+
+        } else {
+            alert(`The email address submitted must be in valid form`)
+        }
     };
 
     render() {
