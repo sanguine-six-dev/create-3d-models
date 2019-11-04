@@ -25,7 +25,13 @@ class UpdateContactInfo extends Component {
         this.setState({
             phone: event.target.value
         }, () => {
-            this.nameValidation();
+            this.phoneValidation();
+        })
+    };
+
+    handleAddressChange = event => {
+        this.setState({
+            address: event.target.value
         })
     };
 
@@ -41,14 +47,19 @@ class UpdateContactInfo extends Component {
     phoneValidation = () => {
         const phone = this.state.phone;
         this.setState({
-            phoneFieldError: phone.length > 10 ? null : 'Phone number must be longer than 10 numbers'
+            phoneFieldError: phone.length > 9 ? null : 'Phone number must be longer than 10 numbers'
         })
     };
 
     handleSubmit = event => {
         event.preventDefault();
-        const {name, phone, address} = this.state;
-        alert(`name: ${name}\n phone number: ${phone}\n address: ${address}`)
+        const {name, phone, address, nameFieldError, phoneFieldError} = this.state;
+        if (name !== "" && !nameFieldError && phone !== "" && !phoneFieldError) {
+            alert(`name: ${name}\n phone number: ${phone}\n address: ${address}`);
+        } else {
+            alert(`Submission requires Name and Phone Number fields must be filled out.`)
+        }
+
     };
 
     render() {
@@ -86,9 +97,8 @@ class UpdateContactInfo extends Component {
                            id="address"
                            placeholder="Enter address (optional)"
                            value={this.state.address}
-                           onChange={this.handleAdressChange}
+                           onChange={this.handleAddressChange}
                     />
-                    <div className='invalid-feedback'>{this.state.addressFieldError}</div>
                 </div>
                 <button type="submit"
                         className="btn btn-success btn-block">Submit
