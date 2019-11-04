@@ -9,7 +9,7 @@
 import React from "react"
 import ViewListing from './ViewListing'
 
-class MyListing extends React.Component{
+class UserListings extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
@@ -86,4 +86,4 @@ class MyListing extends React.Component{
 		)
     }    
 }
-export default MyListing;
+export default UserListings;
