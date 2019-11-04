@@ -17,12 +17,25 @@ export default ({data, selectedListing}) => {
 		)
 })
 
-	return (
-		<div className="selectedListing">
-			<p>
-				{' '}
-				{infoPanel}
-			</p>
-		</div>
-	);
+	if(selectedListing === 0) {
+		return (
+			<div className="selectedListing">
+				<p>
+					{' '}
+					Click on a listing to see more information
+					{infoPanel}
+				</p>
+			</div>
+		);
+	}
+	else {
+		return (
+			<div className="selectedListing">
+				<p>
+					{' '}
+					{infoPanel}
+				</p>
+			</div>
+		);
+	}
 }
