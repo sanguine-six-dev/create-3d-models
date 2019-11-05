@@ -3,6 +3,7 @@ const path = require('path'),
     mongoose = require('mongoose'),
     morgan = require('morgan'),
     bodyParser = require('body-parser'),
+    emailPreferencesRouter = require('../routes/emailPreferences.server.routes');
     exampleRouter = require('../routes/examples.server.routes');
 
 module.exports.init = () => {
@@ -27,6 +28,10 @@ module.exports.init = () => {
 
     // add a router
     app.use('/api/example', exampleRouter);
+
+    // add a router
+    app.use('/api/emailPreferences', emailPreferencesRouter);
+
 
     if (process.env.NODE_ENV === 'production') {
         // Serve any static files

@@ -1,11 +1,10 @@
-//You can replace this entire file with your Bootcamp Assignment #2 - ListingSchema.js File
-
 /* Import mongoose and define any variables needed to create the schema */
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 /* Create your schema */
 var emailSchema = new Schema({
+
         emailAddress: {type: String, required: true},
     },
     {
