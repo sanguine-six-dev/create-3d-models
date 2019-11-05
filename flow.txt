@@ -11,7 +11,10 @@ Place your name here:
 1.  Ken Wilkinson (This name is added after eliminating local fork)
 =======
 1.  Ken Wilkinson (This text has been added after creating a branch)
->>>>>>> checkout
+<<<<<<< HEAD
+2.  Ashleigh Hillebrand (Updated with branch)
+3.  Connor R Wolfe
+4.  Matt Rabe
 
 *** Prior to any code development, please create a branch in your local 
 working directory to perform code development ***
