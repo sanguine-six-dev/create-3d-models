@@ -3,18 +3,16 @@ const path = require('path'),
     mongoose = require('mongoose'),
     morgan = require('morgan'),
     bodyParser = require('body-parser'),
+    emailPreferencesRouter = require('../routes/emailPreferences.server.routes');
     exampleRouter = require('../routes/examples.server.routes');
 
 module.exports.init = () => {
-    //Connect to mongoDB
-    module.exports = {
-        db: {
-          //uri: //place the URI of your mongo database here.
-        }
-    };
-
-    mongoose.connect(process.env.DB_URI || require('../database/config').db.uri, {
-        useNewUrlParser: true
+    /*
+        connect to database
+        - reference README for db uri
+    */
+    mongoose.connect(process.env.DB_URI || require('./config').db.uri, {
+        useNewUrlParser: true, useUnifiedTopology: true
     });
     mongoose.set('useCreateIndex', true);
     mongoose.set('useFindAndModify', false);
@@ -31,6 +29,10 @@ module.exports.init = () => {
     // add a router
     app.use('/api/example', exampleRouter);
 
+    // add a router
+    app.use('/api/emailPreferences', emailPreferencesRouter);
+
+
     if (process.env.NODE_ENV === 'production') {
         // Serve any static files
         app.use(express.static(path.join(__dirname, '../../client/build')));
@@ -42,5 +44,5 @@ module.exports.init = () => {
     }
 
     return app
-}
+};
 
