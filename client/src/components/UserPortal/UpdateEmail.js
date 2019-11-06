@@ -53,6 +53,7 @@ class UpdateEmail extends Component {
     saveEmailPreferences(emailPreference) {
         console.log(emailPreference);
         axios.post('/api/emailPreferences', {
+            "userId": 1,
             "emailAddress": emailPreference
         })
             .then(res => {
