@@ -17,6 +17,7 @@ var should = require('should'),
 var emailAddress;
 
 emailAddress = {
+    userId: 1,
     email: "testemail@gmail.com",
     other: "test"
 };
@@ -39,6 +40,7 @@ describe('Email Preference Schema Unit Tests', function () {
 
         it('saves properly when emailAddress provided', function (done) {
             new EmailPreference({
+                userId: emailAddress.userId,
                 emailAddress: emailAddress.email,
             }).save(function (err, emailAddress) {
                 should.not.exist(err);

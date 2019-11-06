@@ -1,25 +1,27 @@
 import React, {Component} from 'react'
+import axios from 'axios'
 
 class UpdateEmail extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            email: '',
+            emailPreferences: [],
+            emailPreference: '',
             emailFieldError: ''
         };
     };
 
     handleEmailChange = event => {
         this.setState({
-            email: event.target.value
+            emailPreference: event.target.value
         }, () => {
             this.emailValidation();
         })
     };
 
     emailValidation = () => {
-        const email = this.state.email;
+        const email = this.state.emailPreference;
         const emailValid = email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
 
         this.setState({
@@ -29,26 +31,49 @@ class UpdateEmail extends Component {
 
     handleSubmit = event => {
         event.preventDefault();
-        const {email} = this.state;
-        if (this.email !== "" && !this.state.emailFieldError) {
-            alert(`Updated Email Address: ${email}`)
+        const {emailPreference} = this.state;
+        if (this.emailPreference !== "" && !this.state.emailFieldError) {
+            alert(`Updated Email Address: ${emailPreference}`)
 
         } else {
             alert(`The email address submitted must be in valid form`)
         }
+
+        this.saveEmailPreferences(emailPreference);
     };
+
+    getEmailPreferences() {
+        axios.get('/api/emailPreferences')
+            .then(res => {
+                console.log(res);
+                this.setState({emailPreferences: res.data})
+            })
+    }
+
+    saveEmailPreferences(emailPreference) {
+        console.log(emailPreference);
+        axios.post('/api/emailPreferences', {
+            "emailAddress": emailPreference
+        })
+            .then(res => {
+                console.log(res);
+                console.log(res.data);
+            })
+    }
 
     render() {
         return (
+
+
             <form onSubmit={this.handleSubmit}>
                 <div className="form-group">
-                    <label htmlFor="email">Email</label>
-                    <input name="email"
+                    <label htmlFor="emailPreference">Email</label>
+                    <input name="emailPreference"
 
                            className={`form-control ${this.state.emailFieldError ? 'is-invalid' : ''}`}
-                           id="email"
+                           id="emailPreference"
                            placeholder="Enter email"
-                           value={this.state.email}
+                           value={this.state.emailPreference}
                            onChange={this.handleEmailChange}
                            onBlur={this.emailValidation}
                     />
@@ -58,6 +83,7 @@ class UpdateEmail extends Component {
                         className="btn btn-success btn-block">Submit
                 </button>
             </form>
+
         )
     }
 }

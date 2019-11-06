@@ -38,6 +38,7 @@ describe('EmailPreferences CRUD tests', function () {
                     .end(function (err, res) {
                         should.not.exist(err);
                         should.exist(res);
+                        res.body.userId.should.equal(1);
                         res.body.emailAddress.should.equal('testemail@gmail.com');
                         res.body._id.should.equal(emailPreference._id.toString());
                         done();
