@@ -6,11 +6,14 @@ const path = require('path'),
     exampleRouter = require('../routes/examples.server.routes');
 
 module.exports.init = () => {
-    /*
-        connect to database
-        - reference README for db uri
-    */
-    mongoose.connect(process.env.DB_URI || require('./config').db.uri, {
+    //Connect to mongoDB
+    module.exports = {
+        db: {
+          //uri: //place the URI of your mongo database here.
+        }
+    };
+
+    mongoose.connect(process.env.DB_URI || require('../database/config').db.uri, {
         useNewUrlParser: true
     });
     mongoose.set('useCreateIndex', true);
