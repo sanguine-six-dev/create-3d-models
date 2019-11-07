@@ -4,7 +4,7 @@ const path = require('path'),
     morgan = require('morgan'),
     bodyParser = require('body-parser'),
     emailPreferencesRouter = require('../routes/emailPreferences.server.routes');
-    exampleRouter = require('../routes/examples.server.routes');
+    contactInfoRouter = require('../routes/contactInfo.server.routes');
 
 module.exports.init = () => {
     /*
@@ -27,7 +27,7 @@ module.exports.init = () => {
     app.use(bodyParser.json());
 
     // add a router
-    app.use('/api/example', exampleRouter);
+    app.use('/api/contactInfo', contactInfoRouter);
 
     // add a router
     app.use('/api/emailPreferences', emailPreferencesRouter);
@@ -38,7 +38,7 @@ module.exports.init = () => {
         app.use(express.static(path.join(__dirname, '../../client/build')));
 
         // Handle React routing, return all requests to React app
-        app.get('*', function(req, res) {
+        app.get('*', function (req, res) {
             res.sendFile(path.join(__dirname, '../../client/build', 'index.html'));
         });
     }
