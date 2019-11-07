@@ -1,12 +1,12 @@
 /* Dependencies */
 var mongoose = require('mongoose'),
-    ContactInfo = require('../models/userPortal.server.model.js');
+    {UserPortal} = require('../models/userPortal.server.model.js');
 
 /* Create an user contact information */
 exports.create = function (req, res) {
 
     /* Instantiate an user contact information*/
-    var contactInfo = new ContactInfo(req.body);
+    var contactInfo = new UserPortal(req.body);
 
     /* Then save the contact information */
     contactInfo.save(function (err) {
@@ -31,7 +31,7 @@ exports.update = function (req, res) {
     var contactInfo = req.contactInfo;
 
     /* Replace the contact info properties with the new properties found in req.body */
-    ContactInfo.findByIdAndUpdate(contactInfo._id, {
+    UserPortal.findByIdAndUpdate(contactInfo._id, {
         userId: req.body.userId,
         name: req.body.name,
         address: req.body.address,
@@ -60,7 +60,7 @@ exports.update = function (req, res) {
 /* Delete the user's contact info */
 exports.delete = function (req, res) {
     var contactInfo = req.contactInfo;
-    ContactInfo.findByIdAndRemove(contactInfo._id)
+    UserPortal.findByIdAndRemove(contactInfo._id)
         .then(result => {
             if (!result) {
                 return res.status(404).send({
@@ -83,7 +83,7 @@ exports.delete = function (req, res) {
 
 /* Retrieve all the user's contact info, sorted alphabetically by userId */
 exports.list = function (req, res) {
-    ContactInfo.find()
+    UserPortal.find()
         .sort({userId: 1})
         .then(addresses => {
             res.send(addresses);
@@ -98,7 +98,7 @@ exports.list = function (req, res) {
   Middleware: find contact information by its ID, then pass it to the next request handler.
  */
 exports.contactByID = function (req, res, next, id) {
-    ContactInfo.findById(id).exec(function (err, contactInfo) {
+    UserPortal.findById(id).exec(function (err, contactInfo) {
         if (err) {
             res.status(400).send(err);
         } else {
