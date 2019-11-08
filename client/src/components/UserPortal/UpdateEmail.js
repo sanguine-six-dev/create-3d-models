@@ -107,7 +107,7 @@ class UpdateEmail extends Component {
     findEmailPreference() {
         this.state.emailPreferences.find((emailPreference) => {
             if (emailPreference.userId === this.state.userId) {
-                console.log(`here is the email found: ${JSON.stringify(emailPreference)}`)
+                console.log(`here is the email found: ${JSON.stringify(emailPreference)}`);
                 this.state.emailPreference = emailPreference;
             }
         });
@@ -116,8 +116,8 @@ class UpdateEmail extends Component {
     render() {
         return (
             <div>
-                <p>Current Email Adrress: {}</p>
-                <br/>
+                {/*<p>Current Email Address: {}</p>*/}
+                {/*<br/>*/}
                 <form onSubmit={this.handleSubmit}>
                     <div className="form-group">
                         <label htmlFor="emailPreference">Email</label>
