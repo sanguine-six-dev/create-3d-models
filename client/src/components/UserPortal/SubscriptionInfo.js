@@ -1,9 +1,19 @@
 import React from 'react';
+import PayPalButton from './PayPalButton'
+
 
 //Current benefits and Upgraded benefits can be filled out after we are given more information from the client.
 //No styling or css has been done.
 //Throws warnings when comparing in PriceDisplay
 //Needs selectedOption to be an number
+
+
+//We need to move the client ID to another file at some point
+const CLIENT = {
+    sandbox: 'AXZJyFj_3N6Lsh0h9JcZBi9eHM4csjjZwN0WcwDFjdoEKD7iEvWaBq6YdL_oirIHtZCe3ee3ENpxoot4'
+  };
+
+const ENV = 'sandbox' //I only have access to sandbox testing currently
 
 class SubscriptionInfo extends React.Component {
     //This holds the state of the subscription level dropdown box
@@ -93,17 +103,33 @@ function PriceDisplay(props) {
 function CheckoutButtonDisplay(props) {
     const selected = props.selectedOption.valueOf();
     if (selected > 0) {
+
+        const onSuccess = (payment) =>
+            console.log('Successful payment!', payment);
+
+        const onError = (error) =>
+            console.log('Erroneous payment OR failed to load script!', error);
+
+        const onCancel = (data) =>
+            console.log('Cancelled payment!', data);
+
         return(
             <div
                 class="form-row d-flex justify-content-center"
             >
-                <button
-                    variant="primary"
-                    size="lg"
-                    className="btn btn-secondary btn-lg"
-                >
-                    Checkout
-                </button>
+                <div>
+                    <PayPalButton
+                     client={CLIENT}
+                     env={ENV}
+                     commit={true}
+                     amount="1.00"
+                     currency={'USD'}
+                     total={100}
+                     onSuccess={onSuccess}
+                     onError={onError}
+                     onCancel={onCancel}
+                    />
+                </div>
             </div>
         );
     } else {
