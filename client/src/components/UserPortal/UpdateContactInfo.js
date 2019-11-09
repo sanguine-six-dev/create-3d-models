@@ -1,16 +1,22 @@
 import React, {Component} from 'react'
+import axios from 'axios'
 
 class UpdateContactInfo extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
+            userId: 1,
+            allContactInfo: [],
+            contactInof: {},
             name: '',
             phone: '',
             address: '',
             nameFieldError: '',
             phoneFieldError: '',
         };
+
+        this.handleSubmit = this.handleSubmit.bind(this);
     };
 
     handleNameChange = event => {
@@ -61,6 +67,73 @@ class UpdateContactInfo extends Component {
         }
 
     };
+
+    /***
+     * This function will get every user's contact info out of the database
+     */
+    getAllContactInfo() {
+        axios.get('/api/contactInfo')
+            .then(res => {
+                console.log(res);
+                this.setState({allContactInfo: res.data})
+            })
+    }
+
+    /***
+     * This function will get a particular user's contact info out of the database
+     */
+    getContactInfo() {
+        axios.get('/api/contactInfo/' + this.state.contactInfo._id)
+            .then(res => {
+                console.log(res);
+                this.setState({contactInfo: res.data})
+            })
+    }
+
+    /***
+     * This function will save an email preference to the database
+     */
+    saveContactInfo() {
+        axios.post('/api/contactInfo', {
+            "userId": this.state.userId,
+            "name": this.state.contactInfo.name,
+            "phone": this.state.contactInfo.phone,
+            "address": this.state.contactInfo.address,
+
+        })
+            .then(res => {
+                console.log(res);
+                console.log(res.data);
+            })
+    }
+
+    /***
+     * This function will save an email preference to the database
+     */
+    updateEmailPreference() {
+        axios.put('/api/contactInfo/' + this.state.contactInfo._id, {
+            "userId": this.state.userId,
+            "name": this.state.contactInfo.name,
+            "phone": this.state.contactInfo.phone,
+            "address": this.state.contactInfo.address,
+        })
+            .then(res => {
+                console.log(res);
+                console.log(res.data);
+            })
+    }
+
+    /***
+     * This function will find the emailPreference based on userId
+     */
+    findEmailPreference() {
+        this.state.allContactInfo.find((contactInfo) => {
+            if (contactInfo.userId === this.state.userId) {
+                console.log(`here is the contact info found: ${JSON.stringify(contactInfo)}`);
+                this.state.contactInfo = contactInfo;
+            }
+        });
+    }
 
     render() {
         return (
