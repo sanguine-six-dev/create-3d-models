@@ -8,7 +8,7 @@ class UpdateContactInfo extends Component {
         this.state = {
             userId: 1,
             allContactInfo: [],
-            contactInof: {},
+            contactInfo: {},
             name: '',
             phone: '',
             address: '',
@@ -16,6 +16,7 @@ class UpdateContactInfo extends Component {
             phoneFieldError: '',
         };
 
+        this.getAllContactInfo();
         this.handleSubmit = this.handleSubmit.bind(this);
     };
 
@@ -62,6 +63,13 @@ class UpdateContactInfo extends Component {
         const {name, phone, address, nameFieldError, phoneFieldError} = this.state;
         if (name !== "" && !nameFieldError && phone !== "" && !phoneFieldError) {
             alert(`name: ${name}\n phone number: ${phone}\n address: ${address}`);
+
+            let id = this.findContactInfo();
+            console.log(`contact info id: ${id}`);
+            this.updateContactInfo(id);
+
+            console.log(`contact info preferences: ${JSON.stringify(this.state.contactInfo)}`);
+            console.log(`contact info preferences array: ${JSON.stringify(this.state.contactInfo)}`);
         } else {
             alert(`Submission requires Name and Phone Number fields must be filled out.`)
         }
@@ -91,7 +99,7 @@ class UpdateContactInfo extends Component {
     }
 
     /***
-     * This function will save an email preference to the database
+     * This function will save an contact info to the database
      */
     saveContactInfo() {
         axios.post('/api/contactInfo', {
@@ -108,14 +116,14 @@ class UpdateContactInfo extends Component {
     }
 
     /***
-     * This function will save an email preference to the database
+     * This function will save an contact info to the database
      */
-    updateEmailPreference() {
-        axios.put('/api/contactInfo/' + this.state.contactInfo._id, {
+    updateContactInfo(id) {
+        axios.put('/api/contactInfo/' + id, {
             "userId": this.state.userId,
-            "name": this.state.contactInfo.name,
-            "phone": this.state.contactInfo.phone,
-            "address": this.state.contactInfo.address,
+            "name": this.state.name,
+            "phone": this.state.phone,
+            "address": this.state.address,
         })
             .then(res => {
                 console.log(res);
@@ -124,15 +132,28 @@ class UpdateContactInfo extends Component {
     }
 
     /***
-     * This function will find the emailPreference based on userId
+     * This function will find the contact info based on userId
      */
-    findEmailPreference() {
-        this.state.allContactInfo.find((contactInfo) => {
-            if (contactInfo.userId === this.state.userId) {
-                console.log(`here is the contact info found: ${JSON.stringify(contactInfo)}`);
-                this.state.contactInfo = contactInfo;
+    findContactInfo() {
+        let id = "";
+        this.state.allContactInfo.find((info) => {
+            if (info.userId === this.state.userId) {
+                console.log(`here is the contact info found: ${JSON.stringify(info)}`);
+
+                let parsedInfo = JSON.parse(JSON.stringify(info));
+
+                this.setState(
+                    {
+                        contactInfo: info,
+                        name: JSON.stringify(info.name),
+                        phone: JSON.stringify(info.phone),
+                        address: JSON.stringify(info.address)
+                    }
+                );
+                id = info._id;
             }
         });
+        return id;
     }
 
     render() {
