@@ -16,6 +16,9 @@ class UpdateContactInfo extends Component {
             phoneFieldError: '',
         };
 
+        // preserve the initial state in a new object
+        this.baseState = this.state;
+
         this.getAllContactInfo();
         this.handleSubmit = this.handleSubmit.bind(this);
     };
@@ -70,10 +73,16 @@ class UpdateContactInfo extends Component {
 
             console.log(`contact info preferences: ${JSON.stringify(this.state.contactInfo)}`);
             console.log(`contact info preferences array: ${JSON.stringify(this.state.contactInfo)}`);
+            this.resetForm();
+
         } else {
             alert(`Submission requires Name and Phone Number fields must be filled out.`)
         }
 
+    };
+
+    resetForm = () => {
+        this.setState(this.baseState);
     };
 
     /***
