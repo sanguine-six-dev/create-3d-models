@@ -82,7 +82,11 @@ class UpdateContactInfo extends Component {
     };
 
     resetForm = () => {
-        this.setState(this.baseState);
+        this.setState({
+            name: "",
+            phone: "",
+            address: ""
+        });
     };
 
     /***

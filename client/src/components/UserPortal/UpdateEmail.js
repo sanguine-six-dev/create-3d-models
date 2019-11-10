@@ -7,6 +7,7 @@ class UpdateEmail extends Component {
 
         this.state = {
             userId: 1,
+            currentEmail: 'testing',
             emailPreferences: [],
             emailPreference: {},
             emailAddress: '',
@@ -15,9 +16,13 @@ class UpdateEmail extends Component {
 
         // This will pull all of the email preferences out of the database
         this.getEmailPreferences();
+
+        this.handleEmailChange = this.handleEmailChange.bind(this);
+        this.emailValidation = this.emailValidation.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     };
 
-    handleEmailChange = event => {
+    handleEmailChange(event) {
         this.setState({
             emailAddress: event.target.value
         }, () => {
@@ -34,21 +39,25 @@ class UpdateEmail extends Component {
         })
     };
 
-    handleSubmit = event => {
+    handleSubmit(event) {
         event.preventDefault();
         const {emailAddress} = this.state;
-        if (this.emailAddress !== "" && !this.state.emailFieldError) {
-            alert(`Updated Email Address: ${emailAddress}`)
+        if (emailAddress !== "" && !this.state.emailFieldError) {
+            alert(`Updated Email Address: ${emailAddress}`);
+
+            let id = this.findEmailPreference();
+            console.log(`email id: ${id}`);
+
+            this.updateEmailPreference(id);
+
+            this.resetForm();
         } else {
             alert(`The email address submitted must be in valid form`)
         }
+    };
 
-        this.findEmailPreference();
-        console.log(`email id: ${JSON.stringify(this.state.emailPreference._id)}`);
-        this.updateEmailPreference();
-
-        console.log(`email preferences: ${JSON.stringify(this.state.emailPreference)}`);
-        console.log(`email preferences array: ${JSON.stringify(this.state.emailPreferences)}`);
+    resetForm = () => {
+        this.setState({emailAddress: ""});
     };
 
     /***
@@ -90,8 +99,8 @@ class UpdateEmail extends Component {
     /***
      * This function will save an email preference to the database
      */
-    updateEmailPreference() {
-        axios.put('/api/emailPreferences/' + this.state.emailPreference._id, {
+    updateEmailPreference(id) {
+        axios.put('/api/emailPreferences/' + id, {
             "userId": this.state.userId,
             "emailAddress": this.state.emailAddress
         })
@@ -105,12 +114,21 @@ class UpdateEmail extends Component {
      * This function will find the emailPreference based on userId
      */
     findEmailPreference() {
+        let id = "";
         this.state.emailPreferences.find((emailPreference) => {
             if (emailPreference.userId === this.state.userId) {
                 console.log(`here is the email found: ${JSON.stringify(emailPreference)}`);
-                this.state.emailPreference = emailPreference;
+                this.setState({
+                    currentEmail: JSON.stringify(emailPreference.emailAddress),
+                    emailPreference: emailPreference,
+                    emailAddress: JSON.stringify(emailPreference.emailAddress)
+                });
+
+                id = emailPreference._id;
+                console.log(`here is the id:  ${id}`)
             }
         });
+        return id;
     }
 
     render() {
