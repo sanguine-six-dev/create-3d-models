@@ -28,7 +28,7 @@ class SubscriptionInfo extends React.Component {
             <div
                 id="subscriptionAll"
             >
-                <p>Current subscription level:
+                <p>Choose subscription level:
                     <select
                         className="browser-default custom-select"
                         value={this.state.selectedOption}
@@ -36,22 +36,32 @@ class SubscriptionInfo extends React.Component {
                         id = "subscriptionSelector"
                     >
                         <option>Choose your option</option>
-                        <option value="1">Subscription Level 1</option>
-                        <option value="2">Subscription Level 2</option>
-                        <option value="3">Subscription Level 3</option>
+                        <option value="1">Basic Listing</option>
+                        <option value="2">Premium Listing</option>
+                        <option value="3">Splash Page Listing</option>
                     </select>
                 </p>
 
                 <PriceDisplay
                         selectedOption={this.state.selectedOption}
                 />
+                
                 <br/>
+                    <p>Current benefits:</p>
+                <br/>
+                <p class="text-center subscription">
+                    Business Name <br/>
+                    Business Address with a location on Google Maps <br/>
+                    Phone Number <br/>
+                    Link to your website <br/>
+                    <br/>
+                </p>
 
-                <p>Current benefits:</p>
+                    <p>Upgraded benefits:</p>
                 <br/>
-
-                <p>Upgraded benefits:</p>
-                <br/>
+                <BenefitsDisplay
+                        selectedOption={this.state.selectedOption}
+                />
 
                 <CheckoutButtonDisplay
                     selectedOption={this.state.selectedOption}
@@ -73,21 +83,24 @@ function PriceDisplay(props) {
         return(
             <div>
                 <br/>
-                <p>Price to upgrade: Pricepoint1</p>
+                <p>Price to upgrade:</p>
+                <p class="text-center subscription">$59.00</p>
             </div>
         );
     } else if (selected == 2){
         return(
             <div>
                 <br/>
-                <p>Price to upgrade: Pricepoint2</p>
+                <p>Price to upgrade:</p>
+                <p class="text-center subscription">$89.00</p>
             </div>
         );
     } else if (selected == 3){
         return(
             <div>
                 <br/>
-                <p>Price to upgrade: Pricepoint3</p>
+                <p>Price to upgrade:</p>
+                <p class="text-center subscription">$199.00</p>
             </div>
         );
     } else {
@@ -113,6 +126,18 @@ function CheckoutButtonDisplay(props) {
         const onCancel = (data) =>
             console.log('Cancelled payment!', data);
 
+        //Sets the cost of the subscription based on the tier selected
+        var price = "1.00"
+        if (selected == 1) {
+            price = "59.00"
+        }
+        else if (selected == 2) {
+            price = "89.00"
+        }
+        else if (selected == 3) {
+            price = "199.00"
+        }
+
         return(
             <div
                 class="form-row d-flex justify-content-center"
@@ -122,7 +147,7 @@ function CheckoutButtonDisplay(props) {
                      client={CLIENT}
                      env={ENV}
                      commit={true}
-                     amount="1.00"
+                     amount={price}
                      currency={'USD'}
                      total={100}
                      onSuccess={onSuccess}
@@ -136,5 +161,54 @@ function CheckoutButtonDisplay(props) {
         return null;
     }
 
+}
+
+function BenefitsDisplay(props) {
+    const selected = props.selectedOption.valueOf();
+
+    //Set the description based on the chose subscription tier level
+    if (selected == 1) {
+        return (
+            <p class="text-center subscription">
+                Business Name <br/>
+                Business Address with a location on Google Maps <br/>
+                Phone Number <br/>
+                Link to your website <br/>
+                <b>Photos, videos, or existing 360 imagery</b> <br/>
+                <br/>
+            </p>
+        )
+    }
+    else if (selected == 2) {
+        return (
+            <p class="text-center subscription">
+                Business Name <br/>
+                Business Address with a location on Google Maps <br/>
+                Phone Number <br/>
+                Link to your website <br/>
+                <b>Professional 360 imagery of business</b> <br/>
+                <br/>
+            </p>
+        )
+    }
+    else if (selected == 3) {
+        return (
+            <p class="text-center subscription">
+                Business Name <br/>
+                Business Address with a location on Google Maps <br/>
+                Phone Number <br/>
+                Link to your website <br/>
+                <b>Professional 360 imagery of business</b> <br/>
+                <b>360 image uploaded to Google Maps and placement on Google My Business</b> <br/>
+                <b>Link to Premium Listing (included)</b> <br/>
+                <br/>
+            </p>
+        )
+    }
+    else {
+        return (
+            <p></p>
+        )
+    }
 }
 export default SubscriptionInfo;

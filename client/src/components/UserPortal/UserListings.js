@@ -63,16 +63,14 @@ class UserListings extends React.Component{
     
             <div class="row">
                 <div class="column1">
-                    <table class="table table-striped table-hover">
+                    <table class="table mb-0 table-striped table-hover">
                         <thead>
                             <tr>
                                 <th scope="col">My Listings</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>{listingList}</td>
-                            </tr>
+                            <tr>{listingList}</tr>
                         </tbody>
                     </table>
                 </div>

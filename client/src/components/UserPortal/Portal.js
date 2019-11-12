@@ -6,6 +6,8 @@ import UserListings from './UserListings';
 import AddListing from './AddListing';
 import SubscriptionInfo from './SubscriptionInfo';
 import UserData from './UserData';
+import './index.css'
+
 
 const Portal = () => {
 
