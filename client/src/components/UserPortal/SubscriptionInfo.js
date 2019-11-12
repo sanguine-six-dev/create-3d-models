@@ -1,5 +1,7 @@
 import React from 'react';
 import PayPalButton from './PayPalButton'
+import {PricingTable, PricingSlot, PricingDetail} from 'react-pricing-table';
+import './SubscriptionInfo.css'
 
 
 //Current benefits and Upgraded benefits can be filled out after we are given more information from the client.
@@ -20,15 +22,62 @@ class SubscriptionInfo extends React.Component {
     //priceLevel will eventually be used to display the correct pricepoints.
     state = {
         selectedOption: "",
-        priceLevel: ""
+        priceLevel: "",
+        subscriptionlevel: "Free (Needs link to DB)"
     };
 
+    //Currently the subscriptionlevel is just set as "Free", it will need to eventually grab from the DB.
     render() {
         return (
             <div
                 id="subscriptionAll"
             >
-                <p>Current subscription level:
+                <PricingTable  highlightColor='#1976D2'>
+                    <PricingSlot title='FREE' priceText='$0/month'>
+                        <PricingDetail>Business Name</PricingDetail>
+                        <PricingDetail>Business Address with a location on Google Maps</PricingDetail>
+                        <PricingDetail>Phone Number</PricingDetail>
+                        <PricingDetail>Link to your website, social media, and a brief description of your business</PricingDetail>
+                        <PricingDetail strikethrough><b>Photos, Videos, or Existing 360 imagery</b></PricingDetail>
+                        <PricingDetail strikethrough><b>Professional 360 Imagery of your business</b></PricingDetail>
+                        <PricingDetail strikethrough><b>360 Image uploaded to Google Maps, and placement on Google My Business</b></PricingDetail>
+                        <PricingDetail strikethrough><b>Link to Premium Listing</b></PricingDetail>
+                    </PricingSlot>
+                    <PricingSlot onClick={this.submit} buttonText='SIGN UP' title='BASIC' priceText='$59/month'>
+                        <PricingDetail>Business Name</PricingDetail>
+                        <PricingDetail>Business Address with a location on Google Maps</PricingDetail>
+                        <PricingDetail>Phone Number</PricingDetail>
+                        <PricingDetail>Link to your website, social media, and a brief description of your business</PricingDetail>
+                        <PricingDetail><b>Photos, Videos, or Existing 360 imagery</b></PricingDetail>
+                        <PricingDetail strikethrough><b>Professional 360 Imagery of your business</b></PricingDetail>
+                        <PricingDetail strikethrough><b>360 Image uploaded to Google Maps, and placement on Google My Business</b></PricingDetail>
+                        <PricingDetail strikethrough><b>Link to Premium Listing</b></PricingDetail>
+                    </PricingSlot>
+                    <PricingSlot onClick={this.submit} buttonText='SIGN UP' title='PREMIUM' priceText='$89/month'>
+                        <PricingDetail>Business Name</PricingDetail>
+                        <PricingDetail>Business Address with a location on Google Maps</PricingDetail>
+                        <PricingDetail>Phone Number</PricingDetail>
+                        <PricingDetail>Link to your website, social media, and a brief description of your business</PricingDetail>
+                        <PricingDetail><b>Photos, Videos, or Existing 360 imagery</b></PricingDetail>
+                        <PricingDetail><b>Professional 360 Imagery of your business</b></PricingDetail>
+                        <PricingDetail strikethrough><b>360 Image uploaded to Google Maps, and placement on Google My Business</b></PricingDetail>
+                        <PricingDetail strikethrough><b>Link to Premium Listing</b></PricingDetail>
+                    </PricingSlot>
+                    <PricingSlot onClick={this.submit} buttonText='SIGN UP' title='SPLASH PAGE' priceText='$199/month'>
+                        <PricingDetail>Business Name</PricingDetail>
+                        <PricingDetail>Business Address with a location on Google Maps</PricingDetail>
+                        <PricingDetail>Phone Number</PricingDetail>
+                        <PricingDetail>Link to your website, social media, and a brief description of your business</PricingDetail>
+                        <PricingDetail><b><b>Photos, Videos, or Existing 360 imagery</b></b></PricingDetail>
+                        <PricingDetail><b>Professional 360 Imagery of your business</b></PricingDetail>
+                        <PricingDetail><b>360 Image uploaded to Google Maps, and placement on Google My Business</b></PricingDetail>
+                        <PricingDetail><b>Link to Premium Listing</b></PricingDetail>
+                    </PricingSlot>
+                </PricingTable>
+                <p>Your current subscription level: <b>{this.state.subscriptionlevel}</b></p>
+                <br/>
+
+                <p>Choose a subscription level:
                     <select
                         className="browser-default custom-select"
                         value={this.state.selectedOption}
@@ -36,21 +85,15 @@ class SubscriptionInfo extends React.Component {
                         id = "subscriptionSelector"
                     >
                         <option>Choose your option</option>
-                        <option value="1">Subscription Level 1</option>
-                        <option value="2">Subscription Level 2</option>
-                        <option value="3">Subscription Level 3</option>
+                        <option value="1">Basic</option>
+                        <option value="2">Premium</option>
+                        <option value="3">Splash Page</option>
                     </select>
                 </p>
 
                 <PriceDisplay
                         selectedOption={this.state.selectedOption}
                 />
-                <br/>
-
-                <p>Current benefits:</p>
-                <br/>
-
-                <p>Upgraded benefits:</p>
                 <br/>
 
                 <CheckoutButtonDisplay
@@ -73,21 +116,21 @@ function PriceDisplay(props) {
         return(
             <div>
                 <br/>
-                <p>Price to upgrade: Pricepoint1</p>
+                <p>Price to upgrade: <b>$59/month</b></p>
             </div>
         );
     } else if (selected == 2){
         return(
             <div>
                 <br/>
-                <p>Price to upgrade: Pricepoint2</p>
+                <p>Price to upgrade: <b>$89/month</b></p>
             </div>
         );
     } else if (selected == 3){
         return(
             <div>
                 <br/>
-                <p>Price to upgrade: Pricepoint3</p>
+                <p>Price to upgrade: <b>$199/month</b></p>
             </div>
         );
     } else {

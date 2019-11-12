@@ -28,6 +28,7 @@
     "mongoose": "^5.7.1",
     "morgan": "^1.9.1",
     "nodemon": "^1.18.10",
+    "react-pricing-table": "^0.3.0",
     "request": "latest",
     "should": "^13.2.3",
     "supertest": "^4.0.2"
