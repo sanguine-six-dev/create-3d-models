@@ -4,7 +4,11 @@ import Home from "./views/Home/Home"
 import NotFound from "./views/NotFound"
 import Header from "./components/Header/Header"
 import Portal from './components/UserPortal/Portal'
+<<<<<<< HEAD
+import View3D from './components/models/View3D'
+=======
 import LoginLanding from "./components/UserLogin/LoginLanding"
+>>>>>>> 4836b96ddb72e755c6aba29259a287e8a3f97dcb
 
 
 const App = () => {
@@ -20,6 +24,7 @@ const App = () => {
         <Route exact path="/Login" component={LoginLanding} />
         <Route component={NotFound}/>
       </Switch>
+
     </div>
   );
 }
