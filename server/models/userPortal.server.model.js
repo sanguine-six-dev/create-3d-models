@@ -12,7 +12,7 @@ var userPortalSchema = new Schema({
     listings: [{
         locationName: {type: String},
         address1: {type: String},
-        address: {type: String},
+        address2: {type: String},
         city: {type: String},
         state: {type: String},
         zip: {type: String},
