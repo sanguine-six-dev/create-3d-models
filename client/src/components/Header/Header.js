@@ -5,25 +5,8 @@ import './Header.css';
 
 const Header = () => {
     return (
-<<<<<<< HEAD
         <div class="navbar-wrapper">
             <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
-                <a class="navbar-brand" href="#">
-                    <img src={ "/light360logo-3.png"} width="100" height="60" alt="" /></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav">
-                    <a class="nav-item nav-link active" href="Home">Home <span class="sr-only">(current)</span></a>
-                    <a class="nav-item nav-link" href="#">Features</a>
-                    <a class="nav-item nav-link" href="#">Pricing</a>
-                    <a class="nav-item nav-link" href="Portal">MyPortal</a>
-                    <a class="nav-item nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                </div>
-=======
-
-        <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
             <a class="navbar-brand" href="#">
                 <img src={ "/light360logo-3.png"} width="100" height="60" alt="" /></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -37,7 +20,9 @@ const Header = () => {
                 <a class="nav-item nav-link" href="Portal">MyPortal</a>
                 <a class="nav-item nav-link" href="Login">Login/Register</a>
                 <a class="nav-item nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
->>>>>>> 4836b96ddb72e755c6aba29259a287e8a3f97dcb
+                </div>
+
+        
             </div>
             </nav>
         </div>
