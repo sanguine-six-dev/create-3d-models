@@ -148,7 +148,9 @@ function CheckoutButtonDisplay(props) {
                      env={ENV}
                      commit={true}
                      amount={price}
-                     currency={'USD'}
+                     currency={"USD"}
+                     shippingPreference={"NO_SHIPPING"}
+                     style={{}}
                      total={100}
                      onSuccess={onSuccess}
                      onError={onError}

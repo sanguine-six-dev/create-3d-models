@@ -5,9 +5,9 @@ var mongoose = require('mongoose'),
     //Added schema
 var userPortalSchema = new Schema({
         userId: {type: Number, required: true, unique: true},
-        name: String,
-        address: String,
-        phone: String,
+        name: {type: String},
+        address: {type: String},
+        phone: {type: String},
         emailAddress: {type: String, required: true},
         start_hour: {
             type: Number,
@@ -65,4 +65,4 @@ var UserPortal = mongoose.model('UserPortal', userPortalSchema);
 
 
 /* Export the model to make it avaiable to other parts of your Node application */
-module.exports.UserPortal = UserPortal;
+module.exports = UserPortal;
