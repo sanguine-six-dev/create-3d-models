@@ -4,6 +4,7 @@ import Home from "./views/Home/Home"
 import NotFound from "./views/NotFound"
 import Header from "./components/Header/Header"
 import Portal from './components/UserPortal/Portal'
+import View3D from './components/models/View3D'
 
 
 const App = () => {
@@ -18,6 +19,7 @@ const App = () => {
         </Route>
         <Route component={NotFound}/>
       </Switch>
+
     </div>
   );
 }
