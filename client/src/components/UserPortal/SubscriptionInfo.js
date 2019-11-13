@@ -10,7 +10,7 @@ import PayPalButton from './PayPalButton'
 
 //We need to move the client ID to another file at some point
 const CLIENT = {
-    sandbox: 'AXZJyFj_3N6Lsh0h9JcZBi9eHM4csjjZwN0WcwDFjdoEKD7iEvWaBq6YdL_oirIHtZCe3ee3ENpxoot4'
+    sandbox: "AXZJyFj_3N6Lsh0h9JcZBi9eHM4csjjZwN0WcwDFjdoEKD7iEvWaBq6YdL_oirIHtZCe3ee3ENpxoot4"
   };
 
 const ENV = 'sandbox' //I only have access to sandbox testing currently
@@ -144,7 +144,7 @@ function CheckoutButtonDisplay(props) {
             >
                 <div>
                     <PayPalButton
-                     client={CLIENT}
+                     clientId={CLIENT.sandbox}
                      env={ENV}
                      commit={true}
                      amount={price}

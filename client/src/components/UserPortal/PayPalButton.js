@@ -6,7 +6,7 @@ class PayPalButton extends React.Component{
     static defaultProps = {
         style: {},
         options: {
-            clientId: "sb",
+            clientId: "AXZJyFj_3N6Lsh0h9JcZBi9eHM4csjjZwN0WcwDFjdoEKD7iEvWaBq6YdL_oirIHtZCe3ee3ENpxoot4",
             currency: "USD"
         },
         shippingPreference: "NO_SHIPPING",

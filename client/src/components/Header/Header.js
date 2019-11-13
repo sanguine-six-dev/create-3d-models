@@ -5,8 +5,8 @@ import './Header.css';
 
 const Header = () => {
     return (
-
-        <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
+        <div class="navbar-wrapper">
+            <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
             <a class="navbar-brand" href="#">
                 <img src={ "/light360logo-3.png"} width="100" height="60" alt="" /></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -20,9 +20,12 @@ const Header = () => {
                 <a class="nav-item nav-link" href="Portal">MyPortal</a>
                 <a class="nav-item nav-link" href="Login">Login/Register</a>
                 <a class="nav-item nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                </div>
+
+        
             </div>
+            </nav>
         </div>
-        </nav>
 
         
     )

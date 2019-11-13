@@ -20,6 +20,7 @@ const App = () => {
         <Route exact path="/Login" component={LoginLanding} />
         <Route component={NotFound}/>
       </Switch>
+
     </div>
   );
 }
