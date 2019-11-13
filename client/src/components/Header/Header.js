@@ -18,6 +18,7 @@ const Header = () => {
                 <a class="nav-item nav-link" href="#">Features</a>
                 <a class="nav-item nav-link" href="#">Pricing</a>
                 <a class="nav-item nav-link" href="Portal">MyPortal</a>
+                <a class="nav-item nav-link" href="Login">Login/Register</a>
                 <a class="nav-item nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
             </div>
         </div>
