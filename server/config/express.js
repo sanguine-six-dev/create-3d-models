@@ -3,8 +3,7 @@ const path = require('path'),
     mongoose = require('mongoose'),
     morgan = require('morgan'),
     bodyParser = require('body-parser'),
-    emailPreferencesRouter = require('../routes/emailPreferences.server.routes');
-    contactInfoRouter = require('../routes/contactInfo.server.routes');
+    userPortalRouter = require('../routes/userPortal.server.routes.js');
 
 module.exports.init = () => {
     /*
@@ -27,10 +26,7 @@ module.exports.init = () => {
     app.use(bodyParser.json());
 
     // add a router
-    app.use('/api/contactInfo', contactInfoRouter);
-
-    // add a router
-    app.use('/api/emailPreferences', emailPreferencesRouter);
+    app.use('/api/userPortal', userPortalRouter);
 
 
     if (process.env.NODE_ENV === 'production') {

@@ -16,10 +16,9 @@ class UpdateContactInfo extends Component {
             phoneFieldError: '',
         };
 
-        // preserve the initial state in a new object
-        this.baseState = this.state;
-
+        // This will pull all of the contact info out of the database
         this.getAllContactInfo();
+
         this.handleSubmit = this.handleSubmit.bind(this);
     };
 
@@ -67,12 +66,11 @@ class UpdateContactInfo extends Component {
         if (name !== "" && !nameFieldError && phone !== "" && !phoneFieldError) {
             alert(`name: ${name}\n phone number: ${phone}\n address: ${address}`);
 
-            let id = this.findContactInfo();
-            console.log(`contact info id: ${id}`);
-            this.updateContactInfo(id);
+            let userInfo = this.findContactInfo();
+            console.log(`contact info id: ${userInfo._id}`);
+            this.updateContactInfo(userInfo);
 
-            console.log(`contact info preferences: ${JSON.stringify(this.state.contactInfo)}`);
-            console.log(`contact info preferences array: ${JSON.stringify(this.state.contactInfo)}`);
+            console.log(`contact info preference: ${JSON.stringify(this.state.contactInfo)}`);
             this.resetForm();
 
         } else {
@@ -93,7 +91,7 @@ class UpdateContactInfo extends Component {
      * This function will get every user's contact info out of the database
      */
     getAllContactInfo() {
-        axios.get('/api/contactInfo')
+        axios.get('/api/userPortal')
             .then(res => {
                 console.log(res);
                 this.setState({allContactInfo: res.data})
@@ -104,7 +102,7 @@ class UpdateContactInfo extends Component {
      * This function will get a particular user's contact info out of the database
      */
     getContactInfo() {
-        axios.get('/api/contactInfo/' + this.state.contactInfo._id)
+        axios.get('/api/userPortal/' + this.state.contactInfo._id)
             .then(res => {
                 console.log(res);
                 this.setState({contactInfo: res.data})
@@ -114,29 +112,14 @@ class UpdateContactInfo extends Component {
     /***
      * This function will save an contact info to the database
      */
-    saveContactInfo() {
-        axios.post('/api/contactInfo', {
-            "userId": this.state.userId,
-            "name": this.state.contactInfo.name,
-            "phone": this.state.contactInfo.phone,
-            "address": this.state.contactInfo.address,
-
-        })
-            .then(res => {
-                console.log(res);
-                console.log(res.data);
-            })
-    }
-
-    /***
-     * This function will save an contact info to the database
-     */
-    updateContactInfo(id) {
-        axios.put('/api/contactInfo/' + id, {
-            "userId": this.state.userId,
+    updateContactInfo(userInfo) {
+        let id = userInfo._id;
+        axios.put('/api/userPortal/' + id, {
+            "userId": userInfo.userId,
             "name": this.state.name,
             "phone": this.state.phone,
             "address": this.state.address,
+            "emailAddress": userInfo.emailAddress
         })
             .then(res => {
                 console.log(res);
@@ -148,13 +131,13 @@ class UpdateContactInfo extends Component {
      * This function will find the contact info based on userId
      */
     findContactInfo() {
-        let id = "";
+        let userInfo = {};
+
         this.state.allContactInfo.find((info) => {
             if (info.userId === this.state.userId) {
                 console.log(`here is the contact info found: ${JSON.stringify(info)}`);
 
-                let parsedInfo = JSON.parse(JSON.stringify(info));
-
+                userInfo = info;
                 this.setState(
                     {
                         contactInfo: info,
@@ -163,10 +146,9 @@ class UpdateContactInfo extends Component {
                         address: JSON.stringify(info.address)
                     }
                 );
-                id = info._id;
             }
         });
-        return id;
+        return userInfo;
     }
 
     render() {
