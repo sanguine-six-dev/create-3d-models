@@ -152,7 +152,7 @@ class AddListing extends React.Component {
 
                     <div class="form-row d-flex justify-content-center">
                         <button variant="primary" size="lg" class="btn btn-secondary btn-lg"
-                                onClick={this.addListing.bind(this)}>
+                                onClick={this.handleSubmit}>
                             Add Listing
                         </button>
                     </div>
