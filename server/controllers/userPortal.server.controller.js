@@ -1,6 +1,6 @@
 /* Dependencies */
 var mongoose = require('mongoose'),
-    {UserPortal} = require('../models/userPortal.server.model.js');
+    UserPortal = require('../models/userPortal.server.model.js');
 
 /* Create an user contact information */
 exports.create = function (req, res) {

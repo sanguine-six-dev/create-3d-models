@@ -1,0 +1,35 @@
+#UserLoginRegister-tab-Login {
+    font-size: 2rem;
+}
+
+#UserLoginRegister-tab-Register {
+    font-size: 2rem;
+}
+
+form.justify-content-center {
+    margin-top: 5%;
+}
+
+div#myLoginBox{
+
+}
+
+div#myLoginBox.justify-content-center.col{
+    border-style: solid;
+    border-width: 3px;
+    border-color: #157ffb;
+    border-radius: 10px 10px 10px 10px;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    justify-content: center;
+    padding-bottom: 2%;
+    padding-top: 2%;
+    width: 70%;
+    left:15%
+
+}
+
+div#loginContainer.container {
+    margin-right: 1px;
+    margin-left: 1px;
+}

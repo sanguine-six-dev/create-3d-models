@@ -75,4 +75,4 @@ var UserPortal = mongoose.model('UserPortal', userPortalSchema);
 
 
 /* Export the model to make it avaiable to other parts of your Node application */
-module.exports.UserPortal = UserPortal;
+module.exports = UserPortal;

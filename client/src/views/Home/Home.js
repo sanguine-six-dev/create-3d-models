@@ -1,17 +1,17 @@
 import React from 'react';
-import logo from '../../assets/logo.svg';
 import './Home.css';
+
+
 
 function Home() {
     return (
-        <div className="App">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
-                
+        <div class="homeCSS" >
+                    
+<iframe class="MapCSS" src='http://localhost:8081/index.html'  />
 
-            </header>
         </div>
     );
 }
 
 export default Home;
+
