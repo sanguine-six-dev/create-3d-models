@@ -17,7 +17,6 @@ class AddListing extends React.Component {
     };
 
 
-
     addListing = event => {
         event.preventDefault();
 
@@ -42,7 +41,7 @@ class AddListing extends React.Component {
     };
 
     findAndUpdate() {
-        axios.get('/api/userPortal')
+        axios.get('/api/listings')
             .then(res => {
                 console.log(res);
                 res.data.find((listing) => {
@@ -58,7 +57,7 @@ class AddListing extends React.Component {
 
     updatelistings(listing) {
         let id = listing._id;
-        axios.put('/api/userPortal/' + id, {
+        axios.put('/api/listings/' + id, {
             "userId": listing.userId,
             "name": this.state.name,
             "phone": this.state.phone,
