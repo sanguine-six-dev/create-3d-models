@@ -144,11 +144,11 @@ function CheckoutButtonDisplay(props) {
             >
                 <div>
                     <PayPalButton
-                     clientId={CLIENT.sandbox}
                      env={ENV}
                      commit={true}
                      amount={price}
-                     currency={"USD"}
+                     clientId={CLIENT.sandbox}
+                     currency="USD"
                      shippingPreference={"NO_SHIPPING"}
                      style={{}}
                      total={100}

@@ -3,15 +3,6 @@ import ReactDOM from "react-dom";
 
 class PayPalButton extends React.Component{
 
-    static defaultProps = {
-        style: {},
-        options: {
-            clientId: "AXZJyFj_3N6Lsh0h9JcZBi9eHM4csjjZwN0WcwDFjdoEKD7iEvWaBq6YdL_oirIHtZCe3ee3ENpxoot4",
-            currency: "USD"
-        },
-        shippingPreference: "NO_SHIPPING",
-    }
-
     constructor(props) {
         super(props);
 
@@ -115,8 +106,13 @@ class PayPalButton extends React.Component{
     }
 
     addPaypalSdk() {
-        const { options, onButtonReady } = this.props;
+        const { clientId, currency, onButtonReady } = this.props;
         const queryParams = [];
+
+        const options = {
+            clientId,
+            currency
+        };
 
         Object.keys(options).forEach(k => {
             const name = k.split(/(?=[A-Z])/).join("-").toLowerCase();
