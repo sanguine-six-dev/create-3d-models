@@ -36,17 +36,7 @@ exports.update = function (req, res) {
         name: req.body.name,
         address: req.body.address,
         phone: req.body.phone,
-        emailAddress: req.body.emailAddress,
-        listings: [{
-            locationName: req.body.listings.locationName,
-            address1: req.body.listings.address1,
-            address2: req.body.listings.address2,
-            city: req.body.listings.city,
-            state: req.body.listings.state,
-            zip: req.body.listings.zip,
-            phoneNumber: req.body.listings.phoneNumber,
-            emailAddress: req.body.listings.emailAddress,
-        }]
+        emailAddress: req.body.emailAddress
     }, {new: true})
         .then(result => {
             if (!result) {

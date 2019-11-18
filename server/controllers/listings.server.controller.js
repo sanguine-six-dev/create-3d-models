@@ -33,32 +33,23 @@ exports.update = function (req, res) {
     /* Replace the listing info properties with the new properties found in req.body */
     Listings.findByIdAndUpdate(listing._id, {
         userId: req.body.userId,
-        listings: [{
-            locationName: req.body.listings.locationName,
-            address1: req.body.listings.address1,
-            address2: req.body.listings.address2,
-            city: req.body.listings.city,
-            state: req.body.listings.state,
-            zip: req.body.listings.zip,
-            phoneNumber: req.body.listings.phoneNumber,
-            emailAddress: req.body.listings.emailAddress,
-        }]
+        listings: req.body.listings
     }, {new: true})
         .then(result => {
             if (!result) {
                 return res.status(404).send({
-                    message: "Note not found with id " + req.params.req.listing._id
+                    //message: "Note not found with id " + req.params.req.listing._id
                 });
             }
             res.send(result);
         }).catch(err => {
         if (err.kind === 'ObjectId') {
             return res.status(404).send({
-                message: "Note not found with id " + req.params.req.listing._id
+                //message: "Note not found with id " + req.params.req.listing._id
             });
         }
         return res.status(500).send({
-            message: "Error updating note with id " + req.params.req.listing._id
+            //message: "Error updating note with id " + req.params.req.listing._id
         });
     });
 };
@@ -91,8 +82,8 @@ exports.delete = function (req, res) {
 exports.list = function (req, res) {
     Listings.find()
         .sort({userId: 1})
-        .then(addresses => {
-            res.send(addresses);
+        .then(listings => {
+            res.send(listings);
         }).catch(err => {
         res.status(500).send({
             message: err.message || "Some error occurred while retrieving listing information."
@@ -104,11 +95,11 @@ exports.list = function (req, res) {
   Middleware: find listing information by its ID, then pass it to the next request handler.
  */
 exports.listingByID = function (req, res, next, id) {
-    Listings.findById(id).exec(function (err, userlistingInfo) {
+    Listings.findById(id).exec(function (err, listing) {
         if (err) {
             res.status(400).send(err);
         } else {
-            req.userlistingInfo = userlistingInfo;
+            req.listing = listing;
             next();
         }
     });

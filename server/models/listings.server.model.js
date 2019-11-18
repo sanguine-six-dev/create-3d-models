@@ -3,7 +3,7 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 //Added schema
-var listingsSchema = new Schema({
+var listingSchema = new Schema({
     userId: {type: Number, required: true, unique: true},
     listings: [{
         locationName: {type: String},
@@ -57,7 +57,7 @@ var listingsSchema = new Schema({
 // var EmailPreference = mongoose.model('EmailPreference', emailSchema);
 
 //Added save to userPortal schema
-listingsSchema.pre('save', function (next) {
+listingSchema.pre('save', function (next) {
     var currentDate = new Date();
 
     this.updated_at = currentDate;
@@ -67,7 +67,7 @@ listingsSchema.pre('save', function (next) {
     }
     next();
 });
-var Listings = mongoose.model('Listings', listingsSchema);
+var Listings = mongoose.model('Listings', listingSchema);
 
 /* Export the model to make it avaiable to other parts of your Node application */
 module.exports = Listings;

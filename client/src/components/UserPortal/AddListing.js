@@ -2,157 +2,248 @@ import React from 'react';
 import axios from 'axios';
 
 class AddListing extends React.Component {
-
     constructor(props) {
         super(props);
 
         this.state = {
             userId: 1,
-            listings: []
+            locationName: '',
+            address1: '',
+            address2: '',
+            city: '',
+            state: '',
+            zip: '',
+            phoneNumber: '',
+            emailAddress: '',
         };
-
-        const {data} = this.props;
-
-        this.handleSubmit = this.addListing.bind(this);
-    };
-
-
-    addListing = event => {
-        event.preventDefault();
-
-        this.findAndUpdate();
-
-        let newListing = {
-            name: this.name.value,
-            address: {
-                address1: this.address1.value,
-                address2: this.address2.value,
-                city: this.city.value,
-                state: this.state.value,
-                zip: this.zip.value
-            },
-            phone: this.phone.value,
-            email: this.email.value
-        };
-
-        console.log(newListing);
 
         this.handleSubmit = this.handleSubmit.bind(this);
+    };
+
+    handleNameChange = event => {
+        this.setState({
+            locationName: event.target.value
+        })
+    };
+
+    handleAddress1Change = event => {
+        this.setState({
+            address1: event.target.value
+        })
+    };
+
+    handleAddress2Change = event => {
+        this.setState({
+            address2: event.target.value
+        })
+    };
+
+    handleCityChange = event => {
+        this.setState({
+            city: event.target.value
+        })
+    };
+
+    handleStateChange = event => {
+        this.setState({
+            state: event.target.value
+        })
+    };
+
+    handleZipChange = event => {
+        this.setState({
+            zip: event.target.value
+        })
+    };
+
+    handlePhoneChange = event => {
+        this.setState({
+            phoneNumber: event.target.value
+        })
+    };
+
+    handleEmailChange = event => {
+        this.setState({
+            emailAddress: event.target.value
+        })
+    };
+
+    handleSubmit = event => {
+        event.preventDefault();
+        this.findAndUpdate();
     };
 
     findAndUpdate() {
         axios.get('/api/listings')
             .then(res => {
-                console.log(res);
-                res.data.find((listing) => {
-                        if (listing.userId === this.state.userId) {
-                            console.log(`here is the user's info found: ${JSON.stringify(listing)}`);
+                console.log(`Listing response: ${JSON.stringify(res.data)}`);
+                res.data.find((listingObj) => {
+                        if (listingObj.userId === this.state.userId) {
+                            console.log(`here is the listing info found: ${JSON.stringify(listingObj)}`);
 
-                            this.updateContactInfo(listing);
+                            this.updatelistings(listingObj);
                         }
                     }
                 );
             });
     };
 
-    updatelistings(listing) {
-        let id = listing._id;
-        axios.put('/api/listings/' + id, {
-            "userId": listing.userId,
-            "name": this.state.name,
-            "phone": this.state.phone,
-            "address": this.state.address,
-            "emailAddress": listing.emailAddress,
-            "listing": {
-                "name": this.name.value,
-                    address: {
-                address1: this.address1.value,
-                    address2: this.address2.value,
-                    city: this.city.value,
-                    state: this.state.value,
-                    zip: this.zip.value
-            },
-            phone: this.phone.value,
-                email: this.email.value
+    updatelistings(listingObj) {
+        let id = listingObj._id;
+        let listingsArray = [];
+        let newListing = {
+            "locationName": this.state.locationName,
+            "address1": this.state.address1,
+            "address2": this.state.address2,
+            "city": this.state.city,
+            "state": this.state.state,
+            "zip": this.state.zip,
+            "phoneNumber": this.state.phoneNumber,
+            "emailAddress": this.state.emailAddress
+        };
+
+        console.log(`listing array before: ${JSON.stringify(listingObj.listings)}`);
+        let listingsString = "";
+        let arrayString = "";
+        if (listingObj.listings !== null) {
+            listingsArray = listingObj.listings;
+            listingsArray.push(newListing);
+            arrayString = JSON.stringify(listingsArray);
+
+            listingsString = arrayString;
+        } else {
+            listingsString = newListing;
         }
+
+        let myListings = JSON.parse(listingsString);
+        axios.put('/api/listings/' + id, {
+            "userId": listingObj.userId,
+            "listings": myListings
         })
             .then(res => {
                 this.setState({
-                    name: "",
-                    phone: "",
-                    address: ""
+                    locationName: "",
+                    address1: "",
+                    address2: "",
+                    city: "",
+                    state: "",
+                    zip: "",
+                    phoneNumber: "",
+                    emailAddress: ""
                 });
                 console.log(res);
                 console.log(res.data);
             })
     }
 
-
-
     render() {
         return (
             <div>
-                <form>
+                <form onSubmit={this.handleSubmit}>
                     <div class="form-row d-flex justify-content-center">
                         <div class="form-group col-md-9">
                             <label for="name">Location Name</label>
-                            <input type="text" class="form-control" id="name"
-                                   placeholder="Enter your business name here..."/>
+                            <input
+                                class="form-control"
+                                id="name" placeholder="Enter your business name here..."
+                                value={this.state.locationName}
+                                onChange={this.handleNameChange}
+                            />
                         </div>
                     </div>
 
                     <div class="form-row d-flex justify-content-center">
                         <div class="form-group col-md-9">
                             <label for="address1">Address 1</label>
-                            <input type="text" class="form-control" id="address1"
-                                   placeholder="Eg: 1234 Alphabet Street"/>
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="address1" placeholder="Eg: 1234 Alphabet Street"
+                                value={this.state.address1}
+                                onChange={this.handleAddress1Change}
+                            />
                         </div>
                     </div>
 
                     <div class="form-row d-flex justify-content-center">
                         <div class="form-group col-md-9">
-                            <label for="address2">Address</label>
-                            <input type="text" class="form-control" id="address2"
-                                   placeholder="Apt number, Studio, or Floor"/>
+                            <label for="address2">Address 2</label>
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="address2" placeholder="Apt number, Studio, or Floor"
+                                value={this.state.address2}
+                                onChange={this.handleAddress2Change}
+                            />
                         </div>
                     </div>
 
                     <div class="form-row d-flex justify-content-center">
                         <div class="form-group col-md-3">
                             <label for="city">City</label>
-                            <input type="text" class="form-control" id="city" placeholder="City"/>
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="city" placeholder="City"
+                                value={this.state.city}
+                                onChange={this.handleCityChange}
+                            />
                         </div>
 
                         <div class="form-group col-md-3">
                             <label for="state">State</label>
-                            <input type="text" class="form-control" id="state" placeholder="State"/>
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="state" placeholder="State"
+                                value={this.state.state}
+                                onChange={this.handleStateChange}
+
+                            />
                         </div>
 
                         <div class="form-group col-md-3">
                             <label for="zip">Zip</label>
-                            <input type="text" class="form-control" id="address2" placeholder="Zip Code"/>
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="address2" placeholder="Zip Code"
+                                value={this.state.zip}
+                                onChange={this.handleZipChange}
+
+                            />
                         </div>
                     </div>
 
                     <div class="form-row d-flex justify-content-center">
                         <div class="form-group col-md-9">
                             <label for="phone">Phone Number</label>
-                            <input type="tel" class="form-control" id="phone"
-                                   placeholder="Enter your phone number here..." pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"/>
+                            <input
+                                type="tel"
+                                class="form-control"
+                                id="phone" placeholder="Enter your phone number here..."
+                                value={this.state.phoneNumber}
+                                onChange={this.handlePhoneChange}
+                                pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"/>
                         </div>
                     </div>
 
                     <div class="form-row d-flex justify-content-center">
                         <div class="form-group col-md-9">
                             <label for="email">Email address</label>
-                            <input type="email" class="form-control" id="email" placeholder="name@example.com"/>
+                            <input
+                                type="email"
+                                class="form-control"
+                                id="email" placeholder="name@example.com"
+                                value={this.state.emailAdddress}
+                                onChange={this.handleEmailChange}
+                            />
                         </div>
                     </div>
 
                     <div class="form-row d-flex justify-content-center">
-                        <button variant="primary" size="lg" class="btn btn-secondary btn-lg"
-                                onClick={this.handleSubmit}>
-                            Add Listing
+                        <button type="submit"
+                                className="btn btn-success btn-block">Submit
                         </button>
                     </div>
                 </form>
