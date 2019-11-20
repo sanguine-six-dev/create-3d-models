@@ -132,7 +132,6 @@ class Register extends Component {
     };
 
     render() {
-        console.log(this.state);
         return (
             <div>
                 <form className="justify-content-center" onSubmit={this.handleRegister}>
