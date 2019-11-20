@@ -1,30 +1,45 @@
 import React, {Component} from 'react'
+import axios from 'axios'
 
 class Login extends Component {
     constructor(props) {
         super(props);
+
         this.state = {
             username: '',
             password: '',
             userFieldError: '',
             passwordFieldError: ''
         };
+
+        this.handleLogin = this.handleLogin.bind(this);
     };
 
-    handleUserChange = e => {
+    handleUserChange = event => {
         this.setState({
-            username:e.target.value
+            username:event.target.value
         });
     };
 
-    handlePassChange = e => {
+    handlePassChange = event => {
         this.setState({
-            password:e.target.value
+            password:event.target.value
         });
     };
 
     handleLogin = event => {
         event.preventDefault();
+        axios.get('/api/userPortal')
+            .then( res => {
+                console.log(res);
+                res.data.find((userInfo) => {
+                    if (userInfo.username === this.state.username && userInfo.password === this.state.password) {
+                        alert('You are logged in');
+                    } else {
+                        alert('Incorrect Username or Password');
+                    }
+                })
+            })
     };
 
     usernameValidation = () => {
