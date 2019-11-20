@@ -6,6 +6,7 @@ class Login extends Component {
         super(props);
 
         this.state = {
+            _id: '',
             username: '',
             password: '',
             userFieldError: '',
@@ -15,31 +16,43 @@ class Login extends Component {
         this.handleLogin = this.handleLogin.bind(this);
     };
 
+    loginUpdate(userId) {
+        if (userId !== '') {
+            this.props.loginUpdate(userId);
+        }
+    }
+
     handleUserChange = event => {
         this.setState({
-            username:event.target.value
+            username: event.target.value
         });
     };
 
     handlePassChange = event => {
         this.setState({
-            password:event.target.value
+            password: event.target.value
         });
     };
 
     handleLogin = event => {
         event.preventDefault();
+        let success = false;
         axios.get('/api/userPortal')
-            .then( res => {
+            .then(res => {
                 console.log(res);
+
                 res.data.find((userInfo) => {
-                    if (userInfo.username === this.state.username && userInfo.password === this.state.password) {
-                        alert('You are logged in');
-                    } else {
-                        alert('Incorrect Username or Password');
+                    if (userInfo.emailAddress === this.state.username && userInfo.password === this.state.password) {
+                        success = true;
+                        this.loginUpdate(userInfo._id);
                     }
-                })
-            })
+                });
+                if (success) {
+                    alert('You are logged in');
+                } else {
+                    alert('Incorrect Username or Password');
+                }
+            });
     };
 
     usernameValidation = () => {
@@ -56,20 +69,20 @@ class Login extends Component {
     passwordValidation = () => {
         const password = this.state.password;
         this.setState({
-                passwordFieldError: (password.length > 5) ? null :
+                passwordFieldError: (password.length >= 5) ? null :
                     'Please enter a password with more than 5 characters'
             }
         )
     };
 
     render() {
-        return(
+        return (
             <div id="myLoginBox">
                 <form className="justify-content-center" onSubmit={this.handleLogin}>
                     <div className="form-group">
                         <label htmlFor="Login">Username</label>
                         <input
-                            value = {this.state.username}
+                            value={this.state.username}
                             className={`form-control ${this.state.userFieldError ? 'is-invalid' : ''}`}
                             placeholder="Enter your username"
                             onChange={this.handleUserChange}
@@ -81,7 +94,7 @@ class Login extends Component {
                         <label htmlFor="Password">Password</label>
                         <input
                             type="password"
-                            value = {this.state.password}
+                            value={this.state.password}
                             className={`form-control ${this.state.passwordFieldError ? 'is-invalid' : ''}`}
                             placeholder="Enter your password"
                             onChange={this.handlePassChange}

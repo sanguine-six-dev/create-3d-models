@@ -39,8 +39,7 @@ class Register extends Component {
                     "userId": userId,
                     "name": this.state.first_name + " " + this.state.last_name,
                     "emailAddress": this.state.email_address,
-                    "password": this.state.password,
-                    "passwordconfirm": this.state.passwordconfirm
+                    "password": this.state.password
                 })
                     .then(res => {
                         this.setState({
