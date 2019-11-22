@@ -47,7 +47,7 @@ describe('UserPortal CRUD tests', function () {
         });
     });
 
-    it('should be able to save an email preference', function (done) {
+    it('should be able to save user info', function (done) {
         let userInfo = {
             userId: 999,
             name: "David",
@@ -69,7 +69,7 @@ describe('UserPortal CRUD tests', function () {
     });
 
 
-    it('should be able to update an email preference', function (done) {
+    it('should be able to update user info', function (done) {
         let updatedUserInfo = {
             userId: 1999,
             name: "Dave",
@@ -90,7 +90,7 @@ describe('UserPortal CRUD tests', function () {
             });
     });
 
-    it('should be able to delete a email preference', function(done) {
+    it('should be able to delete user info', function(done) {
         agent.delete('/api/userPortal/' + id)
             .expect(200)
             .end(function(err, res) {

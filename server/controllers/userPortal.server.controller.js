@@ -37,7 +37,6 @@ exports.update = function (req, res) {
         address: req.body.address,
         phone: req.body.phone,
         emailAddress: req.body.emailAddress
-
     }, {new: true})
         .then(result => {
             if (!result) {
