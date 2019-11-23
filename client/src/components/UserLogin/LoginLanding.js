@@ -13,14 +13,20 @@ class LoginLanding extends Component {
         super(props);
         this.state = {
             userId: ''
-        }
+        };
     }
 
     loginUpdate(value) {
         this.setState({
             userId: value
         });
-        console.log(`UserId of logged in user: ${this.state.userId}`)
+        this.setUserId(this.state.userId);
+    }
+
+    setUserId(userId) {
+        if (userId !== '') {
+            this.props.setUserId(userId);
+        }
     }
 
     render() {
@@ -45,6 +51,6 @@ class LoginLanding extends Component {
             </Col>
         )
     }
-};
+}
 
 export default LoginLanding

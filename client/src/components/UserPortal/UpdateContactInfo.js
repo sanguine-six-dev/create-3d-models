@@ -6,7 +6,6 @@ class UpdateContactInfo extends Component {
         super(props);
 
         this.state = {
-            userId: 1,
             name: '',
             phone: '',
             address: '',
@@ -68,24 +67,16 @@ class UpdateContactInfo extends Component {
     };
 
     findAndUpdate() {
-        axios.get('/api/userPortal')
+        axios.get('/api/userPortal/' + sessionStorage.getItem(this.key))
             .then(res => {
                 console.log(res);
-                res.data.find((info) => {
-                        if (info.userId === this.state.userId) {
-                            console.log(`here is the user's info found: ${JSON.stringify(info)}`);
-
-                            this.updateContactInfo(info);
-                        }
-                    }
-                );
+                this.updateContactInfo(res.data);
             });
     }
 
     updateContactInfo(userInfo) {
         let id = userInfo._id;
         axios.put('/api/userPortal/' + id, {
-            "userId": userInfo.userId,
             "name": this.state.name,
             "phone": this.state.phone,
             "address": this.state.address,
