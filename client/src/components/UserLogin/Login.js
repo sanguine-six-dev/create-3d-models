@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import axios from 'axios'
+import {withRouter} from 'react-router'
 
 class Login extends Component {
     constructor(props) {
@@ -49,6 +50,7 @@ class Login extends Component {
                 });
                 if (success) {
                     alert('You are logged in');
+                    this.props.history.push("/Portal");
                 } else {
                     alert('Incorrect Username or Password');
                 }
@@ -112,4 +114,5 @@ class Login extends Component {
 
 }
 
+Login = withRouter(Login);
 export default Login
