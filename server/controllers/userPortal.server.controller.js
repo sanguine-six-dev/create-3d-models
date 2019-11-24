@@ -36,7 +36,8 @@ exports.update = function (req, res) {
         name: req.body.name,
         address: req.body.address,
         phone: req.body.phone,
-        emailAddress: req.body.emailAddress
+        emailAddress: req.body.emailAddress,
+        subscriptionTier: req.body.subscriptionTier
 
     }, {new: true})
         .then(result => {

@@ -1,5 +1,6 @@
 import React from 'react';
 import PayPalButton from './PayPalButton'
+import axios from 'axios';
 
 
 //Current benefits and Upgraded benefits can be filled out after we are given more information from the client.
@@ -20,14 +21,46 @@ class SubscriptionInfo extends React.Component {
     //priceLevel will eventually be used to display the correct pricepoints.
     state = {
         selectedOption: "",
-        priceLevel: ""
+        priceLevel: "",
+        userId: 1234, //Will need to update this somewhere in the component
+        subscriptionTier: 0
     };
 
+    componentWillMount() {
+        axios.get('/api/userPortal')
+            .then(res => {
+                console.log(res);
+                res.data.find((info) => {
+                    if (info.userId === this.state.userId) {
+                       this.setState({
+                           subscriptionTier: info.subscriptionTier
+                       })
+                    }
+                })
+            });
+    }
+
     render() {
+
+        var tierName = "Free Listing"
+        if (this.state.subscriptionTier == 1) {
+            tierName = "Basic Listing"
+        }
+        else if (this.state.subscriptionTier == 2) {
+            tierName = "Premium Listing"
+        }
+        else if (this.state.subscriptionTier == 3) {
+            tierName = "Splash Page Listing"
+        }
+        
         return (
             <div
                 id="subscriptionAll"
             >
+                <p>Your current subscription level:</p>
+                <p class="text-center subscription">{tierName}</p>
+                <br/>
+
                 <p>Choose subscription level:
                     <select
                         className="browser-default custom-select"

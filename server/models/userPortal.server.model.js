@@ -9,6 +9,7 @@ var userPortalSchema = new Schema({
         address: {type: String},
         phone: {type: String},
         emailAddress: {type: String, required: true},
+        subscriptionTier: {type: Number, required: true},
         start_hour: {
             type: Number,
             min: 0,
