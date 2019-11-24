@@ -80,21 +80,6 @@ class AddListing extends React.Component {
             });
     };
 
-    // findAndUpdate() {
-    //     axios.get('/api/listings')
-    //         .then(res => {
-    //             console.log(`Listing response: ${JSON.stringify(res.data)}`);
-    //             res.data.find((listingObj) => {
-    //                     if (listingObj.userId === this.state.userId) {
-    //                         console.log(`here is the listing info found: ${JSON.stringify(listingObj)}`);
-    //
-    //                         this.updatelistings(listingObj);
-    //                     }
-    //                 }
-    //             );
-    //         });
-    // };
-
     updatelistings(listingObj) {
         let id = listingObj._id;
         let listingsArray = [];
@@ -109,7 +94,7 @@ class AddListing extends React.Component {
             "emailAddress": this.state.emailAddress
         };
 
-        console.log(`listing array before: ${JSON.stringify(listingObj.listings)}`);
+        //console.log(`listing array before: ${JSON.stringify(listingObj.listings)}`);
         let listingsString = "";
         let arrayString = "";
         if (listingObj.listings !== null) {
@@ -124,7 +109,6 @@ class AddListing extends React.Component {
 
         let myListings = JSON.parse(listingsString);
         axios.put('/api/userPortal/' + id, {
-            //"userId": listingObj.userId,
             "name": listingObj.name,
             "phone": listingObj.phone,
             "address": listingObj.address,
@@ -132,6 +116,8 @@ class AddListing extends React.Component {
             "listings": myListings
         })
             .then(res => {
+                alert(`The listing has been added`);
+
                 this.setState({
                     locationName: "",
                     address1: "",
