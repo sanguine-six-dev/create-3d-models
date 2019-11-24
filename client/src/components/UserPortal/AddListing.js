@@ -113,6 +113,7 @@ class AddListing extends React.Component {
             "phone": listingObj.phone,
             "address": listingObj.address,
             "emailAddress": listingObj.emailAddress,
+            "password": listingObj.password,
             "listings": myListings
         })
             .then(res => {

@@ -80,7 +80,9 @@ class UpdateContactInfo extends Component {
             "name": this.state.name,
             "phone": this.state.phone,
             "address": this.state.address,
-            "emailAddress": userInfo.emailAddress
+            "emailAddress": userInfo.emailAddress,
+            "password": userInfo.password,
+            "listings": userInfo.listings
         })
             .then(res => {
                 this.setState({

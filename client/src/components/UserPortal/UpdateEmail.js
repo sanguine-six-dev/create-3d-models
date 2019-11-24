@@ -59,6 +59,8 @@ class UpdateEmail extends Component {
             "address": userInfo.address,
             "phone": userInfo.phone,
             "emailAddress": this.state.emailAddress,
+            "password": userInfo.password,
+            "listings": userInfo.listings
         })
             .then(res => {
                 this.setState({
