@@ -8,6 +8,7 @@ var userPortalSchema = new Schema({
     address: {type: String},
     phone: {type: String},
     emailAddress: {type: String, required: true},
+    password: {type: String},
     listings: [{
         locationName: {type: String},
         address1: {type: String},

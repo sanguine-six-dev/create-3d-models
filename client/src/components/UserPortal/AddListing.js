@@ -6,7 +6,6 @@ class AddListing extends React.Component {
         super(props);
 
         this.state = {
-            userId: 1,
             locationName: '',
             address1: '',
             address2: '',
@@ -74,19 +73,27 @@ class AddListing extends React.Component {
     };
 
     findAndUpdate() {
-        axios.get('/api/listings')
+        axios.get('/api/userPortal/' + sessionStorage.getItem(this.key))
             .then(res => {
-                console.log(`Listing response: ${JSON.stringify(res.data)}`);
-                res.data.find((listingObj) => {
-                        if (listingObj.userId === this.state.userId) {
-                            console.log(`here is the listing info found: ${JSON.stringify(listingObj)}`);
-
-                            this.updatelistings(listingObj);
-                        }
-                    }
-                );
+                console.log(res);
+                this.updatelistings(res.data);
             });
     };
+
+    // findAndUpdate() {
+    //     axios.get('/api/listings')
+    //         .then(res => {
+    //             console.log(`Listing response: ${JSON.stringify(res.data)}`);
+    //             res.data.find((listingObj) => {
+    //                     if (listingObj.userId === this.state.userId) {
+    //                         console.log(`here is the listing info found: ${JSON.stringify(listingObj)}`);
+    //
+    //                         this.updatelistings(listingObj);
+    //                     }
+    //                 }
+    //             );
+    //         });
+    // };
 
     updatelistings(listingObj) {
         let id = listingObj._id;
@@ -116,8 +123,12 @@ class AddListing extends React.Component {
         }
 
         let myListings = JSON.parse(listingsString);
-        axios.put('/api/listings/' + id, {
-            "userId": listingObj.userId,
+        axios.put('/api/userPortal/' + id, {
+            //"userId": listingObj.userId,
+            "name": listingObj.name,
+            "phone": listingObj.phone,
+            "address": listingObj.address,
+            "emailAddress": listingObj.emailAddress,
             "listings": myListings
         })
             .then(res => {
