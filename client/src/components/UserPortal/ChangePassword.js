@@ -47,7 +47,7 @@ class ChangePassword extends Component {
 
             this.findAndUpdate();
         } else {
-            alert(`The email address submitted must be in valid form`)
+            alert(`The password was NOT updated`)
         }
     };
 
@@ -65,11 +65,14 @@ class ChangePassword extends Component {
             "name": userInfo.name,
             "address": userInfo.address,
             "phone": userInfo.phone,
-            "emailAddress": this.state.emailAddress,
+            "emailAddress": userInfo.emailAddress,
+            "password": this.state.newpass,
+            "listings": userInfo.listings
         })
             .then(res => {
                 this.setState({
-                    emailAddress: ""
+                    newpass: "",
+                    newpassconfirm: ""
                 });
                 console.log(res);
                 console.log(res.data);
