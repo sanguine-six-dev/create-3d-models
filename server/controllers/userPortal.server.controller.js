@@ -32,7 +32,6 @@ exports.update = function (req, res) {
 
     /* Replace the contact info properties with the new properties found in req.body */
     UserPortal.findByIdAndUpdate(userContactInfo._id, {
-        userId: req.body.userId,
         name: req.body.name,
         address: req.body.address,
         phone: req.body.phone,

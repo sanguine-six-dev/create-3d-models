@@ -58,7 +58,7 @@ class UpdateContactInfo extends Component {
         event.preventDefault();
         const {name, phone, address, nameFieldError, phoneFieldError} = this.state;
         if (name !== "" && !nameFieldError && phone !== "" && !phoneFieldError) {
-            alert(`name: ${name}\n phone number: ${phone}\n address: ${address}`);
+            alert(`name: ${name}\nphone number: ${phone}\naddress: ${address}`);
             this.findAndUpdate();
         } else {
             alert(`Submission requires Name and Phone Number fields must be filled out.`)

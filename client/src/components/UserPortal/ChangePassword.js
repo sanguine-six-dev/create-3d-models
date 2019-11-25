@@ -43,7 +43,7 @@ class ChangePassword extends Component {
         const {newpass} = this.state;
         const {newpassconfirm} = this.state;
         if (newpass !== "" && !this.state.passwordFieldError) {
-            alert(`Updated Password: ${newpass}`);
+            alert(`Password has been Updated`);
 
             this.findAndUpdate();
         } else {
