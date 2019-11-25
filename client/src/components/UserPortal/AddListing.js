@@ -6,7 +6,6 @@ class AddListing extends React.Component {
         super(props);
 
         this.state = {
-            userId: 1,
             locationName: '',
             address1: '',
             address2: '',
@@ -74,17 +73,10 @@ class AddListing extends React.Component {
     };
 
     findAndUpdate() {
-        axios.get('/api/listings')
+        axios.get('/api/userPortal/' + sessionStorage.getItem(this.key))
             .then(res => {
-                console.log(`Listing response: ${JSON.stringify(res.data)}`);
-                res.data.find((listingObj) => {
-                        if (listingObj.userId === this.state.userId) {
-                            console.log(`here is the listing info found: ${JSON.stringify(listingObj)}`);
-
-                            this.updatelistings(listingObj);
-                        }
-                    }
-                );
+                console.log(res);
+                this.updatelistings(res.data);
             });
     };
 
@@ -102,7 +94,7 @@ class AddListing extends React.Component {
             "emailAddress": this.state.emailAddress
         };
 
-        console.log(`listing array before: ${JSON.stringify(listingObj.listings)}`);
+        //console.log(`listing array before: ${JSON.stringify(listingObj.listings)}`);
         let listingsString = "";
         let arrayString = "";
         if (listingObj.listings !== null) {
@@ -116,11 +108,17 @@ class AddListing extends React.Component {
         }
 
         let myListings = JSON.parse(listingsString);
-        axios.put('/api/listings/' + id, {
-            "userId": listingObj.userId,
+        axios.put('/api/userPortal/' + id, {
+            "name": listingObj.name,
+            "phone": listingObj.phone,
+            "address": listingObj.address,
+            "emailAddress": listingObj.emailAddress,
+            "password": listingObj.password,
             "listings": myListings
         })
             .then(res => {
+                alert(`The listing has been added`);
+
                 this.setState({
                     locationName: "",
                     address1: "",

@@ -6,7 +6,6 @@ class UpdateContactInfo extends Component {
         super(props);
 
         this.state = {
-            userId: 1,
             name: '',
             phone: '',
             address: '',
@@ -59,7 +58,7 @@ class UpdateContactInfo extends Component {
         event.preventDefault();
         const {name, phone, address, nameFieldError, phoneFieldError} = this.state;
         if (name !== "" && !nameFieldError && phone !== "" && !phoneFieldError) {
-            alert(`name: ${name}\n phone number: ${phone}\n address: ${address}`);
+            alert(`name: ${name}\nphone number: ${phone}\naddress: ${address}`);
             this.findAndUpdate();
         } else {
             alert(`Submission requires Name and Phone Number fields must be filled out.`)
@@ -68,28 +67,22 @@ class UpdateContactInfo extends Component {
     };
 
     findAndUpdate() {
-        axios.get('/api/userPortal')
+        axios.get('/api/userPortal/' + sessionStorage.getItem(this.key))
             .then(res => {
                 console.log(res);
-                res.data.find((info) => {
-                        if (info.userId === this.state.userId) {
-                            console.log(`here is the user's info found: ${JSON.stringify(info)}`);
-
-                            this.updateContactInfo(info);
-                        }
-                    }
-                );
+                this.updateContactInfo(res.data);
             });
     }
 
     updateContactInfo(userInfo) {
         let id = userInfo._id;
         axios.put('/api/userPortal/' + id, {
-            "userId": userInfo.userId,
             "name": this.state.name,
             "phone": this.state.phone,
             "address": this.state.address,
-            "emailAddress": userInfo.emailAddress
+            "emailAddress": userInfo.emailAddress,
+            "password": userInfo.password,
+            "listings": userInfo.listings
         })
             .then(res => {
                 this.setState({

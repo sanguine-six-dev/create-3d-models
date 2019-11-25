@@ -4,11 +4,11 @@ var mongoose = require('mongoose'),
 
 //Added schema
 var userPortalSchema = new Schema({
-    userId: {type: Number, required: true, unique: true},
     name: {type: String},
     address: {type: String},
     phone: {type: String},
     emailAddress: {type: String, required: true},
+    password: {type: String},
     listings: [{
         locationName: {type: String},
         address1: {type: String},
