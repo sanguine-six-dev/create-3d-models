@@ -6,6 +6,8 @@ import UserListings from './UserListings';
 import AddListing from './AddListing';
 import SubscriptionInfo from './SubscriptionInfo';
 import UserData from './UserData';
+import UserInfo from './UserInfo';
+
 
 class Portal extends Component {
 
@@ -76,6 +78,25 @@ class Portal extends Component {
                              data-parent="#accordionExample">
                             <div class="card-body">
                                 <UpdateContactInfo/>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="card">
+                        <div className="card-header" id="headingEight">
+                            <h2 className="mb-0">
+                                <div className="text-center">
+                                    <button className="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                            data-target="#collapseEight" aria-expanded="false"
+                                            aria-controls="collapseEight">
+                                        My Information
+                                    </button>
+                                </div>
+                            </h2>
+                        </div>
+                        <div id="collapseEight" className="collapse" aria-labelledby="headingEight"
+                             data-parent="#accordionExample">
+                            <div className="card-body">
+                                <UserInfo/>
                             </div>
                         </div>
                     </div>

@@ -29,7 +29,7 @@ module.exports.init = () => {
 
     // add a router
     app.use('/api/userPortal', userPortalRouter);
-    app.use('/api/listings', listingRouter);
+    //app.use('/api/listings', listingRouter);
 
 
     if (process.env.NODE_ENV === 'production') {

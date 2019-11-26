@@ -7,12 +7,11 @@ class UpdateEmail extends Component {
 
         this.state = {
             emailAddress: '',
-            emailFieldError: ''
+            emailFieldError: '',
+            currentEmail: ''
         };
 
-        this.handleEmailChange = this.handleEmailChange.bind(this);
-        this.emailValidation = this.emailValidation.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+        this.getCurrentEmail();
     };
 
     handleEmailChange = event => {
@@ -44,6 +43,14 @@ class UpdateEmail extends Component {
         }
     };
 
+    getCurrentEmail() {
+        axios.get('/api/userPortal/' + sessionStorage.getItem(this.key))
+            .then(res => {
+                console.log(res);
+                this.setState({currentEmail: res.data.emailAddress})
+            });
+    }
+
     findAndUpdate() {
         axios.get('/api/userPortal/' + sessionStorage.getItem(this.key))
             .then(res => {
@@ -54,6 +61,7 @@ class UpdateEmail extends Component {
 
     updateEmailPreference(userInfo) {
         let id = userInfo._id;
+        let email = userInfo.emailAddress;
         axios.put('/api/userPortal/' + id, {
             "name": userInfo.name,
             "address": userInfo.address,
@@ -64,7 +72,9 @@ class UpdateEmail extends Component {
         })
             .then(res => {
                 this.setState({
-                    emailAddress: ""
+                    currentEmail: this.state.emailAddress
+                }, () => {
+                    this.setState({emailAddress: ""})
                 });
                 console.log(res);
                 console.log(res.data);
@@ -74,6 +84,7 @@ class UpdateEmail extends Component {
     render() {
         return (
             <div>
+                <p>Current Email Preference: {this.state.currentEmail}</p>
                 <form onSubmit={this.handleSubmit}>
                     <div className="form-group">
                         <label htmlFor="emailPreference">Email</label>
