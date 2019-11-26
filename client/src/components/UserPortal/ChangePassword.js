@@ -82,7 +82,8 @@ class ChangePassword extends Component {
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
-                <div className="form-group">
+                <div class="form-row d-flex justify-content-center">
+                <div className="form-group col-md-9">
                     <label htmlFor="password">Enter your new password</label>
                     <input name="name"
                            className={`form-control ${this.state.passwordFieldError ? 'is-invalid' : ''}`}
@@ -93,8 +94,10 @@ class ChangePassword extends Component {
                            onBlur={this.passwordValidation}
                     />
                     <div className='invalid-feedback'></div>
+                    </div>
                 </div>
-                <div className="form-group">
+                <div class="form-row d-flex justify-content-center">
+                <div className="form-group col-md-9">
                     <label htmlFor="password2">Confirm your new password</label>
                     <input name="password2"
                            className={`form-control ${this.state.passwordFieldError ? 'is-invalid' : ''}`}
@@ -106,9 +109,12 @@ class ChangePassword extends Component {
                     />
                     <div className='invalid-feedback'>{this.state.passwordFieldError}</div>
                 </div>
+                </div>
+                <div class="form-row d-flex justify-content-center">
                 <button type="submit"
-                        className="btn btn-success btn-block">Submit
+                        className="btn btn-secondary btn-lg">Submit
                 </button>
+                </div>
             </form>
         )
     }

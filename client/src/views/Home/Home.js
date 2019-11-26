@@ -7,7 +7,7 @@ function Home() {
     return (
         <div class="homeCSS" >
                     
-<iframe class="MapCSS" src='http://localhost:8081/index.html'  />
+            <iframe class="MapCSS" src='http://localhost:8081/index.html'  />
 
         </div>
     );

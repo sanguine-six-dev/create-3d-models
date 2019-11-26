@@ -98,7 +98,8 @@ class UpdateContactInfo extends Component {
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
-                <div className="form-group">
+                <div class="form-row d-flex justify-content-center">
+                <div className="form-group col-md-9">
                     <label htmlFor="name">Name</label>
                     <input name="name"
                            className={`form-control ${this.state.nameFieldError ? 'is-invalid' : ''}`}
@@ -109,7 +110,9 @@ class UpdateContactInfo extends Component {
                     />
                     <div className='invalid-feedback'>{this.state.nameFieldError}</div>
                 </div>
-                <div className="form-group">
+                </div>
+                <div class="form-row d-flex justify-content-center">
+                <div className="form-group col-md-9">
                     <label htmlFor="phone">Phone Number</label>
                     <input name="phone"
 
@@ -123,7 +126,9 @@ class UpdateContactInfo extends Component {
                     />
                     <div className='invalid-feedback'>{this.state.phoneFieldError}</div>
                 </div>
-                <div className="form-group">
+                </div>
+                <div class="form-row d-flex justify-content-center">
+                <div className="form-group col-md-9">
                     <label htmlFor="address">Address</label>
                     <input name="address"
 
@@ -134,9 +139,12 @@ class UpdateContactInfo extends Component {
                            onChange={this.handleAddressChange}
                     />
                 </div>
+                </div>
+                <div class="form-row d-flex justify-content-center">
                 <button type="submit"
-                        className="btn btn-success btn-block">Submit
+                        className="btn btn-secondary btn-lg">Submit
                 </button>
+                </div>
             </form>
         )
 

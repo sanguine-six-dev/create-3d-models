@@ -26,6 +26,9 @@ class SubscriptionInfo extends React.Component {
     render() {
         return (
             <div
+            class="form-row d-flex justify-content-center"
+        >
+            <div className="form-group col-md-9"
                 id="subscriptionAll"
             >
                 <p>Current subscription level:
@@ -56,6 +59,7 @@ class SubscriptionInfo extends React.Component {
                 <CheckoutButtonDisplay
                     selectedOption={this.state.selectedOption}
                 />
+            </div>
             </div>
         )
     }

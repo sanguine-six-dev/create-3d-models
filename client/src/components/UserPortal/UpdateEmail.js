@@ -86,7 +86,8 @@ class UpdateEmail extends Component {
             <div>
                 <p>Current Email Preference: {this.state.currentEmail}</p>
                 <form onSubmit={this.handleSubmit}>
-                    <div className="form-group">
+                <div class="form-row d-flex justify-content-center">
+                    <div className="form-group col-md-9">
                         <label htmlFor="emailPreference">Email</label>
                         <input name="emailPreference"
 
@@ -99,9 +100,12 @@ class UpdateEmail extends Component {
                         />
                         <div className='invalid-feedback'>{this.state.emailFieldError}</div>
                     </div>
+                    </div>
+                    <div class="form-row d-flex justify-content-center">
                     <button type="submit"
-                            className="btn btn-success btn-block">Submit
+                            className="btn btn-secondary btn-lg">Submit
                     </button>
+                    </div>
                 </form>
             </div>
 

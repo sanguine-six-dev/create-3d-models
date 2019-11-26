@@ -78,10 +78,11 @@ class Login extends Component {
     };
 
     render() {
+
         return (
-            <div id="myLoginBox">
-                <form className="justify-content-center" onSubmit={this.handleLogin}>
-                    <div className="form-group">
+            <div id="myLoginBox" className="col-md-9">
+                <form class="justify-content-center" onSubmit={this.handleLogin}>
+                    <div class="form-group">
                         <label htmlFor="Login">Username</label>
                         <input
                             value={this.state.username}
@@ -105,7 +106,7 @@ class Login extends Component {
                         <div className='text-danger'>{this.state.passwordFieldError}</div>
                     </div>
                     <button type="submit"
-                            className="btn btn-primary btn-block">Login
+                            className="btn btn-secondary btn-block">Login
                     </button>
                 </form>
             </div>

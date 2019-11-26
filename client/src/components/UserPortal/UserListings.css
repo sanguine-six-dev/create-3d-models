@@ -1,0 +1,43 @@
+.column2 {
+    padding-left: 40px;
+}
+
+.no-gutter.row,
+.no-gutter.container,
+.no-gutter.container-fluid{
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.no-gutter>[class^="col-"]{
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+#column1 {
+    margin: 0px;
+    padding-left: 0px;
+    background: lightblue;
+    height: 83vh;
+    direction: left;
+    transition: 4s;
+}
+
+.table .tr:hover{
+    background-color: lightblue;
+}
+
+.table tr {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.slider {
+    
+}
+
