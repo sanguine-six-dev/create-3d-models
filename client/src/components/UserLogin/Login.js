@@ -49,7 +49,7 @@ class Login extends Component {
 
     render() {
         return(
-            <div id="myLoginBox">
+            <div id="myLoginBox" className="col-md-9">
                 <form className="justify-content-center" onSubmit={this.handleLogin}>
                     <div className="form-group">
                         <label htmlFor="Login">Username</label>
@@ -75,7 +75,7 @@ class Login extends Component {
                         <div className='text-danger'>{this.state.passwordFieldError}</div>
                     </div>
                     <button type="submit"
-                            className="btn btn-primary btn-block">Login
+                            className="btn btn-secondary btn-block">Login
                     </button>
                 </form>
             </div>

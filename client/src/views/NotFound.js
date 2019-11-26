@@ -1,7 +1,11 @@
 import React from 'react';
+import ErrPic from '../assets/Error-Pic.jpg'
+import './NotFound.css'
 
 const NotFound = () => {
-        return "Page not found"
+        return (
+                <img class="errPic" src={ErrPic} />
+        );
 }
 
 export default NotFound;
