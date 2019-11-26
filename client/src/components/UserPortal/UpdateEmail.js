@@ -6,7 +6,6 @@ class UpdateEmail extends Component {
         super(props);
 
         this.state = {
-            userId: 1,
             emailAddress: '',
             emailFieldError: ''
         };
@@ -46,29 +45,22 @@ class UpdateEmail extends Component {
     };
 
     findAndUpdate() {
-        axios.get('/api/userPortal')
+        axios.get('/api/userPortal/' + sessionStorage.getItem(this.key))
             .then(res => {
                 console.log(res);
-                res.data.find((emailPreference) => {
-                        if (emailPreference.userId === this.state.userId) {
-                            console.log(`here is the user's info found: ${JSON.stringify(emailPreference)}`);
-
-                            this.updateEmailPreference(emailPreference);
-
-                        }
-                    }
-                );
+                this.updateEmailPreference(res.data);
             });
     }
 
     updateEmailPreference(userInfo) {
         let id = userInfo._id;
         axios.put('/api/userPortal/' + id, {
-            "userId": userInfo.userId,
             "name": userInfo.name,
             "address": userInfo.address,
             "phone": userInfo.phone,
             "emailAddress": this.state.emailAddress,
+            "password": userInfo.password,
+            "listings": userInfo.listings
         })
             .then(res => {
                 this.setState({

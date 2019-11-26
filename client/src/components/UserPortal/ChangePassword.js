@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import axios from "axios";
 
 class ChangePassword extends Component {
     constructor(props) {
@@ -39,7 +40,44 @@ class ChangePassword extends Component {
 
     handleSubmit = event => {
         event.preventDefault();
+        const {newpass} = this.state;
+        const {newpassconfirm} = this.state;
+        if (newpass !== "" && !this.state.passwordFieldError) {
+            alert(`Password has been Updated`);
+
+            this.findAndUpdate();
+        } else {
+            alert(`The password was NOT updated`)
+        }
     };
+
+    findAndUpdate() {
+        axios.get('/api/userPortal/' + sessionStorage.getItem(this.key))
+            .then(res => {
+                console.log(res);
+                this.updatePasswordPreference(res.data);
+            });
+    }
+
+    updatePasswordPreference(userInfo) {
+        let id = userInfo._id;
+        axios.put('/api/userPortal/' + id, {
+            "name": userInfo.name,
+            "address": userInfo.address,
+            "phone": userInfo.phone,
+            "emailAddress": userInfo.emailAddress,
+            "password": this.state.newpass,
+            "listings": userInfo.listings
+        })
+            .then(res => {
+                this.setState({
+                    newpass: "",
+                    newpassconfirm: ""
+                });
+                console.log(res);
+                console.log(res.data);
+            })
+    }
 
     render() {
         return (

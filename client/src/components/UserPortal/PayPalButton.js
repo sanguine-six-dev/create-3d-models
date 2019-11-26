@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import axios from "axios";
 
 class PayPalButton extends React.Component{
 
@@ -51,10 +52,37 @@ class PayPalButton extends React.Component{
     }
 
     onApprove(data, actions) {
+
+        const { userId, newTier } = this.props;
+
         return actions.order
             .capture()
             .then((details) => {
                 if (this.props.onSuccess) {
+                    axios.get('/api/userPortal')
+                    .then(res => {
+                        console.log(res);
+                        res.data.find((info) => {
+                            if (info.userId === userId) {
+                                let id = info._id;  //Will need to update this when we get the listing selector sorted out
+                                info.listings[0].subscriptionTier = newTier;
+                                console.log(info.listings);
+                                console.log(newTier);
+
+                                axios.put('/api/userPortal/' + id, {
+                                    "userId": info.userId,
+                                    "name": "Mike Test",
+                                    "phone": info.phone,
+                                    "emailAddress": info.emailAddress,
+                                    "address": info.address,
+                                    "service": info.service,
+                                    "accessibility": info.accessibility,
+                                    "listings": info.listings
+                                })
+                            }
+                        })
+                    });
+
                     return this.props.onSuccess(details, data);
                 }
             })

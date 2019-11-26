@@ -1,9 +1,10 @@
 import React, {Component} from 'react'
-
+import axios from 'axios'
 
 class Register extends Component {
     constructor(props) {
         super(props);
+
         this.state = {
             first_name: '',
             last_name: '',
@@ -22,35 +23,56 @@ class Register extends Component {
 
     handleRegister = event => {
         event.preventDefault();
+
+        axios.get('/api/userPortal')
+            .then(res => {
+                console.log(res.data.length);
+                axios.post('/api/userPortal', {
+                    //"userId": userId,
+                    "name": this.state.first_name + " " + this.state.last_name,
+                    "emailAddress": this.state.email_address,
+                    "password": this.state.password
+                })
+                    .then(res => {
+                        this.setState({
+                            first_name: "",
+                            last_name: "",
+                            email_address: "",
+                            password: "",
+                            passwordconfirm: ""
+                        });
+                    });
+                alert(`You have been successfully registered`)
+            });
     };
 
     handleFirstChange = e => {
         this.setState({
-            first_name:e.target.value
+            first_name: e.target.value
         });
     };
 
     handleLastChange = e => {
         this.setState({
-            last_name:e.target.value
+            last_name: e.target.value
         });
     };
 
     handleEmailChange = e => {
         this.setState({
-            email_address:e.target.value
+            email_address: e.target.value
         });
     };
 
     handlePasswordChange = e => {
         this.setState({
-            password:e.target.value
+            password: e.target.value
         });
     };
 
     handlePassword2Change = e => {
         this.setState({
-            passwordconfirm:e.target.value
+            passwordconfirm: e.target.value
         });
     };
 
@@ -91,7 +113,7 @@ class Register extends Component {
     };
 
     password2Validation = () => {
-        const password = this.state.password
+        const password = this.state.password;
         const password2 = this.state.passwordconfirm;
         this.setState({
                 pass2FieldError: (password === password2) ? null :
@@ -101,8 +123,7 @@ class Register extends Component {
     };
 
     render() {
-        console.log(this.state);
-        return(
+        return (
             <div>
                 <form className="justify-content-center" onSubmit={this.handleRegister}>
                     <div class="form-row d-flex justify-content-around">

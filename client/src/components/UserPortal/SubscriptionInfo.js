@@ -33,7 +33,7 @@ class SubscriptionInfo extends React.Component {
                 res.data.find((info) => {
                     if (info.userId === this.state.userId) {
                        this.setState({
-                           subscriptionTier: info.subscriptionTier
+                           subscriptionTier: info.listings[0].subscriptionTier
                        })
                     }
                 })
@@ -77,6 +77,7 @@ class SubscriptionInfo extends React.Component {
 
                 <PriceDisplay
                         selectedOption={this.state.selectedOption}
+                        subscriptionTier={this.state.subscriptionTier}
                 />
                 
                 <br/>
@@ -98,6 +99,8 @@ class SubscriptionInfo extends React.Component {
 
                 <CheckoutButtonDisplay
                     selectedOption={this.state.selectedOption}
+                    subscriptionTier={this.state.subscriptionTier}
+                    userId={this.state.userId}
                 />
             </div>
         )
@@ -112,33 +115,42 @@ class SubscriptionInfo extends React.Component {
 // Double equal is used because selectedOption is technically a string
 function PriceDisplay(props) {
     const selected = props.selectedOption.valueOf();
+    const currentTier = props.subscriptionTier.valueOf();
+    var amountPaid = 0;
+    var upgradeCost = 0;
+
+    //Determine how much has already been paid
+    if (currentTier == 1) {
+        amountPaid = 59
+    }
+    else if (currentTier == 2) {
+        amountPaid = 89
+    }
+    else if (currentTier == 3) {
+        amountPaid = 199
+    }
+    else {
+        amountPaid = 0
+    }
+
+    //Determine how much to pay for the upraded subscription tier
     if (selected == 1) {
-        return(
-            <div>
-                <br/>
-                <p>Price to upgrade:</p>
-                <p class="text-center subscription">$59.00</p>
-            </div>
-        );
+        upgradeCost = 59 - amountPaid;
     } else if (selected == 2){
-        return(
-            <div>
-                <br/>
-                <p>Price to upgrade:</p>
-                <p class="text-center subscription">$89.00</p>
-            </div>
-        );
+        upgradeCost = 89 - amountPaid;
     } else if (selected == 3){
-        return(
-            <div>
-                <br/>
-                <p>Price to upgrade:</p>
-                <p class="text-center subscription">$199.00</p>
-            </div>
-        );
+        upgradeCost = 199 - amountPaid;
     } else {
         return null;
     }
+
+    return(
+        <div>
+            <br/>
+            <p>Price to upgrade:</p>
+            <p class="text-center subscription">${upgradeCost}.00</p>
+        </div>
+    );
 
 }
 
@@ -148,6 +160,10 @@ function PriceDisplay(props) {
 //It would just link to the respective checkout page that would have the correct price already.
 function CheckoutButtonDisplay(props) {
     const selected = props.selectedOption.valueOf();
+    const currentTier = props.subscriptionTier.valueOf();
+    var amountPaid = 0;
+    var upgradeCost = 0;
+
     if (selected > 0) {
 
         const onSuccess = (payment) =>
@@ -159,16 +175,30 @@ function CheckoutButtonDisplay(props) {
         const onCancel = (data) =>
             console.log('Cancelled payment!', data);
 
-        //Sets the cost of the subscription based on the tier selected
-        var price = "1.00"
+
+       //Determine how much has already been paid
+        if (currentTier == 1) {
+            amountPaid = 59
+        }
+        else if (currentTier == 2) {
+            amountPaid = 89
+        }
+        else if (currentTier == 3) {
+            amountPaid = 199
+        }
+        else {
+            amountPaid = 0
+        }
+
+        //Determine how much to pay for the upraded subscription tier
         if (selected == 1) {
-            price = "59.00"
-        }
-        else if (selected == 2) {
-            price = "89.00"
-        }
-        else if (selected == 3) {
-            price = "199.00"
+            upgradeCost = 59 - amountPaid;
+        } else if (selected == 2){
+            upgradeCost = 89 - amountPaid;
+        } else if (selected == 3){
+            upgradeCost = 199 - amountPaid;
+        } else {
+            return null;
         }
 
         return(
@@ -179,7 +209,9 @@ function CheckoutButtonDisplay(props) {
                     <PayPalButton
                      env={ENV}
                      commit={true}
-                     amount={price}
+                     amount={upgradeCost}
+                     newTier={selected}
+                     userId={props.userId}
                      clientId={CLIENT.sandbox}
                      currency="USD"
                      shippingPreference={"NO_SHIPPING"}
@@ -201,7 +233,7 @@ function CheckoutButtonDisplay(props) {
 function BenefitsDisplay(props) {
     const selected = props.selectedOption.valueOf();
 
-    //Set the description based on the chose subscription tier level
+    //Set the description based on the chosen subscription tier level
     if (selected == 1) {
         return (
             <p class="text-center subscription">
