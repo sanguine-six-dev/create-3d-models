@@ -139,7 +139,7 @@ class AddListing extends React.Component {
         return (
             <div class="form-container">
                 <form class="listing-form" onSubmit={this.handleSubmit}>
-                    <div className="formRow d-flex justify-content-center" >
+                    <div class="form-row d-flex justify-content-center" >
                         <div class="form-group col-md-9">
                             <label for="name">Location Name</label>
                             <input
@@ -163,13 +163,6 @@ class AddListing extends React.Component {
                             />
                         </div>
                     </div>
-
-                        <div class="form-row d-flex justify-content-center">
-                            <div class="form-group col-md-9">
-                                <label for="address1">Address 1</label>
-                                <input type="text" class="form-control" id="address1" placeholder="Eg: 1234 Alphabet Street" />
-                            </div>
-                        </div>
 
                     <div class="form-row d-flex justify-content-center">
                         <div class="form-group col-md-9">
@@ -195,7 +188,7 @@ class AddListing extends React.Component {
                                 onChange={this.handleCityChange}
                             />
                         </div>
-                    </div>
+                    
 
                         <div class="form-group col-md-3">
                             <label for="state">State</label>
@@ -219,6 +212,8 @@ class AddListing extends React.Component {
                                 onChange={this.handleZipChange}
 
                             />
+                        </div>
+
                         </div>
 
                     <div class="form-row d-flex justify-content-center">
