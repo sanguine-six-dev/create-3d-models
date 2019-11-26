@@ -115,10 +115,11 @@ class UpdateContactInfo extends Component {
 
                            className={`form-control ${this.state.phoneFieldError ? 'is-invalid' : ''}`}
                            id="phone"
-                           placeholder="Enter phone number"
+                           placeholder="Enter phone number (###-###-####)"
                            value={this.state.phone}
                            onChange={this.handlePhoneChange}
                            onBlur={this.phoneValidation}
+                           pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                     />
                     <div className='invalid-feedback'>{this.state.phoneFieldError}</div>
                 </div>
