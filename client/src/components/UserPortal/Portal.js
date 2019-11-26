@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import ChangePassword from './ChangePassword';
 import UpdateEmail from './UpdateEmail';
 import UpdateContactInfo from './UpdateContactInfo';
@@ -8,9 +8,17 @@ import SubscriptionInfo from './SubscriptionInfo';
 import UserData from './UserData';
 import './Portal.css';
 
-const Portal = () => {
+class Portal extends Component {
 
-return (
+    constructor(props) {
+        super(props);
+        this.state = {
+            userId: ''
+        }
+    }
+
+    render() {
+        return (
     <div class="portal">
          <div class="row">
             <div class="col-2" id="portal-col">
@@ -44,7 +52,8 @@ return (
             </div>
         </div>
     </div>
-    )
+        )
+    }
 }
 
 export default Portal;

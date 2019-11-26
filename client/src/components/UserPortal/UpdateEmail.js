@@ -6,16 +6,9 @@ class UpdateEmail extends Component {
         super(props);
 
         this.state = {
-            userId: 1,
-            currentEmail: '',
-            emailPreferences: [],
-            emailPreference: {},
             emailAddress: '',
             emailFieldError: ''
         };
-
-        // This will pull all of the email preferences out of the database
-        this.getEmailPreferences();
 
         this.handleEmailChange = this.handleEmailChange.bind(this);
         this.emailValidation = this.emailValidation.bind(this);
@@ -45,92 +38,42 @@ class UpdateEmail extends Component {
         if (emailAddress !== "" && !this.state.emailFieldError) {
             alert(`Updated Email Address: ${emailAddress}`);
 
-            let userInfo = this.findEmailPreference();
-            console.log(`email id: ${userInfo._id}`);
-
-            this.updateEmailPreference(userInfo);
-
-            this.resetForm();
+            this.findAndUpdate();
         } else {
             alert(`The email address submitted must be in valid form`)
         }
     };
 
-    resetForm = () => {
-        this.setState({
-            emailAddress: ""
-        });
-    };
-
-    /***
-     * This function will get all of the email preferences out of the database
-     */
-    getEmailPreferences() {
-        axios.get('/api/userPortal')
+    findAndUpdate() {
+        axios.get('/api/userPortal/' + sessionStorage.getItem(this.key))
             .then(res => {
                 console.log(res);
-                this.setState({emailPreferences: res.data})
-            })
+                this.updateEmailPreference(res.data);
+            });
     }
 
-    /***
-     * This function will get all of the email preferences out of the database
-     */
-    getEmailPreference() {
-        axios.get('/api/userPortal/' + this.state.emailPreference._id)
-            .then(res => {
-                console.log(res);
-                this.setState({emailPreference: res.data})
-            })
-    }
-
-    /***
-     * This function will save an email preference to the database
-     */
     updateEmailPreference(userInfo) {
-        console.log(`emailAddress: ${this.state.emailAddress}`);
-        console.log(`Address: ${userInfo.address}`);
         let id = userInfo._id;
-
         axios.put('/api/userPortal/' + id, {
-            "userId": userInfo.userId,
             "name": userInfo.name,
             "address": userInfo.address,
             "phone": userInfo.phone,
             "emailAddress": this.state.emailAddress,
-
+            "password": userInfo.password,
+            "listings": userInfo.listings
         })
             .then(res => {
+                this.setState({
+                    emailAddress: ""
+                });
                 console.log(res);
                 console.log(res.data);
             })
     }
 
-    /***
-     * This function will find the emailPreference based on userId
-     */
-    findEmailPreference() {
-        let userInfo = {};
-        this.state.emailPreferences.find((emailPreference) => {
-            if (emailPreference.userId === this.state.userId) {
-                console.log(`here is the user's info found: ${JSON.stringify(emailPreference)}`);
-                userInfo = emailPreference;
-                this.setState({
-                    emailPreference: emailPreference,
-                    currentEmail: JSON.stringify(emailPreference.emailAddress),
-                    emailAddress: JSON.stringify(emailPreference.emailAddress)
-                });
-
-            }
-        });
-        return userInfo;
-    }
-
     render() {
         return (
             <div>
-                {/*<p>Current Email Address: {}</p>*/}
-                {/*<br/>*/}
                 <form onSubmit={this.handleSubmit}>
                 <div class="form-row d-flex justify-content-center">
                     <div className="form-group col-md-9">
