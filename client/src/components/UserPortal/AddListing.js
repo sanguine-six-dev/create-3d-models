@@ -1,4 +1,5 @@
 import React from 'react';
+import './AddListing.css';
 import axios from 'axios';
 
 class AddListing extends React.Component {
@@ -136,8 +137,8 @@ class AddListing extends React.Component {
 
     render() {
         return (
-            <div>
-                <form onSubmit={this.handleSubmit}>
+            <div class="form-container">
+                <form class="listing-form> onSubmit={this.handleSubmit}>
                     <div class="form-row d-flex justify-content-center">
                         <div class="form-group col-md-9">
                             <label for="name">Location Name</label>
@@ -161,8 +162,12 @@ class AddListing extends React.Component {
                                 onChange={this.handleAddress1Change}
                             />
                         </div>
-                    </div>
 
+                        <div class="form-row d-flex justify-content-center">
+                            <div class="form-group col-md-9">
+                                <label for="address1">Address 1</label>
+                                <input type="text" class="form-control" id="address1" placeholder="Eg: 1234 Alphabet Street" />
+                            </div>
                     <div class="form-row d-flex justify-content-center">
                         <div class="form-group col-md-9">
                             <label for="address2">Address 2</label>
@@ -174,7 +179,6 @@ class AddListing extends React.Component {
                                 onChange={this.handleAddress2Change}
                             />
                         </div>
-                    </div>
 
                     <div class="form-row d-flex justify-content-center">
                         <div class="form-group col-md-3">
@@ -211,7 +215,6 @@ class AddListing extends React.Component {
 
                             />
                         </div>
-                    </div>
 
                     <div class="form-row d-flex justify-content-center">
                         <div class="form-group col-md-9">
@@ -224,7 +227,6 @@ class AddListing extends React.Component {
                                 onChange={this.handlePhoneChange}
                                 pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"/>
                         </div>
-                    </div>
 
                     <div class="form-row d-flex justify-content-center">
                         <div class="form-group col-md-9">
@@ -240,8 +242,11 @@ class AddListing extends React.Component {
                     </div>
 
                     <div class="form-row d-flex justify-content-center">
-                        <button type="submit"
-                                className="btn btn-success btn-block">Submit
+                        <button variant="primary" 
+                                size="lg" 
+                                class="btn btn-secondary btn-lg"
+                                type="submit"
+                                >Submit
                         </button>
                     </div>
                 </form>

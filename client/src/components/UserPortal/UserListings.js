@@ -8,6 +8,7 @@
 
 import React from "react"
 import ViewListing from './ViewListing'
+import './UserListings.css';
 
 class UserListings extends React.Component{
     constructor(props) {
@@ -34,7 +35,7 @@ class UserListings extends React.Component{
             name: 'Academic Advisement - Farrior Hall',
             address: '100 Fletcher Dr, Gainesville, FL 32611, United States',
             phone: 'Test phone number 1',
-            link: 'one.uf'
+            link: 'www.one.uf'
         },
         {
             id: 2,
@@ -62,8 +63,8 @@ class UserListings extends React.Component{
 		return (
     
             <div class="row">
-                <div class="column1">
-                    <table class="table table-striped table-hover">
+                <div class="col-md-3" id='column1'>
+                    <table class="table table-hover">
                         <thead>
                             <tr>
                                 <th scope="col">My Listings</th>
@@ -76,7 +77,7 @@ class UserListings extends React.Component{
                         </tbody>
                     </table>
                 </div>
-                <div class="column2">
+                <div class="column2 col-md-6">
                     <ViewListing
                         selectedListing={this.state.selectedListing}
                         data={data}

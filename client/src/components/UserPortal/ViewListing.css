@@ -1,0 +1,27 @@
+.table-icon {
+    width: 30px;
+    height: 30px;
+}
+
+.listing-data {
+    border-bottom: 1px solid lightgray;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    height: 1.5em;
+}
+
+.listing-header {
+    border-bottom: 1px solid lightgray;
+    padding-bottom: 10px;
+    width: 100%;
+    text-align: center;
+    font-size: 1.5em;
+}
+
+.listing-info {
+    width: 100%;
+}
+
+
