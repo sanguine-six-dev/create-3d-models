@@ -36,7 +36,6 @@ exports.update = function (req, res) {
         address: req.body.address,
         phone: req.body.phone,
         emailAddress: req.body.emailAddress,
-        subscriptionTier: req.body.subscriptionTier,
         password: req.body.password,
         listings: req.body.listings
     }, {new: true})

@@ -5,8 +5,11 @@
     width: 98%;
 }
 
+/* I wrote this UserListings css but it was never merged. I don't want it 
+to interfere with Ken's new css so I'm going to comment it out for now */
+
 /* ##### UserListings ##### */
-table, tr, th {
+/*table, tr, th {
    border: 1px solid #dee2e6;
 }
 table {
@@ -45,4 +48,4 @@ td:hover {
 	width: 50%;
     padding: 20px;
 	background-color: #c2c5cc;
-}
+} */

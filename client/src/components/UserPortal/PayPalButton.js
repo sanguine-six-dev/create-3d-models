@@ -51,6 +51,7 @@ class PayPalButton extends React.Component{
         });
     }
 
+    //Runs after an order has been completed
     onApprove(data, actions) {
 
         const { userId, newTier } = this.props;
@@ -58,27 +59,31 @@ class PayPalButton extends React.Component{
         return actions.order
             .capture()
             .then((details) => {
-                if (this.props.onSuccess) {
+                if (this.props.onSuccess) { //If the transaction was successful
                     axios.get('/api/userPortal')
                     .then(res => {
                         console.log(res);
                         res.data.find((info) => {
                             if (info.userId === userId) {
-                                let id = info._id;  //Will need to update this when we get the listing selector sorted out
-                                info.listings[0].subscriptionTier = newTier;
-                                console.log(info.listings);
-                                console.log(newTier);
+                                let id = info._id;  
+                        
+                                //Right now it's hardcoded need to update this when we get the listing selector sorted out
+                                let myListings = info.listings
+                                myListings[0].subscriptionTier = newTier;
 
                                 axios.put('/api/userPortal/' + id, {
                                     "userId": info.userId,
-                                    "name": "Mike Test",
+                                    "name": info.name,
                                     "phone": info.phone,
                                     "emailAddress": info.emailAddress,
                                     "address": info.address,
                                     "service": info.service,
                                     "accessibility": info.accessibility,
-                                    "listings": info.listings
+                                    "listings": myListings
                                 })
+                                    /* .then(res => {
+                                        console.log(res);
+                                    }) */
                             }
                         })
                     });
@@ -133,6 +138,7 @@ class PayPalButton extends React.Component{
         );
     }
 
+    //Loads the Paypal SDK
     addPaypalSdk() {
         const { clientId, currency, onButtonReady } = this.props;
         const queryParams = [];

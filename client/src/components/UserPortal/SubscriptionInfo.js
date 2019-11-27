@@ -55,6 +55,9 @@ class SubscriptionInfo extends React.Component {
         
         return (
             <div
+            class="form-row d-flex justify-content-center"
+        >
+            <div className="form-group col-md-9"
                 id="subscriptionAll"
             >
                 <p>Your current subscription level:</p>
@@ -102,6 +105,7 @@ class SubscriptionInfo extends React.Component {
                     subscriptionTier={this.state.subscriptionTier}
                     userId={this.state.userId}
                 />
+            </div>
             </div>
         )
     }
