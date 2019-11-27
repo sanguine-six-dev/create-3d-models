@@ -74,6 +74,11 @@ class UpdateContactInfo extends Component {
             });
     }
 
+    refreshPage() {
+        window.location.reload();
+        console.log('Refreshing');
+    }
+
     updateContactInfo(userInfo) {
         let id = userInfo._id;
         axios.put('/api/userPortal/' + id, {
@@ -92,58 +97,59 @@ class UpdateContactInfo extends Component {
                 });
                 console.log(res);
                 console.log(res.data);
-            })
+            });
+        this.refreshPage();
     }
 
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
                 <div class="form-row d-flex justify-content-center">
-                <div className="form-group col-md-9">
-                    <label htmlFor="name">Name</label>
-                    <input name="name"
-                           className={`form-control ${this.state.nameFieldError ? 'is-invalid' : ''}`}
-                           id="name" placeholder="Enter name"
-                           value={this.state.name}
-                           onChange={this.handleNameChange}
-                           onBlur={this.nameValidation}
-                    />
-                    <div className='invalid-feedback'>{this.state.nameFieldError}</div>
-                </div>
+                    <div className="form-group col-md-9">
+                        <label htmlFor="name">Name</label>
+                        <input name="name"
+                               className={`form-control ${this.state.nameFieldError ? 'is-invalid' : ''}`}
+                               id="name" placeholder="Enter name"
+                               value={this.state.name}
+                               onChange={this.handleNameChange}
+                               onBlur={this.nameValidation}
+                        />
+                        <div className='invalid-feedback'>{this.state.nameFieldError}</div>
+                    </div>
                 </div>
                 <div class="form-row d-flex justify-content-center">
-                <div className="form-group col-md-9">
-                    <label htmlFor="phone">Phone Number</label>
-                    <input name="phone"
+                    <div className="form-group col-md-9">
+                        <label htmlFor="phone">Phone Number</label>
+                        <input name="phone"
 
-                           className={`form-control ${this.state.phoneFieldError ? 'is-invalid' : ''}`}
-                           id="phone"
-                           placeholder="Enter phone number (###-###-####)"
-                           value={this.state.phone}
-                           onChange={this.handlePhoneChange}
-                           onBlur={this.phoneValidation}
-                           pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-                    />
-                    <div className='invalid-feedback'>{this.state.phoneFieldError}</div>
-                </div>
+                               className={`form-control ${this.state.phoneFieldError ? 'is-invalid' : ''}`}
+                               id="phone"
+                               placeholder="Enter phone number (###-###-####)"
+                               value={this.state.phone}
+                               onChange={this.handlePhoneChange}
+                               onBlur={this.phoneValidation}
+                               pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                        />
+                        <div className='invalid-feedback'>{this.state.phoneFieldError}</div>
+                    </div>
                 </div>
                 <div class="form-row d-flex justify-content-center">
-                <div className="form-group col-md-9">
-                    <label htmlFor="address">Address</label>
-                    <input name="address"
+                    <div className="form-group col-md-9">
+                        <label htmlFor="address">Address</label>
+                        <input name="address"
 
-                           className={`form-control`}
-                           id="address"
-                           placeholder="Enter address (optional)"
-                           value={this.state.address}
-                           onChange={this.handleAddressChange}
-                    />
-                </div>
+                               className={`form-control`}
+                               id="address"
+                               placeholder="Enter address (optional)"
+                               value={this.state.address}
+                               onChange={this.handleAddressChange}
+                        />
+                    </div>
                 </div>
                 <div class="form-row d-flex justify-content-center">
-                <button type="submit"
-                        className="btn btn-secondary btn-lg">Submit
-                </button>
+                    <button type="submit"
+                            className="btn btn-secondary btn-lg">Submit
+                    </button>
                 </div>
             </form>
         )

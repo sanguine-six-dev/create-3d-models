@@ -59,9 +59,13 @@ class UpdateEmail extends Component {
             });
     }
 
+    refreshPage() {
+        window.location.reload();
+        console.log('Refreshing');
+    }
+
     updateEmailPreference(userInfo) {
         let id = userInfo._id;
-        let email = userInfo.emailAddress;
         axios.put('/api/userPortal/' + id, {
             "name": userInfo.name,
             "address": userInfo.address,
@@ -78,7 +82,8 @@ class UpdateEmail extends Component {
                 });
                 console.log(res);
                 console.log(res.data);
-            })
+            });
+        this.refreshPage();
     }
 
     render() {
