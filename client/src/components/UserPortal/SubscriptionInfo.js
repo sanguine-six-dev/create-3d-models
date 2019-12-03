@@ -1,12 +1,12 @@
 import React from 'react';
 import PayPalButton from './PayPalButton'
 import axios from 'axios';
+import './UserListings.css';
 
 
 //Current benefits and Upgraded benefits can be filled out after we are given more information from the client.
-//No styling or css has been done.
 //Throws warnings when comparing in PriceDisplay
-//Needs selectedOption to be an number
+//Needs selectedTier to be an number
 
 
 //We need to move the client ID to another file at some point
@@ -19,72 +19,145 @@ const ENV = 'sandbox' //I only have access to sandbox testing currently
 class SubscriptionInfo extends React.Component {
     //This holds the state of the subscription level dropdown box
     //priceLevel will eventually be used to display the correct pricepoints.
-    state = {
-        selectedOption: "",
-        priceLevel: "",
-        userId: 1234, //Will need to update this somewhere in the component
-        subscriptionTier: 0
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            _id: "5ddf0e8272dc6e51d29c7df6", //FIXME: Right now its hard coded to the first user, but will need to update later
+            subscriptionTier: -1,
+            listings: [],
+            selectedListing: 0,
+            selectedTier: "",
+            priceLevel: ""
+        };
+    }
+
 
     componentWillMount() {
         axios.get('/api/userPortal')
             .then(res => {
                 console.log(res);
                 res.data.find((info) => {
-                    if (info.userId === this.state.userId) {
+                    if (info._id === this.state._id) {
                        this.setState({
-                           subscriptionTier: info.listings[0].subscriptionTier
+                           listings: info.listings
                        })
                     }
                 })
             });
     }
 
+    selectedListing(_id) {
+
+        var tier
+        this.state.listings.find((info) => {
+            if (info._id === _id) {
+                tier = info.subscriptionTier
+                return true;
+            }
+            else {
+                tier = 0
+            }
+        })
+
+        this.setState({
+          selectedListing: _id,
+          subscriptionTier: tier,
+          selectedTier: ""
+        })
+    }
+
+    selectedTier(value) {
+        this.setState({
+            selectedTier: value
+        })
+    }
+
+
     render() {
 
-        var tierName = "Free Listing"
-        if (this.state.subscriptionTier == 1) {
-            tierName = "Basic Listing"
-        }
-        else if (this.state.subscriptionTier == 2) {
-            tierName = "Premium Listing"
-        }
-        else if (this.state.subscriptionTier == 3) {
-            tierName = "Splash Page Listing"
-        }
-        
         return (
             <div
-            class="form-row d-flex justify-content-center"
-        >
-            <div className="form-group col-md-9"
-                id="subscriptionAll"
+            class="row"
             >
-                <p>Your current subscription level:</p>
-                <p class="text-center subscription">{tierName}</p>
-                <br/>
+            
 
-                <p>Choose subscription level:
-                    <select
-                        className="browser-default custom-select"
-                        value={this.state.selectedOption}
-                        onChange={(e) => this.setState({selectedOption: e.target.value})}
-                        id = "subscriptionSelector"
-                    >
-                        <option>Choose your option</option>
-                        <option value="1">Basic Listing</option>
-                        <option value="2">Premium Listing</option>
-                        <option value="3">Splash Page Listing</option>
-                    </select>
-                </p>
-
-                <PriceDisplay
-                        selectedOption={this.state.selectedOption}
-                        subscriptionTier={this.state.subscriptionTier}
+                <ListingSelector
+                    listings={this.state.listings}
+                    selectedListing={this.selectedListing.bind(this)}
                 />
-                
+
+                <div className="column2 col-md-8"
+                    id="subscriptionAll"
+                >
+
+                    <SubscriptionSelector
+                        selectedListing={this.state.selectedListing}
+                        subscriptionTier={this.state.subscriptionTier}
+                        selectedTier={this.selectedTier.bind(this)}
+                    />
+
+                    <PriceDisplay
+                            selectedTier={this.state.selectedTier}
+                            subscriptionTier={this.state.subscriptionTier}
+                    />
+
+                    <BenefitsDisplay
+                            selectedTier={this.state.selectedTier}
+                    />
+
+                    <CheckoutButtonDisplay
+                        selectedTier={this.state.selectedTier}
+                        subscriptionTier={this.state.subscriptionTier}
+                        _id={this.state._id}
+                    />
+                </div>
+            </div>
+        )
+    }
+}
+
+function ListingSelector(props) {
+    const listingList = props.listings
+		.map(listing => {
+			return (
+				<tr key={listing._id} onClick={() => props.selectedListing(listing._id)}>
+					<td> {listing.locationName} </td>
+				</tr>
+			);
+		});
+
+		return (
+    
+            <div class="col-md-3" id='column1'>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">My Listings</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>{listingList}</tr>
+                    </tbody>
+                </table>
+            </div>
+		)
+}
+
+function SubscriptionSelector(props) {
+    const subscriptionTier = props.subscriptionTier;
+
+    //Show only subscription levels in the drop down that are higher than the listing's
+    //current level
+    if (subscriptionTier === 0) {
+        return (
+            <div>
+                <p>Your current subscription level:</p>
                 <br/>
-                    <p>Current benefits:</p>
+                <p class="text-center subscription">Free Listing</p>
+                <br/>
+
+                <br/>
+                <p>Your current benefits:</p>
                 <br/>
                 <p class="text-center subscription">
                     Business Name <br/>
@@ -94,20 +167,121 @@ class SubscriptionInfo extends React.Component {
                     <br/>
                 </p>
 
-                    <p>Upgraded benefits:</p>
+                <p>Upgrade subscription:
+                    <select
+                        className="browser-default custom-select"
+                        //value={this.state.selectedTier}
+                        onChange={(e) => props.selectedTier(e.target.value)}
+                        id = "subscriptionSelector"
+                    >
+                        <option>Choose your option</option>
+                        <option value="1">Basic Listing</option>
+                        <option value="2">Premium Listing</option>
+                        <option value="3">Splash Page Listing</option>
+                    </select>
+                </p>
+            </div>
+        );
+    }
+    else if (subscriptionTier === 1) {
+        return (
+            <div>
+                <p>Your current subscription level:</p>
                 <br/>
-                <BenefitsDisplay
-                        selectedOption={this.state.selectedOption}
-                />
+                <p class="text-center subscription">Basic Listing</p>
+                <br/>
 
-                <CheckoutButtonDisplay
-                    selectedOption={this.state.selectedOption}
-                    subscriptionTier={this.state.subscriptionTier}
-                    userId={this.state.userId}
-                />
+                <br/>
+                <p>Your current benefits:</p>
+                <br/>
+                <p class="text-center subscription">
+                    Business Name <br/>
+                    Business Address with a location on Google Maps <br/>
+                    Phone Number <br/>
+                    Link to your website <br/>
+                    Photos, videos, or existing 360 imagery <br/>
+                    <br/>
+                </p>
+
+                <p>Upgrade subscription:
+                    <select
+                        className="browser-default custom-select"
+                        //value={this.state.selectedTier}
+                        onChange={(e) => props.selectedTier(e.target.value)}
+                        id = "subscriptionSelector"
+                    >
+                        <option>Choose your option</option>
+                        <option value="2">Premium Listing</option>
+                        <option value="3">Splash Page Listing</option>
+                    </select>
+                </p>
             </div>
+        );
+    }
+    else if (subscriptionTier === 2) {
+        return (
+            <div>
+                <p>Your current subscription level:</p>
+                <br/>
+                <p class="text-center subscription">Premium Listing</p>
+                <br/>
+
+                <br/>
+                <p>Your current benefits:</p>
+                <br/>
+                <p class="text-center subscription">
+                    Business Name <br/>
+                    Business Address with a location on Google Maps <br/>
+                    Phone Number <br/>
+                    Link to your website <br/>
+                    Professional 360 imagery of business <br/>
+                    <br/>
+                </p>
+
+                <p>Upgrade subscription:
+                    <select
+                        className="browser-default custom-select"
+                        //value={this.state.selectedTier}
+                        onChange={(e) => props.selectedTier(e.target.value)}
+                        id = "subscriptionSelector"
+                    >
+                        <option>Choose your option</option>
+                        <option value="3">Splash Page Listing</option>
+                    </select>
+                </p>
             </div>
-        )
+        );
+    }
+    else if (subscriptionTier === 3) {
+        return (
+            <div>
+                <p>Your current subscription level:</p>
+                <br/>
+                <p class="text-center subscription">Splash Page Listing</p>
+                <br/>
+
+                <br/>
+                <p>Your current benefits:</p>
+                <br/>
+                <p class="text-center subscription">
+                    Business Name <br/>
+                    Business Address with a location on Google Maps <br/>
+                    Phone Number <br/>
+                    Link to your website <br/>
+                    Professional 360 imagery of business <br/>
+                    360 image uploaded to Google Maps and placement on Google My Business <br/>
+                    Link to Premium Listing (included) <br/>
+                    <br/>
+                </p>
+            </div>
+        );
+    }
+    else {
+        return (
+            <div>
+                <p>Click on a listing to see your subscription details</p>
+            </div>
+        );
     }
 }
 
@@ -116,9 +290,9 @@ class SubscriptionInfo extends React.Component {
 // Prices are undetermined.
 // Props are passed in through the call to the function in render
 // Any number of extra props can be added by including them in the call.
-// Double equal is used because selectedOption is technically a string
+// Double equal is used because selectedTier is technically a string
 function PriceDisplay(props) {
-    const selected = props.selectedOption.valueOf();
+    const selected = props.selectedTier.valueOf();
     const currentTier = props.subscriptionTier.valueOf();
     var amountPaid = 0;
     var upgradeCost = 0;
@@ -163,7 +337,7 @@ function PriceDisplay(props) {
 //Unsure of how the checkout system will be implemented, but I don't think that the price point really needs to be saved
 //It would just link to the respective checkout page that would have the correct price already.
 function CheckoutButtonDisplay(props) {
-    const selected = props.selectedOption.valueOf();
+    const selected = props.selectedTier.valueOf();
     const currentTier = props.subscriptionTier.valueOf();
     var amountPaid = 0;
     var upgradeCost = 0;
@@ -215,7 +389,7 @@ function CheckoutButtonDisplay(props) {
                      commit={true}
                      amount={upgradeCost}
                      newTier={selected}
-                     userId={props.userId}
+                     _id={props._id}
                      clientId={CLIENT.sandbox}
                      currency="USD"
                      shippingPreference={"NO_SHIPPING"}
@@ -235,45 +409,57 @@ function CheckoutButtonDisplay(props) {
 }
 
 function BenefitsDisplay(props) {
-    const selected = props.selectedOption.valueOf();
+    const selected = props.selectedTier.valueOf();
 
     //Set the description based on the chosen subscription tier level
     if (selected == 1) {
         return (
-            <p class="text-center subscription">
-                Business Name <br/>
-                Business Address with a location on Google Maps <br/>
-                Phone Number <br/>
-                Link to your website <br/>
-                <b>Photos, videos, or existing 360 imagery</b> <br/>
+            <div>
+                <p>Upgraded benefits:</p>
                 <br/>
-            </p>
+                <p class="text-center subscription">
+                    Business Name <br/>
+                    Business Address with a location on Google Maps <br/>
+                    Phone Number <br/>
+                    Link to your website <br/>
+                    <b>Photos, videos, or existing 360 imagery</b> <br/>
+                    <br/>
+                </p>
+            </div>
         )
     }
     else if (selected == 2) {
         return (
-            <p class="text-center subscription">
-                Business Name <br/>
-                Business Address with a location on Google Maps <br/>
-                Phone Number <br/>
-                Link to your website <br/>
-                <b>Professional 360 imagery of business</b> <br/>
+            <div>
+                <p>Upgraded benefits:</p>
                 <br/>
-            </p>
+                <p class="text-center subscription">
+                    Business Name <br/>
+                    Business Address with a location on Google Maps <br/>
+                    Phone Number <br/>
+                    Link to your website <br/>
+                    <b>Professional 360 imagery of business</b> <br/>
+                    <br/>
+                </p>
+            </div>
         )
     }
     else if (selected == 3) {
         return (
-            <p class="text-center subscription">
-                Business Name <br/>
-                Business Address with a location on Google Maps <br/>
-                Phone Number <br/>
-                Link to your website <br/>
-                <b>Professional 360 imagery of business</b> <br/>
-                <b>360 image uploaded to Google Maps and placement on Google My Business</b> <br/>
-                <b>Link to Premium Listing (included)</b> <br/>
+            <div>
+                <p>Upgraded benefits:</p>
                 <br/>
-            </p>
+                <p class="text-center subscription">
+                    Business Name <br/>
+                    Business Address with a location on Google Maps <br/>
+                    Phone Number <br/>
+                    Link to your website <br/>
+                    <b>Professional 360 imagery of business</b> <br/>
+                    <b>360 image uploaded to Google Maps and placement on Google My Business</b> <br/>
+                    <b>Link to Premium Listing (included)</b> <br/>
+                    <br/>
+                </p>
+            </div>
         )
     }
     else {

@@ -54,7 +54,7 @@ class PayPalButton extends React.Component{
     //Runs after an order has been completed
     onApprove(data, actions) {
 
-        const { userId, newTier } = this.props;
+        const { _id, newTier } = this.props;
 
         return actions.order
             .capture()
@@ -64,7 +64,7 @@ class PayPalButton extends React.Component{
                     .then(res => {
                         console.log(res);
                         res.data.find((info) => {
-                            if (info.userId === userId) {
+                            if (info._id === _id) {
                                 let id = info._id;  
                         
                                 //Right now it's hardcoded need to update this when we get the listing selector sorted out
@@ -72,13 +72,13 @@ class PayPalButton extends React.Component{
                                 myListings[0].subscriptionTier = newTier;
 
                                 axios.put('/api/userPortal/' + id, {
-                                    "userId": info.userId,
                                     "name": info.name,
                                     "phone": info.phone,
                                     "emailAddress": info.emailAddress,
                                     "address": info.address,
                                     "service": info.service,
                                     "accessibility": info.accessibility,
+                                    "password": info.password,
                                     "listings": myListings
                                 })
                                     /* .then(res => {

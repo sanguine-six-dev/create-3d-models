@@ -92,7 +92,8 @@ class AddListing extends React.Component {
             "state": this.state.state,
             "zip": this.state.zip,
             "phoneNumber": this.state.phoneNumber,
-            "emailAddress": this.state.emailAddress
+            "emailAddress": this.state.emailAddress,
+            "subscriptionTier": 0
         };
 
         //console.log(`listing array before: ${JSON.stringify(listingObj.listings)}`);
