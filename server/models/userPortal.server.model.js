@@ -17,7 +17,8 @@ var userPortalSchema = new Schema({
         state: {type: String},
         zip: {type: String},
         phoneNumber: {type: String},
-        emailAddress: {type: String}
+        emailAddress: {type: String},
+        website: {type: String},
     }],
     start_hour: {
         type: Number,
