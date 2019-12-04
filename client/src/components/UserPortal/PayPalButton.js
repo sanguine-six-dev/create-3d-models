@@ -54,12 +54,12 @@ class PayPalButton extends React.Component{
     //Runs after an order has been completed
     onApprove(data, actions) {
 
-        const { _id, newTier } = this.props;
+        const { _id, newTier, selectedListing } = this.props;
 
         return actions.order
             .capture()
             .then((details) => {
-                if (this.props.onSuccess) { //If the transaction was successful
+                if (this.props.onSuccess) { //If the transaction was successful, update the subscriptionTier in the DB
                     axios.get('/api/userPortal')
                     .then(res => {
                         console.log(res);
@@ -67,9 +67,13 @@ class PayPalButton extends React.Component{
                             if (info._id === _id) {
                                 let id = info._id;  
                         
-                                //Right now it's hardcoded need to update this when we get the listing selector sorted out
                                 let myListings = info.listings
-                                myListings[0].subscriptionTier = newTier;
+
+                                myListings.find((target) => {
+                                    if (target._id === selectedListing) {
+                                        target.subscriptionTier = newTier
+                                    }
+                                })
 
                                 axios.put('/api/userPortal/' + id, {
                                     "name": info.name,
@@ -81,9 +85,6 @@ class PayPalButton extends React.Component{
                                     "password": info.password,
                                     "listings": myListings
                                 })
-                                    /* .then(res => {
-                                        console.log(res);
-                                    }) */
                             }
                         })
                     });

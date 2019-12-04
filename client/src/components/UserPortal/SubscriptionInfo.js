@@ -25,7 +25,7 @@ class SubscriptionInfo extends React.Component {
             _id: "5ddf0e8272dc6e51d29c7df6", //FIXME: Right now its hard coded to the first user, but will need to update later
             subscriptionTier: -1,
             listings: [],
-            selectedListing: 0,
+            selectedListing: "",
             selectedTier: "",
             priceLevel: ""
         };
@@ -109,6 +109,7 @@ class SubscriptionInfo extends React.Component {
                         selectedTier={this.state.selectedTier}
                         subscriptionTier={this.state.subscriptionTier}
                         _id={this.state._id}
+                        selectedListing={this.state.selectedListing}
                     />
                 </div>
             </div>
@@ -339,6 +340,7 @@ function PriceDisplay(props) {
 function CheckoutButtonDisplay(props) {
     const selected = props.selectedTier.valueOf();
     const currentTier = props.subscriptionTier.valueOf();
+    const selectedListing = props.selectedListing;
     var amountPaid = 0;
     var upgradeCost = 0;
 
@@ -390,6 +392,7 @@ function CheckoutButtonDisplay(props) {
                      amount={upgradeCost}
                      newTier={selected}
                      _id={props._id}
+                     selectedListing={selectedListing}
                      clientId={CLIENT.sandbox}
                      currency="USD"
                      shippingPreference={"NO_SHIPPING"}
