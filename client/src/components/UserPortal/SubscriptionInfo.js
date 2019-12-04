@@ -2,17 +2,11 @@ import React from 'react';
 import PayPalButton from './PayPalButton'
 import axios from 'axios';
 import './UserListings.css';
+var CLIENT = require('../../config/config.js');
 
 
-//Current benefits and Upgraded benefits can be filled out after we are given more information from the client.
 //Throws warnings when comparing in PriceDisplay
 //Needs selectedTier to be an number
-
-
-//We need to move the client ID to another file at some point
-const CLIENT = {
-    sandbox: "AXZJyFj_3N6Lsh0h9JcZBi9eHM4csjjZwN0WcwDFjdoEKD7iEvWaBq6YdL_oirIHtZCe3ee3ENpxoot4"
-  };
 
 const ENV = 'sandbox' //I only have access to sandbox testing currently
 
