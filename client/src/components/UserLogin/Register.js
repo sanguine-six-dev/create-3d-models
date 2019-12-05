@@ -26,7 +26,6 @@ class Register extends Component {
 
         axios.get('/api/userPortal')
             .then(res => {
-                console.log(res.data.length);
                 axios.post('/api/userPortal', {
                     //"userId": userId,
                     "name": this.state.first_name + " " + this.state.last_name,
@@ -41,9 +40,19 @@ class Register extends Component {
                             password: "",
                             passwordconfirm: ""
                         });
-                    });
-                alert(`You have been successfully registered`)
-            });
+                        console.log(res);
+                        console.log(res.data);
+                        if (res.status === 200) {
+                            alert(`You have been successfully registered`);
+                        }
+                    }).catch((error) => {
+                    console.log(error.response);
+                    alert(`Registration was not successful!`);
+                })
+            }).catch((error) => {
+            console.log(error.response);
+            alert(`Registration was not successful!`);
+        });
     };
 
     handleFirstChange = e => {

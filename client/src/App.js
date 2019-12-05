@@ -24,7 +24,6 @@ class App extends Component {
         });
 
         sessionStorage.setItem(this.key, this.state.userId);
-        let test = sessionStorage.getItem(this.key);
     }
 
     render() {
