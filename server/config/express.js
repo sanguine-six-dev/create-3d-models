@@ -4,7 +4,7 @@ const path = require('path'),
     morgan = require('morgan'),
     bodyParser = require('body-parser'),
     userPortalRouter = require('../routes/userPortal.server.routes.js');
-    listingRouter = require('../routes/addListings.server.routes.js');
+    //listingRouter = require('../routes/addListings.server.routes.js');
 
 
 module.exports.init = () => {
@@ -29,7 +29,7 @@ module.exports.init = () => {
 
     // add a router
     app.use('/api/userPortal', userPortalRouter);
-    app.use('/api/listings', listingRouter);
+    //app.use('/api/listings', listingRouter);
 
 
     if (process.env.NODE_ENV === 'production') {
