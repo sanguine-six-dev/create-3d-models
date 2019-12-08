@@ -27,7 +27,6 @@ class Register extends Component {
         axios.get('/api/userPortal')
             .then(res => {
                 axios.post('/api/userPortal', {
-                    //"userId": userId,
                     "name": this.state.first_name + " " + this.state.last_name,
                     "emailAddress": this.state.email_address,
                     "password": this.state.password
