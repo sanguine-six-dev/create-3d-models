@@ -16,7 +16,7 @@ class SubscriptionInfo extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            _id: "5ddf0e8272dc6e51d29c7df6", //FIXME: Right now its hard coded to the first user, but will need to update later
+            _id: "",
             subscriptionTier: -1,
             listings: [],
             selectedListing: "",
@@ -30,12 +30,15 @@ class SubscriptionInfo extends React.Component {
         axios.get('/api/userPortal')
             .then(res => {
                 console.log(res);
-                res.data.find((info) => {
-                    if (info._id === this.state._id) {
+                res.data.find((info) => { //FIXME: Right now its hard coded to the first user, but will need to update later
+                    //if (info._id === this.state._id) { 
                        this.setState({
+                           _id: info._id,
                            listings: info.listings
                        })
-                    }
+
+                       return true;
+                    //}
                 })
             });
     }
@@ -60,7 +63,7 @@ class SubscriptionInfo extends React.Component {
         })
     }
 
-    selectedTier(value) {
+    updateSelectedTier(value) {
         this.setState({
             selectedTier: value
         })
@@ -87,7 +90,8 @@ class SubscriptionInfo extends React.Component {
                     <SubscriptionSelector
                         selectedListing={this.state.selectedListing}
                         subscriptionTier={this.state.subscriptionTier}
-                        selectedTier={this.selectedTier.bind(this)}
+                        updateSelectedTier={this.updateSelectedTier.bind(this)}
+                        selectedTier={this.state.selectedTier}
                     />
 
                     <PriceDisplay
@@ -165,8 +169,8 @@ function SubscriptionSelector(props) {
                 <p>Upgrade subscription:
                     <select
                         className="browser-default custom-select"
-                        //value={this.state.selectedTier}
-                        onChange={(e) => props.selectedTier(e.target.value)}
+                        value={props.selectedTier}
+                        onChange={(e) => props.updateSelectedTier(e.target.value)}
                         id = "subscriptionSelector"
                     >
                         <option>Choose your option</option>
@@ -201,8 +205,8 @@ function SubscriptionSelector(props) {
                 <p>Upgrade subscription:
                     <select
                         className="browser-default custom-select"
-                        //value={this.state.selectedTier}
-                        onChange={(e) => props.selectedTier(e.target.value)}
+                        value={props.selectedTier}
+                        onChange={(e) => props.updateSelectedTier(e.target.value)}
                         id = "subscriptionSelector"
                     >
                         <option>Choose your option</option>
@@ -236,8 +240,8 @@ function SubscriptionSelector(props) {
                 <p>Upgrade subscription:
                     <select
                         className="browser-default custom-select"
-                        //value={this.state.selectedTier}
-                        onChange={(e) => props.selectedTier(e.target.value)}
+                        value={props.selectedTier}
+                        onChange={(e) => props.updateSelectedTier(e.target.value)}
                         id = "subscriptionSelector"
                     >
                         <option>Choose your option</option>
@@ -396,6 +400,7 @@ function CheckoutButtonDisplay(props) {
                      onError={onError}
                      onCancel={onCancel}
                     />
+
                 </div>
             </div>
         );

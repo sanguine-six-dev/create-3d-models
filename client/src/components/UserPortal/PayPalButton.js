@@ -65,6 +65,8 @@ class PayPalButton extends React.Component{
                         console.log(res);
                         res.data.find((info) => {
                             if (info._id === _id) {
+                                window.location.href = "/OrderConfirm";
+                                
                                 let id = info._id;  
                         
                                 let myListings = info.listings
