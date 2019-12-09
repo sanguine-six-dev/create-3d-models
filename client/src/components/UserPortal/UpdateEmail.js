@@ -89,7 +89,6 @@ class UpdateEmail extends Component {
     render() {
         return (
             <div>
-                <p>Current Email Preference: {this.state.currentEmail}</p>
                 <form onSubmit={this.handleSubmit}>
                 <div class="form-row d-flex justify-content-center">
                     <div className="form-group col-md-9">
