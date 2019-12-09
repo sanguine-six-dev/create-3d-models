@@ -6,7 +6,6 @@ import Button from "react-bootstrap/Button";
 class Register extends Component {
     constructor(props) {
         super(props);
-
         this.state = {
             first_name: '',
             last_name: '',
@@ -47,17 +46,17 @@ class Register extends Component {
                         console.log(res.data);
                         if (res.status === 200) {
                             this.state.registration_successful = 'true';
-                            //alert(`You have been successfully registered`);
+                            this.setState({registration_successful:this.state.registration_successful});
                         }
                     }).catch((error) => {
                     console.log(error.response);
                     this.state.registration_successful = 'false';
-                    //alert(`Registration was not successful!`);
+                    this.setState({registration_successful:this.state.registration_successful});
                 })
             }).catch((error) => {
             console.log(error.response);
             this.state.registration_successful = 'false';
-            alert(`Registration was not successful!`);
+            this.setState({registration_successful:this.state.registration_successful});
         });
     };
 
@@ -220,10 +219,9 @@ class Register extends Component {
 
 function Modal_display(props) {
     const [show, setShow] = useState(false);
-
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    const registration_successful = props.registration_successful;
+    let registration_successful = props.registration_successful;
 
     if (registration_successful==='true') {
         return (
@@ -245,7 +243,7 @@ function Modal_display(props) {
                 </Modal>
             </>
         );
-    } else if (registration_successful === 'false' || registration_successful ===''){
+    } else if (registration_successful === 'false' || registration_successful === ''){
         return (
             <>
                 <button type="submit" onClick={handleShow} className="btn btn-secondary btn-block">
