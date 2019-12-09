@@ -30,7 +30,6 @@ class Register extends Component {
         axios.get('/api/userPortal')
             .then(res => {
                 axios.post('/api/userPortal', {
-                    //"userId": userId,
                     "name": this.state.first_name + " " + this.state.last_name,
                     "emailAddress": this.state.email_address,
                     "password": this.state.password
@@ -47,12 +46,10 @@ class Register extends Component {
                         console.log(res.data);
                         if (res.status === 200) {
                             this.state.registration_successful = 'true';
-                            //alert(`You have been successfully registered`);
                         }
                     }).catch((error) => {
                     console.log(error.response);
                     this.state.registration_successful = 'false';
-                    //alert(`Registration was not successful!`);
                 })
             }).catch((error) => {
             console.log(error.response);
@@ -225,7 +222,7 @@ function Modal_display(props) {
     const handleShow = () => setShow(true);
     const registration_successful = props.registration_successful;
 
-    if (registration_successful==='true') {
+    if (registration_successful === 'true') {
         return (
             <>
                 <button type="submit" onClick={handleShow} className="btn btn-secondary btn-block">
@@ -245,7 +242,7 @@ function Modal_display(props) {
                 </Modal>
             </>
         );
-    } else if (registration_successful === 'false' || registration_successful ===''){
+    } else if (registration_successful === 'false' || registration_successful === '') {
         return (
             <>
                 <button type="submit" onClick={handleShow} className="btn btn-secondary btn-block">
