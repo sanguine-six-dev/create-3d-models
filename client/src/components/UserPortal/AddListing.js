@@ -88,6 +88,11 @@ class AddListing extends React.Component {
             });
     };
 
+    refreshPage() {
+        window.location.reload();
+        console.log('Refreshing');
+    }
+
     updatelistings(listingObj) {
         let id = listingObj._id;
         let listingsArray = [];
@@ -141,7 +146,8 @@ class AddListing extends React.Component {
                 });
                 console.log(res);
                 console.log(res.data);
-            })
+            });
+        this.refreshPage();
     }
 
     render() {
