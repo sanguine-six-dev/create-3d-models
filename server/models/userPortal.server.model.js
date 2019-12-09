@@ -7,7 +7,7 @@ var userPortalSchema = new Schema({
     name: {type: String},
     address: {type: String},
     phone: {type: String},
-    emailAddress: {type: String, required: true},
+    emailAddress: {type: String, required: true, unique: true},
     password: {type: String},
     listings: [{
         locationName: {type: String},
@@ -19,6 +19,7 @@ var userPortalSchema = new Schema({
         phoneNumber: {type: String},
         emailAddress: {type: String},
         subscriptionTier: {type: Number, required: true}
+        website: {type: String},
     }],
     start_hour: {
         type: Number,
