@@ -88,6 +88,11 @@ class AddListing extends React.Component {
             });
     };
 
+    refreshPage() {
+        window.location.reload();
+        console.log('Refreshing');
+    }
+
     updatelistings(listingObj) {
         let id = listingObj._id;
         let listingsArray = [];
@@ -100,7 +105,7 @@ class AddListing extends React.Component {
             "zip": this.state.zip,
             "phoneNumber": this.state.phoneNumber,
             "emailAddress": this.state.emailAddress,
-            "subscriptionTier": 0
+            "subscriptionTier": 0,
             "website": this.state.website
         };
 
@@ -142,14 +147,15 @@ class AddListing extends React.Component {
                 });
                 console.log(res);
                 console.log(res.data);
-            })
+            });
+        this.refreshPage();
     }
 
     render() {
         return (
             <div class="form-container">
                 <form class="listing-form" onSubmit={this.handleSubmit}>
-                    <div class="form-row d-flex justify-content-center" >
+                    <div class="form-row d-flex justify-content-center">
                         <div class="form-group col-md-9">
                             <label for="name">Location Name</label>
                             <input
@@ -224,7 +230,7 @@ class AddListing extends React.Component {
                             />
                         </div>
 
-                        </div>
+                    </div>
 
                     <div class="form-row d-flex justify-content-center">
                         <div class="form-group col-md-9">
@@ -270,7 +276,7 @@ class AddListing extends React.Component {
                                 size="lg"
                                 class="btn btn-secondary btn-lg"
                                 type="submit"
-                                >Submit
+                        >Submit
                         </button>
                     </div>
                 </form>

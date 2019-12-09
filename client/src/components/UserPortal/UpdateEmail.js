@@ -89,27 +89,26 @@ class UpdateEmail extends Component {
     render() {
         return (
             <div>
-                <p>Current Email Preference: {this.state.currentEmail}</p>
                 <form onSubmit={this.handleSubmit}>
-                <div class="form-row d-flex justify-content-center">
-                    <div className="form-group col-md-9">
-                        <label htmlFor="emailPreference">Email</label>
-                        <input name="emailPreference"
+                    <div class="form-row d-flex justify-content-center">
+                        <div className="form-group col-md-9">
+                            <label htmlFor="emailPreference">Email</label>
+                            <input name="emailPreference"
 
-                               className={`form-control ${this.state.emailFieldError ? 'is-invalid' : ''}`}
-                               id="emailPreference"
-                               placeholder="Enter email"
-                               value={this.state.emailAddress}
-                               onChange={this.handleEmailChange}
-                               onBlur={this.emailValidation}
-                        />
-                        <div className='invalid-feedback'>{this.state.emailFieldError}</div>
-                    </div>
+                                   className={`form-control ${this.state.emailFieldError ? 'is-invalid' : ''}`}
+                                   id="emailPreference"
+                                   placeholder="Enter email"
+                                   value={this.state.emailAddress}
+                                   onChange={this.handleEmailChange}
+                                   onBlur={this.emailValidation}
+                            />
+                            <div className='invalid-feedback'>{this.state.emailFieldError}</div>
+                        </div>
                     </div>
                     <div class="form-row d-flex justify-content-center">
-                    <button type="submit"
-                            className="btn btn-secondary btn-lg">Submit
-                    </button>
+                        <button type="submit"
+                                className="btn btn-secondary btn-lg">Submit
+                        </button>
                     </div>
                 </form>
             </div>
