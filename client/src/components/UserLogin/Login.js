@@ -58,9 +58,12 @@ class Login extends Component {
                 });
                 if (success) {
                     this.state.isloggedin = 'true';
+                    this.setState({isloggedin:this.state.isloggedin});
                     this.props.history.push("/Portal");
                 } else {
                     this.state.isloggedin = 'false';
+                    this.setState({isloggedin:this.state.isloggedin});
+                    //alert('Incorrect Username or Password');
                 }
             });
     };
