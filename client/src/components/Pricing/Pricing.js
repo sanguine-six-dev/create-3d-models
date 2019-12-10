@@ -64,7 +64,7 @@ class Pricing extends Component {
                                 </Row>
                                 <Row className="justify-content-md-center">
                                     <img className="table-icon" src={Image360} id="abc"/>
-                                    <p>Professional 360 imagery of your business by a photographer.</p>
+                                    <p>Professional 360 imagery of your business by a photographer</p>
                                 </Row>
                                 <Row className="justify-content-md-center">
                                     <img className="table-icon" src={Address} id="googleIcon"/>
