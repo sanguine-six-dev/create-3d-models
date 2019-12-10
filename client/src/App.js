@@ -6,6 +6,7 @@ import Header from "./components/Header/Header"
 import Portal from './components/UserPortal/Portal'
 import LoginLanding from "./components/UserLogin/LoginLanding"
 import OrderConfirm from "./components/OrderConfirm/OrderConfirm"
+import Pricing from "./components/Pricing/Pricing"
 
 
 
@@ -52,7 +53,11 @@ class App extends Component {
                                 (props) => <OrderConfirm
                                 />}
                     />
-                    <Route component={NotFound}/>
+                    <Route exact path="/SubscriptionInfo"
+                        render={
+                            (props) => <Pricing userId={this.state.userId}
+                            />}
+                    />
                 </Switch>
 
             </div>
