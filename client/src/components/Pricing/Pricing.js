@@ -89,10 +89,14 @@ class Pricing extends Component {
                                         <PricingDetail>Business Address with a location on Google Maps</PricingDetail>
                                         <PricingDetail>Phone Number</PricingDetail>
                                         <PricingDetail>Link to your website, social media, and a brief description of your business</PricingDetail>
-                                        <PricingDetail strikethrough><b>Photos, Videos, or Existing 360 imagery</b></PricingDetail>
-                                        <PricingDetail strikethrough><b>Professional 360 Imagery of your business</b></PricingDetail>
-                                        <PricingDetail strikethrough><b>360 Image uploaded to Google Maps, and placement on Google My Business</b></PricingDetail>
-                                        <PricingDetail strikethrough><b>Link to Premium Listing</b></PricingDetail>
+                                        <PricingDetail><br></br></PricingDetail>
+                                        <PricingDetail><br></br></PricingDetail>
+                                        <PricingDetail><br></br></PricingDetail>
+                                        <PricingDetail><br></br></PricingDetail>
+                                        <PricingDetail><br></br></PricingDetail>
+                                        <PricingDetail><br></br></PricingDetail>
+                                        <PricingDetail><br></br></PricingDetail>
+                                        <PricingDetail><br></br></PricingDetail>
                                         <button type="submit" className="btn btn-secondary btn-block" id="order">
                                             FREE
                                         </button>
@@ -103,9 +107,13 @@ class Pricing extends Component {
                                         <PricingDetail>Phone Number</PricingDetail>
                                         <PricingDetail>Link to your website, social media, and a brief description of your business</PricingDetail>
                                         <PricingDetail><b>Photos, Videos, or Existing 360 imagery</b></PricingDetail>
-                                        <PricingDetail strikethrough><b>Professional 360 Imagery of your business</b></PricingDetail>
-                                        <PricingDetail strikethrough><b>360 Image uploaded to Google Maps, and placement on Google My Business</b></PricingDetail>
-                                        <PricingDetail strikethrough><b>Link to Premium Listing</b></PricingDetail>
+                                        <PricingDetail><br></br></PricingDetail>
+                                        <PricingDetail><br></br></PricingDetail>
+                                        <PricingDetail><br></br></PricingDetail>
+                                        <PricingDetail><br></br></PricingDetail>
+                                        <PricingDetail><br></br></PricingDetail>
+                                        <PricingDetail><br></br></PricingDetail>
+                                        <PricingDetail></PricingDetail>
                                         <Modal_display userId={sessionStorage.getItem(this.key)}
                                                        history={this.props.history}
                                         />
@@ -117,8 +125,12 @@ class Pricing extends Component {
                                         <PricingDetail>Link to your website, social media, and a brief description of your business</PricingDetail>
                                         <PricingDetail><b>Photos, Videos, or Existing 360 imagery</b></PricingDetail>
                                         <PricingDetail><b>Professional 360 Imagery of your business</b></PricingDetail>
-                                        <PricingDetail strikethrough><b>360 Image uploaded to Google Maps, and placement on Google My Business</b></PricingDetail>
-                                        <PricingDetail strikethrough><b>Link to Premium Listing</b></PricingDetail>
+                                        <PricingDetail><br></br></PricingDetail>
+                                        <PricingDetail><br></br></PricingDetail>
+                                        <PricingDetail><br></br></PricingDetail>
+                                        <PricingDetail><br></br></PricingDetail>
+                                        <PricingDetail></PricingDetail>
+                                        <PricingDetail></PricingDetail>
                                         <Modal_display userId={sessionStorage.getItem(this.key)}
                                                        history={this.props.history}
                                         />
@@ -132,6 +144,8 @@ class Pricing extends Component {
                                         <PricingDetail><b>Professional 360 Imagery of your business</b></PricingDetail>
                                         <PricingDetail><b>360 Image uploaded to Google Maps, and placement on Google My Business</b></PricingDetail>
                                         <PricingDetail><b>Link to Premium Listing</b></PricingDetail>
+                                        <PricingDetail></PricingDetail>
+                                        <PricingDetail></PricingDetail>
                                         <Modal_display userId={sessionStorage.getItem(this.key)}
                                                        history={this.props.history}
                                         />
@@ -176,7 +190,7 @@ function Modal_display(props) {
 
     return (
             <>
-                
+
                 <button type="submit" onClick={handleShow} className="btn btn-secondary btn-block" id="order">
                     ORDER NOW
                 </button>
