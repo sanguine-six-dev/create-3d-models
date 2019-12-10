@@ -35,13 +35,15 @@ class PayPalButton extends React.Component{
     createOrder(data, actions) {
 
         const { currency, amount, shippingPreference } = this.props;
+        const tax = amount * 0.06
+        const total = tax + amount
 
         return actions.order.create({
           purchase_units: [
             {
               amount: {
                 currency_code: currency,
-                value: amount.toString()
+                value: total.toString()
               }
             }
           ],
@@ -54,7 +56,7 @@ class PayPalButton extends React.Component{
     //Runs after an order has been completed
     onApprove(data, actions) {
 
-        const { _id, newTier, selectedListing } = this.props;
+        const { _id, newTier, selectedListing, amount } = this.props;
 
         return actions.order
             .capture()
@@ -65,17 +67,18 @@ class PayPalButton extends React.Component{
                         console.log(res);
                         res.data.find((info) => {
                             if (info._id === _id) {
-                                window.location.href = "/OrderConfirm";
-                                
-                                let id = info._id;  
+                               let id = info._id;  
                         
                                 let myListings = info.listings
 
                                 myListings.find((target) => {
                                     if (target._id === selectedListing) {
                                         target.subscriptionTier = newTier
+
                                     }
                                 })
+
+
 
                                 axios.put('/api/userPortal/' + id, {
                                     "name": info.name,
@@ -90,6 +93,7 @@ class PayPalButton extends React.Component{
                             }
                         })
                     });
+
 
                     return this.props.onSuccess(details, data);
                 }

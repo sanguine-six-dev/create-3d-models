@@ -2,12 +2,14 @@ import React from 'react';
 import PayPalButton from './PayPalButton'
 import axios from 'axios';
 import './UserListings.css';
-var CLIENT = require('../../config/config.js');
+import {Redirect} from 'react-router-dom';
+
 
 
 //Throws warnings when comparing in PriceDisplay
 //Needs selectedTier to be an number
 
+var CLIENT = (process.env.SANDBOX || require('../../config/config.js'));
 const ENV = 'sandbox' //I only have access to sandbox testing currently
 
 class SubscriptionInfo extends React.Component {
@@ -21,24 +23,31 @@ class SubscriptionInfo extends React.Component {
             listings: [],
             selectedListing: "",
             selectedTier: "",
-            priceLevel: ""
+            priceLevel: "",
+            redirect: false
         };
+
+        this.getCurrentInformation();
     }
 
 
-    componentWillMount() {
+    getCurrentInformation() {
+        const userId = sessionStorage.getItem(this.key)
+        console.log(userId)
+
         axios.get('/api/userPortal')
             .then(res => {
                 console.log(res);
-                res.data.find((info) => { //FIXME: Right now its hard coded to the first user, but will need to update later
-                    //if (info._id === this.state._id) { 
+                console.log(userId)
+                res.data.find((info) => {
+                    if (info._id === userId) { 
                        this.setState({
-                           _id: info._id,
                            listings: info.listings
                        })
+                       localStorage.setItem("email", info.emailAddress)
 
                        return true;
-                    //}
+                    }
                 })
             });
     }
@@ -49,6 +58,7 @@ class SubscriptionInfo extends React.Component {
         this.state.listings.find((info) => {
             if (info._id === _id) {
                 tier = info.subscriptionTier
+                localStorage.setItem("listing", info.locationName) //For Order Confirmation
                 return true;
             }
             else {
@@ -66,6 +76,12 @@ class SubscriptionInfo extends React.Component {
     updateSelectedTier(value) {
         this.setState({
             selectedTier: value
+        })
+    }
+
+    setRedirect() {
+        this.setState({
+            redirect: true
         })
     }
 
@@ -108,6 +124,8 @@ class SubscriptionInfo extends React.Component {
                         subscriptionTier={this.state.subscriptionTier}
                         _id={this.state._id}
                         selectedListing={this.state.selectedListing}
+                        setRedirect={this.setRedirect.bind(this)}
+                        redirect={this.state.redirect}
                     />
                 </div>
             </div>
@@ -344,15 +362,6 @@ function CheckoutButtonDisplay(props) {
 
     if (selected > 0) {
 
-        const onSuccess = (payment) =>
-            console.log('Successful payment!', payment);
-
-        const onError = (error) =>
-            console.log('Erroneous payment OR failed to load script!', error);
-
-        const onCancel = (data) =>
-            console.log('Cancelled payment!', data);
-
 
        //Determine how much has already been paid
         if (currentTier == 1) {
@@ -379,31 +388,57 @@ function CheckoutButtonDisplay(props) {
             return null;
         }
 
-        return(
-            <div
-                class="form-row d-flex justify-content-center"
-            >
-                <div>
-                    <PayPalButton
-                     env={ENV}
-                     commit={true}
-                     amount={upgradeCost}
-                     newTier={selected}
-                     _id={props._id}
-                     selectedListing={selectedListing}
-                     clientId={CLIENT.sandbox}
-                     currency="USD"
-                     shippingPreference={"NO_SHIPPING"}
-                     style={{}}
-                     total={100}
-                     onSuccess={onSuccess}
-                     onError={onError}
-                     onCancel={onCancel}
-                    />
+        //These are executed by the PayPal component
+        const onSuccess = (payment) => {
+            console.log('Successful payment!', payment);
 
+            props.setRedirect();
+        }
+
+        const onError = (error) =>
+            console.log('Erroneous payment OR failed to load script!', error);
+
+        const onCancel = (data) =>
+            console.log('Cancelled payment!', data);
+
+
+        if (props.redirect) {
+            
+            localStorage.setItem("newTier", selected)
+            localStorage.setItem("cost", upgradeCost)
+
+            return (
+                <Redirect to={'/OrderConfirm'}
+                />
+            )
+        }
+        else {
+            return(
+                <div
+                    class="form-row d-flex justify-content-center"
+                >
+                    <div>
+                        <PayPalButton
+                         env={ENV}
+                         commit={true}
+                         amount={upgradeCost}
+                         newTier={selected}
+                         _id={props._id}
+                         selectedListing={selectedListing}
+                         clientId={CLIENT.sandbox}
+                         currency="USD"
+                         shippingPreference={"NO_SHIPPING"}
+                         style={{}}
+                         total={100}
+                         onSuccess={onSuccess}
+                         onError={onError}
+                         onCancel={onCancel}
+                        />
+    
+                    </div>
                 </div>
-            </div>
-        );
+            );
+        }
     } else {
         return null;
     }
@@ -470,4 +505,5 @@ function BenefitsDisplay(props) {
         )
     }
 }
+
 export default SubscriptionInfo;

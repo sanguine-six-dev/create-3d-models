@@ -14,48 +14,83 @@ class OrderConfirm extends Component {
     
 
     render() {
-        return (
-            <div class="column">
-                <div class="row2">
-                    <h1 class="text-center">Thank you for your order</h1>
-                </div>
-                <div class="text-center row2">
-                    <b>A confirmation has been sent to your email address.</b>
-                </div>
-                <div class="container" id="order-summary">
-                    <div class="row text-center">
-                        <div class="col-sm order-col">
-                            <b>Summary:</b>
-                        </div>
-                        <div class="col-sm order-col">
-                            <b>Premium Listing (monthly)</b>
-                            <br/>
-                            <div>for Happy Farms</div>
-                            <br/>
-                            <br/>
-                            <b>Tax</b>
-                            <br/>
-                            <br/>
-                            <hr/>
-                            <b>Total</b>
-                        </div>
-                        <div class="col-sm order-col">
-                            $89.00
-                            <br/>
-                            <br/>
-                            <br/>
-                            <br/>
-                            $5.34
-                            <br/>
-                            <br/>
-                            <hr/>
-                            $94.34
-                        </div>
 
+        //I couldn't figure out any way to get these values here other than localStorage
+        const listing = localStorage.getItem("listing")
+        var cost = localStorage.getItem("cost")
+        const newTier = localStorage.getItem("newTier")
+        const email = localStorage.getItem("email")
+
+        if (newTier == null) {
+            return (
+                <div>
+                    <h1>Sorry, something went wrong. Please go back and try again. If the problem persists, please contact customer support.</h1>
+                </div>
+            )
+        }
+        else {
+
+            var subscriptionTier
+            if (newTier == 1) {
+                subscriptionTier = "Basic Listing"
+            }
+            else if (newTier == 2) {
+                subscriptionTier = "Premium Listing"
+            }
+            else if (newTier == 3) {
+                subscriptionTier = "Splash Page Listing"
+            }
+
+            cost = parseInt(cost, 10)
+            var tax = (cost * .06).toFixed(2)
+            tax = parseFloat(tax, 10)
+            var total = (cost + tax)
+            tax = tax.toFixed(2)
+            total = total.toFixed(2)
+
+            return (
+                <div class="column">
+                    <div class="row2">
+                        <h1 class="text-center">Thank you for your order</h1>
+                    </div>
+                    <div class="text-center row2">
+                        <b>A confirmation has been sent to {email}.</b>
+                    </div>
+                    <div class="container" id="order-summary">
+                        <div class="row text-center">
+                            <div class="col-sm order-col">
+                                <b>Order Summary:</b>
+                            </div>
+                            <div class="col-sm order-col">
+                                <b>{subscriptionTier} (monthly subscription)</b>
+                                <br/>
+                                <div>for {listing}</div>
+                                <br/>
+                                <br/>
+                                <b>Tax</b>
+                                <br/>
+                                <br/>
+                                <hr/>
+                                <b>Total</b>
+                            </div>
+                            <div class="col-sm order-col">
+                                ${cost}.00
+                                <br/>
+                                <br/>
+                                <br/>
+                                <br/>
+                                ${tax}
+                                <br/>
+                                <br/>
+                                <hr/>
+                                ${total}
+                            </div>
+    
+                        </div>
                     </div>
                 </div>
-            </div>
-        )
+            )
+        }
     }
 }
 

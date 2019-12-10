@@ -14,7 +14,7 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            userId: ''
+            userId: '',
         };
         let key = 'userId';
     }
@@ -26,6 +26,7 @@ class App extends Component {
 
         sessionStorage.setItem(this.key, this.state.userId);
     }
+
 
     render() {
         return (
