@@ -104,6 +104,7 @@ class UpdateContactInfo extends Component {
                 console.log(res);
                 console.log(res.data);
             });
+        //It originally refreshed immediately, now the window refreshes when the alert is closed.
         //this.refreshPage();
     }
 
@@ -169,8 +170,21 @@ class UpdateContactInfo extends Component {
 function Modal_display(props) {
     const [show, setShow] = useState(false);
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    function refreshPage() {
+        window.location.reload();
+    }
+
+    function handleClose () {
+        setShow(false);
+        setTimeout(function () {
+            if (-1 === -1) {
+                refreshPage();
+            }
+        }, 500);
+    }
+    function handleShow () {
+        setShow(true);
+    }
     const has_submit = props.has_submit;
     const name = props.name;
     const address = props.address;
