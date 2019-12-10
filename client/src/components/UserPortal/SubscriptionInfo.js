@@ -42,9 +42,10 @@ class SubscriptionInfo extends React.Component {
                 res.data.find((info) => {
                     if (info._id === userId) { 
                        this.setState({
+                           _id: userId,
                            listings: info.listings
                        })
-                       localStorage.setItem("email", info.emailAddress)
+                       sessionStorage.setItem("email", info.emailAddress)
 
                        return true;
                     }
@@ -58,7 +59,7 @@ class SubscriptionInfo extends React.Component {
         this.state.listings.find((info) => {
             if (info._id === _id) {
                 tier = info.subscriptionTier
-                localStorage.setItem("listing", info.locationName) //For Order Confirmation
+                sessionStorage.setItem("listing", info.locationName) //For Order Confirmation
                 return true;
             }
             else {
@@ -404,8 +405,8 @@ function CheckoutButtonDisplay(props) {
 
         if (props.redirect) {
             
-            localStorage.setItem("newTier", selected)
-            localStorage.setItem("cost", upgradeCost)
+            sessionStorage.setItem("newTier", selected)
+            sessionStorage.setItem("cost", upgradeCost)
 
             return (
                 <Redirect to={'/OrderConfirm'}

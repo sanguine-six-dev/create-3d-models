@@ -16,15 +16,16 @@ class OrderConfirm extends Component {
     render() {
 
         //I couldn't figure out any way to get these values here other than localStorage
-        const listing = localStorage.getItem("listing")
-        var cost = localStorage.getItem("cost")
-        const newTier = localStorage.getItem("newTier")
-        const email = localStorage.getItem("email")
+        const listing = sessionStorage.getItem("listing")
+        var cost = sessionStorage.getItem("cost")
+        const newTier = sessionStorage.getItem("newTier")
+        const email = sessionStorage.getItem("email")
 
         if (newTier == null) {
             return (
-                <div>
-                    <h1>Sorry, something went wrong. Please go back and try again. If the problem persists, please contact customer support.</h1>
+                <div class="text-center">
+                    <h1>Sorry, something went wrong. </h1><br/>
+                        <p>Please go back and try again. If the problem persists, please contact customer support.</p>
                 </div>
             )
         }
@@ -62,7 +63,7 @@ class OrderConfirm extends Component {
                                 <b>Order Summary:</b>
                             </div>
                             <div class="col-sm order-col">
-                                <b>{subscriptionTier} (monthly subscription)</b>
+                                <b>{subscriptionTier} Upgrade</b>
                                 <br/>
                                 <div>for {listing}</div>
                                 <br/>
