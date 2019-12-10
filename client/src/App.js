@@ -5,6 +5,7 @@ import NotFound from "./views/NotFound"
 import Header from "./components/Header/Header"
 import Portal from './components/UserPortal/Portal'
 import LoginLanding from "./components/UserLogin/LoginLanding"
+import OrderConfirm from "./components/OrderConfirm/OrderConfirm"
 
 
 
@@ -13,7 +14,7 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            userId: ''
+            userId: '',
         };
         let key = 'userId';
     }
@@ -25,6 +26,7 @@ class App extends Component {
 
         sessionStorage.setItem(this.key, this.state.userId);
     }
+
 
     render() {
         return (
@@ -44,6 +46,11 @@ class App extends Component {
                            render={
                                (props) => <LoginLanding setUserId={this.setUserId.bind(this)}
                                />}
+                    />
+                    <Route exact path="/OrderConfirm"
+                            render={
+                                (props) => <OrderConfirm
+                                />}
                     />
                     <Route component={NotFound}/>
                 </Switch>

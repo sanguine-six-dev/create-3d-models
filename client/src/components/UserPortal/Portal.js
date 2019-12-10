@@ -46,7 +46,7 @@ class Portal extends Component {
                                 <div class="tab-pane fade show" id="v-pills-user-information" role="tabpanel" aria-labelledby="v-pills-user-information-tab"><UserInfo /></div>
                                 <div class="tab-pane fade show" id="v-pills-display-listings" role="tabpanel" aria-labelledby="v-pills-display-listings-tab"><UserListings />  </div>
                                 <div class="tab-pane fade show" id="v-pills-add-listing" role="tabpanel" aria-labelledby="v-pills-add-listing-tab"><AddListing />  </div>
-                                <div class="tab-pane fade show" id="v-pills-subscription" role="tabpanel" aria-labelledby="v-pills-subscription-tab"><SubscriptionInfo />  </div>
+                                <div class="tab-pane fade show" id="v-pills-subscription" role="tabpanel" aria-labelledby="v-pills-subscription-tab"><SubscriptionInfo/>  </div>
                                 <div class="tab-pane fade show" id="v-pills-traffic" role="tabpanel" aria-labelledby="v-pills-traffic-tab"> <UserData />    </div>
                             </div>
                         </div>
