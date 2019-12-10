@@ -83,7 +83,6 @@ class UpdateContactInfo extends Component {
 
     refreshPage() {
         window.location.reload();
-        console.log('Refreshing');
     }
 
     updateContactInfo(userInfo) {

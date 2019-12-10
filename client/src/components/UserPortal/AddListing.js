@@ -91,6 +91,10 @@ class AddListing extends React.Component {
             });
     };
 
+    refreshPage() {
+        window.location.reload();
+    }
+
     updatelistings(listingObj) {
         let id = listingObj._id;
         let listingsArray = [];
@@ -107,7 +111,6 @@ class AddListing extends React.Component {
             "website": this.state.website
         };
 
-        //console.log(`listing array before: ${JSON.stringify(listingObj.listings)}`);
         let listingsString = "";
         let arrayString = "";
         if (listingObj.listings !== null) {
@@ -147,14 +150,15 @@ class AddListing extends React.Component {
                 });
                 console.log(res);
                 console.log(res.data);
-            })
+            });
+        this.refreshPage();
     }
 
     render() {
         return (
             <div class="form-container">
                 <form class="listing-form" onSubmit={this.handleSubmit}>
-                    <div class="form-row d-flex justify-content-center" >
+                    <div class="form-row d-flex justify-content-center">
                         <div class="form-group col-md-9">
                             <label for="name">Location Name</label>
                             <input
@@ -229,7 +233,7 @@ class AddListing extends React.Component {
                             />
                         </div>
 
-                        </div>
+                    </div>
 
                     <div class="form-row d-flex justify-content-center">
                         <div class="form-group col-md-9">
