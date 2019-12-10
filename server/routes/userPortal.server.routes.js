@@ -12,6 +12,9 @@ router.route('/')
     .get(userPortal.list)
     .post(userPortal.create);
 
+router.route('fetchListings')
+    .get(userPortal.fetchListings);
+
 /*
   The ':' specifies a URL parameter.
  */

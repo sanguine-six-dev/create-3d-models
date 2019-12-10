@@ -108,3 +108,7 @@ exports.userByID = function (req, res, next, id) {
         }
     });
 };
+
+exports.fetchListings = function(req, res) {
+    console.log('Retrieving listings!');
+}

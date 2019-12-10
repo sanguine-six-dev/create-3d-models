@@ -1,16 +1,40 @@
-import React from 'react';
+import React, {Component} from 'react'
+import axios from 'axios'
 import './Home.css';
 
 
 
-function Home() {
-    return (
-        <div class="homeCSS" >
-                    
-            <iframe class="MapCSS" src='http://localhost:8081/index.html'  />
+class Home extends Component {
 
-        </div>
-    );
+    constructor(props) {
+        super(props);
+
+        this.state = {
+        listingsArray: []
+        }
+
+        this.fetchListings = this.fetchListings.bind(this);
+    }
+
+    fetchListings = event => {
+        console.log('Retrieving Listings!')
+        event.preventDefault();
+        let success = false;
+        axios.get('/api/userPortal/fetchListings')
+        .then(res => {
+            console.log('Retrieved listings!')
+        })
+    }
+
+    render() {
+        return (
+            <div class="homeCSS" >
+                        
+                <iframe onLoad={this.fetchListings} class="MapCSS" src='http://localhost:8081/index.html'  />
+
+            </div>
+        );
+    }
 }
 
 export default Home;
