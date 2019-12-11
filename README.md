@@ -1,3 +1,45 @@
+## Deployed Site
+The website is currently hosted on https://create-3d-demo.herokuapp.com/Home
+
+## Project Features Implemented and Associated Screenshots
+
+### Pages
+
+#### Home Page
+![ScreenShot](https://github.com/sanguine-six-dev/create-3d-models/blob/master/client/src/assets/Page\ Screenshots/Homepage.png)
+
+#### Pricing Page
+
+#### Login tab
+
+#### Register tab
+
+#### Portal Page
+
+### Portal Components
+
+#### My Profile
+
+#### Change Password
+
+#### Update Email Preferences
+
+#### Update Contact Info
+
+#### My Information
+
+#### My Listings
+
+#### Add Listing
+
+#### My Subscription
+
+#### My Traffic
+
+#### Paypal Checkout
+
+#### Modals
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 This project contains an example project board meant to showcase how one can be used. The issues posted to it are not real issues.
 
