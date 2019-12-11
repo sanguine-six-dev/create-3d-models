@@ -284,6 +284,11 @@ class AddListing extends React.Component {
     }
 }
 
+    /* The button will be displayed in the components render, but is tied to this function to use these
+    // functions. When clicked it will call handleShow, which checks if the user is logged in and
+    // sets the modal to be displayed. Passed has submit from initial render to know whether or not the user has submit the form
+    */
+
 function Modal_display(props) {
     const [show, setShow] = useState(false);
 

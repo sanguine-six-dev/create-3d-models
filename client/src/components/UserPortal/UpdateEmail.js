@@ -35,18 +35,21 @@ class UpdateEmail extends Component {
     };
 
     handleSubmit = event => {
+        //Prevent the user from submitting an empty form.
         event.preventDefault();
         const {emailAddress} = this.state;
         if (emailAddress !== "" && !this.state.emailFieldError) {
+            //The user filled the form in correctly, set the state
             this.state.has_submit = 'true';
+            //Call this so the state is updated immediately for the modal.
             this.setState({has_submit:this.state.has_submit});
-            //alert(`Updated Email Address: ${emailAddress}`);
-
+            //Update the user's info
             this.findAndUpdate();
         } else {
+            //The user didn't fill the form in correctly, set the state
             this.state.has_submit = 'false';
+            //Call this so the state is updated immediately for the modal.
             this.setState({has_submit:this.state.has_submit});
-            //alert(`The email address submitted must be in valid form`)
         }
     };
 
@@ -64,10 +67,6 @@ class UpdateEmail extends Component {
                 console.log(res);
                 this.updateEmailPreference(res.data);
             });
-    }
-
-    refreshPage() {
-        window.location.reload();
     }
 
     updateEmailPreference(userInfo) {
@@ -89,7 +88,6 @@ class UpdateEmail extends Component {
                 console.log(res);
                 console.log(res.data);
             });
-        this.refreshPage();
     }
 
     render() {
@@ -125,8 +123,24 @@ class UpdateEmail extends Component {
 function Modal_display(props) {
     const [show, setShow] = useState(false);
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    //Just refreshed the page.
+    function refreshPage() {
+        window.location.reload();
+    }
+
+    //When the modal alert is closed, slight delay, then the window reloads.
+    function handleClose () {
+        setShow(false);
+        setTimeout(function () {
+            if (-1 === -1) {
+                refreshPage();
+            }
+        }, 500);
+    }
+    function handleShow () {
+        setShow(true);
+    }
+
     const has_submit = props.has_submit;
 
     if (has_submit==='true') {

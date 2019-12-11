@@ -35,7 +35,12 @@ class UserInfo extends Component {
                 )
             });
     }
-
+    /* Uses a dark variant of the React Bootstrap table to display simple information about the user
+    // The info comes from the state, which is updated through axios in getCurrentInformation.
+    */
+    /* Issues: Professor noted that the icons and the category names might be too much
+    // Switch icons from right to left? Would be more consistent with pricing page.
+    */
     render() {
         return (
             <div id="customUserInfo">
