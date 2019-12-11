@@ -55,6 +55,19 @@ The website is currently hosted on https://create-3d-demo.herokuapp.com/Home
 #### Modals
 ![ScreenShot](https://github.com/sanguine-six-dev/create-3d-models/blob/master/client/src/assets/Component%20Screenshots/Modals.png)
 
+## How to run
+### Locally
+Ken can you fill this out
+### Heroku
+David can you fill this out
+
+## Team Members
+* Ashleigh Hillebrand - Product Manager
+* Ken Wilkinson - Scrum Master
+* David Meadows - Development Team
+* Matt Rabe - Development Team
+* Connor Wolfe - Development Team
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 This project contains an example project board meant to showcase how one can be used. The issues posted to it are not real issues.
 
