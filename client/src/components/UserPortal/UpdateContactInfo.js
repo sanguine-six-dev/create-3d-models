@@ -58,17 +58,21 @@ class UpdateContactInfo extends Component {
     };
 
     handleSubmit = event => {
+        //Prevent the user from submitting an empty form
         event.preventDefault();
         const {name, phone, address, nameFieldError, phoneFieldError} = this.state;
         if (name !== "" && !nameFieldError && phone !== "" && !phoneFieldError) {
-            //alert(`name: ${name}\nphone number: ${phone}\naddress: ${address}`);
+            //User had all the appropriate forms filled out, so they can submit
             this.state.has_submit = 'true';
+            //Set the state to pass it to the modal later
             this.setState({has_submit:this.state.has_submit});
+            //Update the users information
             this.findAndUpdate();
         } else {
+            //Form was not filled out correctly
             this.state.has_submit = 'false';
+            //Set the state to reflect they haven't actually submit.
             this.setState({has_submit:this.state.has_submit});
-            //alert(`Submission requires Name and Phone Number fields must be filled out.`)
         }
 
     };
@@ -79,10 +83,6 @@ class UpdateContactInfo extends Component {
                 console.log(res);
                 this.updateContactInfo(res.data);
             });
-    }
-
-    refreshPage() {
-        window.location.reload();
     }
 
     updateContactInfo(userInfo) {
@@ -104,8 +104,6 @@ class UpdateContactInfo extends Component {
                 console.log(res);
                 console.log(res.data);
             });
-        //It originally refreshed immediately, now the window refreshes when the alert is closed.
-        //this.refreshPage();
     }
 
     render() {
@@ -167,13 +165,22 @@ class UpdateContactInfo extends Component {
     }
 }
 
+    /* The button will be displayed in the components render, but is tied to this function to use these
+       // functions. When clicked it will call handleShow, which checks if the user is logged in and
+       // sets the modal to be displayed. When the modal is closed there is a slight delay that can be
+       // adjusted by adjusting the timeout value (ms) above. Then the user's page is refreshed, so that
+       // the data is updated appropriately.
+        */
+
 function Modal_display(props) {
     const [show, setShow] = useState(false);
 
+    //Just refreshed the page.
     function refreshPage() {
         window.location.reload();
     }
 
+    //When the modal alert is closed, slight delay, then the window reloads.
     function handleClose () {
         setShow(false);
         setTimeout(function () {
@@ -186,11 +193,6 @@ function Modal_display(props) {
         setShow(true);
     }
     const has_submit = props.has_submit;
-    const name = props.name;
-    const address = props.address;
-    const phone = props.phone;
-    //When I tried to use the name address and phone to be similar to the other alert, it would display
-    //and then just revert back to the names of the variables.
 
     if (has_submit==='true') {
         return (

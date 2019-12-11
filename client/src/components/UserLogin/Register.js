@@ -59,36 +59,38 @@ class Register extends Component {
         });
     };
 
+    //As the user types their first name, this updates the state
     handleFirstChange = e => {
         this.setState({
             first_name: e.target.value
         });
     };
-
+    //As the user types their last name, this updates the state
     handleLastChange = e => {
         this.setState({
             last_name: e.target.value
         });
     };
-
+    //As the user types their email, this updates the state
     handleEmailChange = e => {
         this.setState({
             email_address: e.target.value
         });
     };
-
+    //As the user types their password, this updates the state
     handlePasswordChange = e => {
         this.setState({
             password: e.target.value
         });
     };
-
+    //As the user types their confirming password, this updates the state
     handlePassword2Change = e => {
         this.setState({
             passwordconfirm: e.target.value
         });
     };
-
+    //This function checks to see if all the necessary characters in an email are in the form.
+    //If they are not, it populates the form feedback with the error message.
     emailValidation = () => {
         const email = this.state.email_address;
         this.setState({
@@ -97,7 +99,8 @@ class Register extends Component {
             }
         )
     };
-
+    //This function checks to see if the first name form is filled in.
+    //If they are not, it populates the form feedback with the error message.
     firstValidation = () => {
         const first = this.state.first_name;
         this.setState({
@@ -107,6 +110,8 @@ class Register extends Component {
         )
     };
 
+    //This function checks to see if the last name form is filled in.
+    //If they are not, it populates the form feedback with the error message.
     lastValidation = () => {
         const last = this.state.last_name;
         this.setState({
@@ -115,7 +120,8 @@ class Register extends Component {
             }
         )
     };
-
+    //This function checks to see if the password is at least 5 characters.
+    //If they are not, it populates the form feedback with the error message.
     passwordValidation = () => {
         const password = this.state.password;
         this.setState({
@@ -125,6 +131,8 @@ class Register extends Component {
         )
     };
 
+    //This function checks to see if the first password matches the second.
+    //If they are not, it populates the form feedback with the error message.
     password2Validation = () => {
         const password = this.state.password;
         const password2 = this.state.passwordconfirm;
@@ -215,6 +223,10 @@ class Register extends Component {
         )
     }
 }
+       /* The button will be displayed in the components render, but is tied to this function to use these
+       // functions. When clicked it will call handleShow, which checks if the registration was successful and
+       // sets the modal to be displayed. Nothing happens when the modal is closed.
+       */
 
 function Modal_display(props) {
     const [show, setShow] = useState(false);

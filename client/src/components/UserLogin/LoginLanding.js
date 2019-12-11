@@ -28,7 +28,7 @@ class LoginLanding extends Component {
             this.props.setUserId(userId);
         }
     }
-
+    /* This is the container that contains both tabs for the login and register */
     render() {
         return (
             <Col className="justify-content-center" id="myLoginBox">

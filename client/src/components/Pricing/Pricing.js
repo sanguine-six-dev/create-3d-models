@@ -7,8 +7,6 @@ import Premium from "../../assets/premium.png";
 import Address from "../../assets/address-icon.png";
 import Image360 from "../../assets/360image.png";
 import Upload from "../../assets/upload.png";
-import Redirect from "react-router-dom/es/Redirect";
-import Login from "../UserLogin/Login";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 
@@ -22,31 +20,17 @@ class Pricing extends Component {
         };
     }
 
-    setUserId(userId) {
-        if (userId !== '') {
-            this.props.setUserId(userId);
-        }
-    }
+    /* Things to note in this render section
+    // All the icons are imported at the top, credited in documentation
+    // The content divider is the div with the wrapper
+    // also credited in documentation.
+    // The pricing table is a free package found online for react 'react-pricing-table'
+     */
 
-    setRedirect = () => {
-        if (sessionStorage.getItem(this.key) !== null) {
-            this.setState({
-                redirect: true
-            })
-        }
-    };
-
-    /* handlePush = () => {
-        console.log(this.state.redirect);
-        if (this.state.redirect) {
-            this.props.history.push('/Portal');
-        }
-    };
-
-    doRedirect = () => {
-        this.setRedirect();
-        this.handlePush();
-    }; */
+    /* Issues: Professor noted that the divider might have been jittery.
+    // Solution? Replace with an identical image in a similar manner to the icons.
+    // Professor also noted that she personally didn't like the animation when hovering over each option.
+     */
 
     render() {
         return(
@@ -161,26 +145,25 @@ class Pricing extends Component {
 }
 
 function Modal_display(props) {
+    //Set the states that the modal can be in, initialize false.
     const [show, setShow] = useState(false);
 
-    let redirect;
-    redirect = false;
+    //userId and history are passed in by necessity
+    //userId lets us check if the user is logged in
     let userId = props.userId;
+    //history allows us to push the user and store their history.
     let history = props.history;
 
     function handleShow () {
         //Display the modal
         setShow(true);
-        //Make sure that the user is logged in.
-        if (userId !== null) {
-            redirect = true;
-        }
     }
 
     function handleClose () {
         //Close the modal
         setShow(false);
         //This is just here to provide a slight delay when the user clicks out of the modal
+        //Push sends the user to the portal, and stores the history in the history prop.
         setTimeout(function () {
             if (userId) {
                 history.push('/Portal');
@@ -188,13 +171,22 @@ function Modal_display(props) {
         }, 500);
     }
 
+    /* The button will be displayed in the components render, but is tied to this function to use these
+    // functions. When clicked it will call handleShow, which checks if the user is logged in and
+    // sets the modal to be displayed. When the modal is closed there is a slight delay that can be
+    // adjusted by adjusting the timeout value (ms) above. Then the user is pushed to the portal.
+     */
+
+    /* Issue: The redirecting modal currently shows the same message whether or not the user is logged in
+    // It would be a good idea to change the message with some conditional logic, so unlogged user knows
+    // they are not logged in.
+     */
+
     return (
             <>
-
                 <button type="submit" onClick={handleShow} className="btn btn-secondary btn-block" id="order">
                     ORDER NOW
                 </button>
-
                     <Modal show={show} onHide={handleClose}>
                         <Modal.Header closeButton>
                             <Modal.Title>Redirecting</Modal.Title>
@@ -212,7 +204,7 @@ function Modal_display(props) {
 
 
 }
-
+//This statement assists with the push that is used to redirect the user to the userportal.
 Pricing = withRouter(Pricing);
-
+//Export the component to be used in App.js
 export default Pricing

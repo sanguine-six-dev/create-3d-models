@@ -15,6 +15,8 @@ class ChangePassword extends Component {
         };
     };
 
+    //When called it will update the state of the password and then check
+    //If newpass === newpassconfirm
     handlePasswordChange = event => {
         this.setState({
             newpass: event.target.value
@@ -23,6 +25,7 @@ class ChangePassword extends Component {
         })
     };
 
+    //Sets the secondary confirmation password, then checks same as above
     handlePasswordChangeConfirm = event => {
         this.setState({
             newpassconfirm: event.target.value
@@ -31,6 +34,7 @@ class ChangePassword extends Component {
         })
     };
 
+    //Check if the passwords are the same, if they are great, if they aren't change the error text.
     passwordValidation = () => {
         const password1 = this.state.newpass;
         const password2 = this.state.newpassconfirm;
@@ -42,19 +46,23 @@ class ChangePassword extends Component {
     };
 
     handleSubmit = event => {
+        //Prevent from submitting empty forms.
         event.preventDefault();
         const {newpass} = this.state;
         const {newpassconfirm} = this.state;
         if (newpass !== "" && !this.state.passwordFieldError) {
+            //If they passed the above logic, they've submitted
             this.state.has_submit = 'true';
+            //Have to call set state to get the state to update immediately for the modal alert.
             this.setState({has_submit:this.state.has_submit});
-            //alert(`Password has been Updated`);
-
+            //Update the users password
             this.findAndUpdate();
         } else {
+            //They didn't pass the logic, either because the password was empty
+            //or the error field was populated.
             this.state.has_submit = 'false';
+            //Have to call set to get the state to update immediately for the modal alert
             this.setState({has_submit:this.state.has_submit});
-            //alert(`The password was NOT updated`)
         }
     };
 
@@ -85,7 +93,11 @@ class ChangePassword extends Component {
                 console.log(res.data);
             })
     }
-
+    /* onSubmit, onChange, and onBlur are all the important callers to the functions
+    // Some one line conditional logic to change whether or not the form provides form feedback (line 106).
+    // Submit button is in the modal function call, which is provided has_submit to be able to recognize
+    // when the user has submit.
+    */
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
@@ -125,6 +137,11 @@ class ChangePassword extends Component {
         )
     }
 }
+
+    /* The button will be displayed in the components render, but is tied to this function to use these
+    // functions. When clicked it will call handleShow, which checks if the user is logged in and
+    // sets the modal to be displayed. Passed has submit from initial render to know whether or not the user has submit the form
+    */
 
 function Modal_display(props) {
     const [show, setShow] = useState(false);

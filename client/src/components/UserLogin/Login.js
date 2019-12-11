@@ -30,12 +30,13 @@ class Login extends Component {
         }
     }
 
+    //Updates username state when typed
     handleUserChange = event => {
         this.setState({
             username: event.target.value
         });
     };
-
+    //Updates password state when typed
     handlePassChange = event => {
         this.setState({
             password: event.target.value
@@ -43,6 +44,7 @@ class Login extends Component {
     };
 
     handleLogin = event => {
+        //Prevent the user from submitting empty form.
         event.preventDefault();
         let success = false;
 
@@ -59,7 +61,7 @@ class Login extends Component {
                 if (success) {
                     this.state.isloggedin = 'true';
                     this.setState({isloggedin:this.state.isloggedin});
-                    this.props.history.push("/Portal");
+                    //this.props.history.push("/Portal");
                 } else {
                     this.state.isloggedin = 'false';
                     this.setState({isloggedin:this.state.isloggedin});
@@ -88,7 +90,8 @@ class Login extends Component {
         )
     };
 
-
+    /* Renders the form for logging in, which includes providing form feedback to prevent bad input */
+    // Issue: text-danger was the only form feedback type I could personally get to render, be aware when changing.
     render() {
 
         return (
@@ -120,20 +123,41 @@ class Login extends Component {
                         <div className='text-danger'>{this.state.passwordFieldError}</div>
                     </div>
                     <Example
-                        isloggedin={this.state.isloggedin}/>
+                        isloggedin={this.state.isloggedin}
+                        history={this.props.history}
+                    />
                 </form>
             </div>
         )
     }
 
 }
+       /* The button will be displayed in the components render, but is tied to this function to use these
+       // functions. When clicked it will call handleShow, which sets the modal to be displayed.
+       // When the modal is closed there is a slight delay that can be
+       // adjusted by adjusting the timeout value (ms) above. Then the user's page is pushed to the portal.
+       */
+
+       /* Issue: Currently bad attempts at logging in still push the user to the portal. */
 
 function Example(props) {
     const [show, setShow] = useState(false);
-
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
     const isloggedin = props.isloggedin;
+    let history = props.history;
+
+    //When the modal alert is closed, slight delay, then the window reloads.
+    function handleClose () {
+        setShow(false);
+        setTimeout(function () {
+            if (isloggedin) {
+                history.push('/Portal');
+            }
+        }, 500);
+    }
+
+    function handleShow () {
+        setShow(true);
+    }
 
     if (isloggedin === 'true') {
         return (
@@ -183,6 +207,6 @@ function Example(props) {
         );
     }
 }
-
+//Necessary to push the user.
 Login = withRouter(Login);
 export default Login
