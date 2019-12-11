@@ -9,36 +9,51 @@ The website is currently hosted on https://create-3d-demo.herokuapp.com/Home
 ![ScreenShot](https://github.com/sanguine-six-dev/create-3d-models/blob/master/client/src/assets/Page%20Screenshots/Homepage.png)
 
 #### Pricing Page
+![ScreenShot](https://github.com/sanguine-six-dev/create-3d-models/blob/master/client/src/assets/Page%20Screenshots/Pricing1.png)
+![ScreenShot](https://github.com/sanguine-six-dev/create-3d-models/blob/master/client/src/assets/Page%20Screenshots/Pricing2.png)
 
 #### Login tab
+![ScreenShot](https://github.com/sanguine-six-dev/create-3d-models/blob/master/client/src/assets/Page%20Screenshots/Login.png)
 
 #### Register tab
+![ScreenShot](https://github.com/sanguine-six-dev/create-3d-models/blob/master/client/src/assets/Page%20Screenshots/Register.png)
 
 #### Portal Page
+![ScreenShot](https://github.com/sanguine-six-dev/create-3d-models/blob/master/client/src/assets/Page%20Screenshots/Portal.png)
 
 ### Portal Components
 
 #### My Profile
+![ScreenShot](https://github.com/sanguine-six-dev/create-3d-models/blob/master/client/src/assets/Component%20Screenshots/MyProfile.png)
 
 #### Change Password
+![ScreenShot](https://github.com/sanguine-six-dev/create-3d-models/blob/master/client/src/assets/Component%20Screenshots/ChangePassword.png)
 
 #### Update Email Preferences
+![ScreenShot](https://github.com/sanguine-six-dev/create-3d-models/blob/master/client/src/assets/Component%20Screenshots/UpdateEmailPreferences.png)
 
 #### Update Contact Info
+![ScreenShot](https://github.com/sanguine-six-dev/create-3d-models/blob/master/client/src/assets/Component%20Screenshots/UpdateContactInfo.png)
 
 #### My Information
+![ScreenShot](https://github.com/sanguine-six-dev/create-3d-models/blob/master/client/src/assets/Component%20Screenshots/MyInformation.png)
 
 #### My Listings
+![ScreenShot](https://github.com/sanguine-six-dev/create-3d-models/blob/master/client/src/assets/Component%20Screenshots/MyListings.png)
 
 #### Add Listing
+![ScreenShot](https://github.com/sanguine-six-dev/create-3d-models/blob/master/client/src/assets/Component%20Screenshots/AddListing.png)
 
 #### My Subscription
+![ScreenShot](https://github.com/sanguine-six-dev/create-3d-models/blob/master/client/src/assets/Component%20Screenshots/MySubscription.png)
 
 #### My Traffic
+![ScreenShot](https://github.com/sanguine-six-dev/create-3d-models/blob/master/client/src/assets/Component%20Screenshots/MyTraffic.png)
 
 #### Paypal Checkout
 
 #### Modals
+![ScreenShot](https://github.com/sanguine-six-dev/create-3d-models/blob/master/client/src/assets/Component%20Screenshots/Modals.png)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 This project contains an example project board meant to showcase how one can be used. The issues posted to it are not real issues.
