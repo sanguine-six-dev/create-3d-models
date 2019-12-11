@@ -69,24 +69,24 @@ David can you fill this out
 * Connor Wolfe - Development Team
 
 ## API Credits
-This web application is built on the MERN stack and utilizes MongoDB, Express, React, React-Bootstrap, NodeJS, Axios, React-Router-Dom, and PaypalButton. The web application was also based off of a MERN stack template (https://github.com/UFWebApps/MERN-Template) provided as a resource in class CEN3031 at the University of Florida.
+This web application is built on the MERN stack and utilizes MongoDB, Express, React, React-Bootstrap, NodeJS, Axios, React-Router-Dom, Passport and PaypalButton. The web application was also based off of a MERN stack template (https://github.com/UFWebApps/MERN-Template) provided as a resource in class CEN3031 at the University of Florida.
 
 ## Other Sources
 * Connor Wolfe
-** Icons
-*** Premium icon: https://www.flaticon.com/free-icon/bookmark_1118300?term=premium&page=1&position=46
-*** Author: bqlqn
-*** Upload icon:  https://www.flaticon.com/free-icon/cloud-computing_512216?term=upload&page=1&position=13
-*** Author: Krill Kazachek
-*** User icon: https://www.flaticon.com/free-icon/user_121693?term=user&page=1&position=22
-*** Mail icon: https://www.flaticon.com/free-icon/black-back-closed-envelope-shape_37572?term=mail&page=1&position=36
-*** 360 icon: https://www.flaticon.com/free-icon/360-degrees_1530099?term=360%20image&page=1&position=3
-*** Author: Freepik
-** Pricing page content divider 
-*** Divider experiments https://codepen.io/Oddgson/pen/VPrYbv
-*** Author: Milan
-** Code Sources used:
-*** React bootstrap component documentation: https://react-bootstrap.github.io/components/
+   * Icons
+         * Premium icon: https://www.flaticon.com/free-icon/bookmark_1118300?term=premium&page=1&position=46
+         * Author: bqlqn
+         * Upload icon:  https://www.flaticon.com/free-icon/cloud-computing_512216?term=upload&page=1&position=13
+         * Author: Krill Kazachek
+         * User icon: https://www.flaticon.com/free-icon/user_121693?term=user&page=1&position=22
+         * Mail icon: https://www.flaticon.com/free-icon/black-back-closed-envelope-shape_37572?term=mail&page=1&position=36
+         * 360 icon: https://www.flaticon.com/free-icon/360-degrees_1530099?term=360%20image&page=1&position=3
+         * Author: Freepik
+   * Pricing page content divider 
+         * Divider experiments https://codepen.io/Oddgson/pen/VPrYbv
+         * Author: Milan
+   * Code Sources used:
+         * React bootstrap component documentation: https://react-bootstrap.github.io/components/
 
 
 # General Information about the template
