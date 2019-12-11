@@ -6,7 +6,7 @@ The website is currently hosted on https://create-3d-demo.herokuapp.com/Home
 ### Pages
 
 #### Home Page
-![ScreenShot](https://github.com/sanguine-six-dev/create-3d-models/blob/master/client/src/assets/Page\ Screenshots/Homepage.png)
+![ScreenShot](https://github.com/sanguine-six-dev/create-3d-models/blob/master/client/src/assets/Page%20Screenshots/Homepage.png)
 
 #### Pricing Page
 
