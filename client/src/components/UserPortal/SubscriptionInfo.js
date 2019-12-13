@@ -9,7 +9,7 @@ import {Redirect} from 'react-router-dom';
 //Throws warnings when comparing in PriceDisplay
 //Needs selectedTier to be an number
 
-var CLIENT = (process.env.SANDBOX || require('../../config/config.js'));
+var CLIENT = (process.env.SANDBOX || require('../../config/config.js').sandbox);
 const ENV = 'sandbox' //I only have access to sandbox testing currently
 
 class SubscriptionInfo extends React.Component {
@@ -40,7 +40,7 @@ class SubscriptionInfo extends React.Component {
                 console.log(res);
                 console.log(userId)
                 res.data.find((info) => {
-                    if (info._id === userId) { 
+                    if (info._id === userId) {
                        this.setState({
                            _id: userId,
                            listings: info.listings
@@ -93,7 +93,7 @@ class SubscriptionInfo extends React.Component {
             <div
             class="row"
             >
-            
+
 
                 <ListingSelector
                     listings={this.state.listings}
@@ -145,7 +145,7 @@ function ListingSelector(props) {
 		});
 
 		return (
-    
+
             <div class="col-md-3" id='column1'>
                 <table class="table table-hover">
                     <thead>
@@ -404,7 +404,7 @@ function CheckoutButtonDisplay(props) {
 
 
         if (props.redirect) {
-            
+
             sessionStorage.setItem("newTier", selected)
             sessionStorage.setItem("cost", upgradeCost)
 
@@ -426,7 +426,7 @@ function CheckoutButtonDisplay(props) {
                          newTier={selected}
                          _id={props._id}
                          selectedListing={selectedListing}
-                         clientId={CLIENT.sandbox}
+                         clientId={CLIENT}
                          currency="USD"
                          shippingPreference={"NO_SHIPPING"}
                          style={{}}
@@ -435,7 +435,7 @@ function CheckoutButtonDisplay(props) {
                          onError={onError}
                          onCancel={onCancel}
                         />
-    
+
                     </div>
                 </div>
             );
