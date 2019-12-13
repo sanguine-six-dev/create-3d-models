@@ -42,18 +42,18 @@ exports.update = function (req, res) {
         .then(result => {
             if (!result) {
                 return res.status(404).send({
-                    message: "Note not found with id " + req.params.req.userInfo._id
+                    message: "User info not found with id " + req.params.req.userInfo._id
                 });
             }
             res.send(result);
         }).catch(err => {
         if (err.kind === 'ObjectId') {
             return res.status(404).send({
-                message: "Note not found with id " + req.params.req.userInfo._id
+                message: "User info not found with id " + req.params.req.userInfo._id
             });
         }
         return res.status(500).send({
-            message: "Error updating note with id " + req.params.req.userInfo._id
+            message: "Error updating User info with id " + req.params.req.userInfo._id
         });
     });
 };
@@ -72,7 +72,7 @@ exports.delete = function (req, res) {
         }).catch(err => {
         if (err.kind === 'ObjectId' || err.name === 'NotFound') {
             return res.status(404).send({
-                message: "Note not found with id " + userInfo._id
+                message: "User info not found with id " + userInfo._id
             });
         }
         return res.status(500).send({
@@ -109,7 +109,7 @@ exports.deleteListing = function (req, res) {
         }).catch(err => {
         if (err.kind === 'ObjectId' || err.name === 'NotFound') {
             return res.status(404).send({
-                message: "Note not found with id " + userInfo._id
+                message: "User info not found with id " + userInfo._id
             });
         }
         return res.status(500).send({
@@ -174,7 +174,7 @@ exports.fetchListings = function(req, res) {
         res.send(listings)
     })
 
-    
+
     .catch(err => {
         res.status(500).send({
             message: err.message || "Some error occurred while retrieving listing infomation."

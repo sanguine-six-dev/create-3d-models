@@ -4,8 +4,6 @@ const path = require('path'),
     morgan = require('morgan'),
     bodyParser = require('body-parser'),
     userPortalRouter = require('../routes/userPortal.server.routes.js');
-    //listingRouter = require('../routes/addListings.server.routes.js');
-
 
 module.exports.init = () => {
     /*
@@ -14,6 +12,8 @@ module.exports.init = () => {
     */
     mongoose.connect(process.env.DB_URI || require('./config').db.uri, {
         useNewUrlParser: true, useUnifiedTopology: true
+    }).catch(function (err) {
+        console.log(err);
     });
     mongoose.set('useCreateIndex', true);
     mongoose.set('useFindAndModify', false);
@@ -29,8 +29,6 @@ module.exports.init = () => {
 
     // add a router
     app.use('/api/userPortal', userPortalRouter);
-    //app.use('/api/listings', listingRouter);
-
 
     if (process.env.NODE_ENV === 'production') {
         // Serve any static files
