@@ -8,6 +8,7 @@ class AddListing extends React.Component {
     constructor(props) {
         super(props);
 
+        // This stores the state of the new listing that is being added.
         this.state = {
             locationName: '',
             address1: '',
@@ -24,65 +25,99 @@ class AddListing extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     };
 
+    /*
+    This function sets the state of the listing name after a submission
+     */
     handleNameChange = event => {
         this.setState({
             locationName: event.target.value
         })
     };
 
+    /*
+    This function sets the state of the listing address 1 after a submission
+     */
     handleAddress1Change = event => {
         this.setState({
             address1: event.target.value
         })
     };
 
+    /*
+    This function sets the state of the listing address 2 after a submission
+     */
     handleAddress2Change = event => {
         this.setState({
             address2: event.target.value
         })
     };
 
+    /*
+    This function sets the state of the listing city after a submission
+     */
     handleCityChange = event => {
         this.setState({
             city: event.target.value
         })
     };
 
+    /*
+    This function sets the state of the listing state after a submission
+     */
     handleStateChange = event => {
         this.setState({
             state: event.target.value
         })
     };
 
+    /*
+    This function sets the state of the listing zip after a submission
+     */
     handleZipChange = event => {
         this.setState({
             zip: event.target.value
         })
     };
 
+    /*
+    This function sets the state of the listing phone number after a submission
+     */
     handlePhoneChange = event => {
         this.setState({
             phoneNumber: event.target.value
         })
     };
 
+    /*
+    This function sets the state of the listing email address after a submission
+     */
     handleEmailChange = event => {
         this.setState({
             emailAddress: event.target.value
         })
     };
 
+    /*
+    This function sets the state of the listing website after a submission
+     */
     handleWebsiteChange = event => {
         this.setState({
             website: event.target.value
         })
     };
 
+    /*
+    This function calls the findAndUpdate function when the submit button is clicked
+     */
     handleSubmit = event => {
         event.preventDefault();
         this.findAndUpdate();
     };
 
+    /*
+    This function does a http get request and passed the user object to the updatelistings function.
+    The sessionStrorage has the user id of the logged in user.
+     */
     findAndUpdate() {
         axios.get('/api/userPortal/' + sessionStorage.getItem(this.key))
             .then(res => {
@@ -98,6 +133,7 @@ class AddListing extends React.Component {
     updatelistings(listingObj) {
         let id = listingObj._id;
         let listingsArray = [];
+        // Create a new listing object
         let newListing = {
             "locationName": this.state.locationName,
             "address1": this.state.address1,
@@ -110,6 +146,8 @@ class AddListing extends React.Component {
             "subscriptionTier": 0,
             "website": this.state.website
         };
+
+        //Add the new listing object to the existing listing array.
 
         let listingsString = "";
         let arrayString = "";
@@ -135,8 +173,7 @@ class AddListing extends React.Component {
             .then(res => {
                 this.state.has_submit = 'true';
                 this.setState({has_submit:this.state.has_submit});
-                //alert(`The listing has been added`);
-
+                // clear form input fields
                 this.setState({
                     locationName: "",
                     address1: "",
@@ -151,6 +188,7 @@ class AddListing extends React.Component {
                 console.log(res);
                 console.log(res.data);
             });
+        // refresh page, this will update the information displayed in the UserPortal
         this.refreshPage();
     }
 
