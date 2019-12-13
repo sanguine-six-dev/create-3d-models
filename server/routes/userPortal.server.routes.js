@@ -12,8 +12,16 @@ router.route('/')
     .get(userPortal.list)
     .post(userPortal.create);
 
-    //This route will allow an administrator to gather all listings
-    router.route('/fetchListings')
+router.route('/register')
+    .get(userPortal.list)
+    .post(userPortal.create);
+
+router.route('/login')
+    .get(userPortal.list)
+    .post(userPortal.login);
+
+//This route will allow an administrator to gather all listings
+router.route('/fetchListings')
     .get(userPortal.fetchListings);
 
 /*

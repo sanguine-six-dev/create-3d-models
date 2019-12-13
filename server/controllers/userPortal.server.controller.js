@@ -1,5 +1,6 @@
 /* Dependencies */
 var mongoose = require('mongoose'),
+    passport = require('passport'),
     UserPortal = require('../models/userPortal.server.model.js');
 
 /* Create an User Portal information account*/
@@ -14,9 +15,32 @@ exports.create = function (req, res) {
             console.log(err);
             res.status(400).send(err);
         } else {
+            res.status(200);
             res.json(userInfo);
+            console.log("Successfully registered " + userInfo.emailAddress);
             console.log(userInfo);
+
+            passport.authenticate('local')(req, res, () => {
+                req.session.save((err) => {
+                    if (err) {
+                        console.log("There was an issue registering -- Passport");
+                    }
+                })
+            });            
         }
+    });
+};
+
+
+//This verifies user and password through authentication from passport
+exports.login = passport.authenticate('local'), (req, res) => {
+    req.session.save((err) => {
+        if (err) {
+            console.log("There was an issue logging in using passport")
+        } else {
+            console.log("Successful log in with passport");
+        }
+        return res.status(200);
     });
 };
 

@@ -48,24 +48,35 @@ class Login extends Component {
         event.preventDefault();
         let success = false;
 
-        axios.get('/api/userPortal')
+        axios.get('/api/userPortal/login')
             .then(res => {
-                console.log(res);
-
-                res.data.find((userInfo) => {
-                    if (userInfo.emailAddress === this.state.username && userInfo.password === this.state.password) {
-                        success = true;
-                        this.loginUpdate(userInfo._id);
-                    }
+                axios.post('/api/userPortal/login', {
+                    "emailAddress": this.state.username,
+                    "password": this.state.password
+                })
+                    .then(res => {
+                        this.setState({
+                            username: "",
+                            password: ""
+                        });
+                        console.log(res);
+                        console.log(res.data);
+                        if (res.status === 200) {
+                            success = true;
+                        }
+                    }).catch((error) => {
+                        console.log(error.response);
+                }).catch((error) => {
+                    console.log(error.response);
                 });
-                if (success) {
+
+                if (success = true) {
                     this.state.isloggedin = 'true';
                     this.setState({isloggedin:this.state.isloggedin});
-                    //this.props.history.push("/Portal");
                 } else {
+                    success = false;
                     this.state.isloggedin = 'false';
                     this.setState({isloggedin:this.state.isloggedin});
-                    //alert('Incorrect Username or Password');
                 }
             });
     };

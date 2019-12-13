@@ -1,5 +1,6 @@
 /* Import mongoose and define any variables needed to create the schema */
 var mongoose = require('mongoose'),
+    passportLocalMongoose = require('passport-local-mongoose'),
     Schema = mongoose.Schema;
 
 //Added schema
@@ -73,6 +74,9 @@ userPortalSchema.pre('save', function (next) {
     }
     next();
 });
+
+userPortalSchema.plugin(passportLocalMongoose);
+
 var UserPortal = mongoose.model('UserPortal', userPortalSchema);
 
 

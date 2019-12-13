@@ -26,9 +26,9 @@ class Register extends Component {
     handleRegister = event => {
         event.preventDefault();
 
-        axios.get('/api/userPortal')
+        axios.get('/api/userPortal/register')
             .then(res => {
-                axios.post('/api/userPortal', {
+                axios.post('/api/userPortal/register', {
                     "name": this.state.first_name + " " + this.state.last_name,
                     "emailAddress": this.state.email_address,
                     "password": this.state.password
