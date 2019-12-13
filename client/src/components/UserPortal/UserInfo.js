@@ -21,6 +21,10 @@ class UserInfo extends Component {
         this.getCurrentInformation();
     };
 
+    /*
+    This function does a http get request and obtains the user's portal info.
+    The sessionStrorage has the user id of the logged in user.
+     */
     getCurrentInformation() {
         axios.get('/api/userPortal/' + sessionStorage.getItem(this.key))
             .then(res => {

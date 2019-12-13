@@ -17,6 +17,9 @@ class UpdateEmail extends Component {
         this.getCurrentEmail();
     };
 
+    /*
+    This function sets the state of the user's email/username after a submission
+     */
     handleEmailChange = event => {
         this.setState({
             emailAddress: event.target.value
@@ -25,6 +28,9 @@ class UpdateEmail extends Component {
         })
     };
 
+    /*
+    This function is a validation check of the user's email/username after a submission
+     */
     emailValidation = () => {
         const email = this.state.emailAddress;
         const emailValid = email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
@@ -61,6 +67,10 @@ class UpdateEmail extends Component {
             });
     }
 
+    /*
+    This function does a http get request and passed the user object to the updateEmailPreference function.
+    The sessionStrorage has the user id of the logged in user.
+     */
     findAndUpdate() {
         axios.get('/api/userPortal/' + sessionStorage.getItem(this.key))
             .then(res => {

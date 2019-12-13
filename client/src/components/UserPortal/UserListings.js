@@ -20,6 +20,10 @@ class UserListings extends React.Component {
         });
     }
 
+    /*
+    This function does a http get request and obtains the user's portal info.
+    The sessionStrorage has the user id of the logged in user.
+     */
     getCurrentInformation() {
         let listings;
         axios.get('/api/userPortal/' + sessionStorage.getItem(this.key))
