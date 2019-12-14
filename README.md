@@ -57,7 +57,9 @@ The website is currently hosted on https://create-3d-demo.herokuapp.com/Home
 
 ## How to run
 ### Locally
-Ken can you fill this out
+1.  navigate to create-3d-models/ and run npm start (back end/server)
+2.  navigate to create-3d-models/client/ and run npm start (front end)
+3.  navigate to create-3d-models/client/src/components/models and run npm start (React-360/map)
 ### Heroku
 [Deploy_App_with_Heroku](https://github.com/sanguine-six-dev/create-3d-models/blob/master/documents/Deploying_Heroku_App.docx)
 
