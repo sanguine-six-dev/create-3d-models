@@ -59,7 +59,7 @@ The website is currently hosted on https://create-3d-demo.herokuapp.com/Home
 ### Locally
 Ken can you fill this out
 ### Heroku
-[a link](https://github.com/sanguine-six-dev/create-3d-models/blob/master/documents/Deploying_Heroku_App.docx)
+[Deploy_App_with_Heroku](https://github.com/sanguine-six-dev/create-3d-models/blob/master/documents/Deploying_Heroku_App.docx)
 
 ## Team Members
 * Ashleigh Hillebrand - Product Manager
