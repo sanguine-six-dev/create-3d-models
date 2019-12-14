@@ -59,7 +59,7 @@ The website is currently hosted on https://create-3d-demo.herokuapp.com/Home
 ### Locally
 Ken can you fill this out
 ### Heroku
-David can you fill this out
+[a link]()
 
 ## Team Members
 * Ashleigh Hillebrand - Product Manager
@@ -122,6 +122,8 @@ This app can be deployed directly to heroku since there is a script defined in p
 - #### `routes` - This holds all of our HTTP to URL path associations for each unique url
 - #### `tests` - This holds all of our server tests that we have defined
 - #### `server.js` - Defines npm behaviors and packages for the client
+#### `Procfile` - Used for declaring what commands are run by your app's container.
+#### `documents` - Contains any documents related to this project
 #### `package.json` - Defines npm behaviors like the scripts defined in the next section of the README
 #### `.gitignore` - Tells git which files to ignore
 #### `README` - This file!
@@ -141,11 +143,13 @@ Open [http://localhost:3000](http://localhost:3000) to view the client in the br
 Runs just the client app in development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view the client in the browser.
 
-
 ### `npm run-script server`
 
 Runs just the server in development mode.<br>
 
+### `npm run-script map`
+
+Runs just the react-360 map in development mode.<br>
 
 ### `npm run build`
 
