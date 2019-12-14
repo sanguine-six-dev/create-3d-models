@@ -1,0 +1,296 @@
+{
+	"info": {
+		"_postman_id": "2dc28003-8981-4d5e-b8c7-ff4a59a25dba",
+		"name": "create-3d-models Testing",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "update  a listing by id",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"disabled": false,
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\t\"name\": \"David\",\n    \t\"emailAddress\": \"dave@aol.com\",\n    \t\"password\": 12345,\n    \t\"address\": \"123 abc lane\",\n    \t\"phone\": \"1234567890\",\n\t\t\"listings\": [{\n            \"locationName\": \"updated location name 1\",\n            \"address1\": \"address 1\",\n            \"address2\": \"address 2\",\n            \"city\": \"G-ville\",\n            \"state\": \"Fl\",\n            \"zip\": \"32252\",\n            \"phoneNumber\": \"3051234567\",\n            \"emailAddress\": \"updatedtestemail@test.com\"\n        }]\n}"
+				},
+				"url": {
+					"raw": "localhost:5000/api/userPortal/:_id",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"userPortal",
+						":_id"
+					],
+					"variable": [
+						{
+							"key": "_id",
+							"value": "5ddb1c74f993b2ee960c02f1"
+						}
+					]
+				},
+				"description": "Request handler for route /api/listings\nThis is a put request which uses object id as a path variable"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a listing",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"disabled": false,
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:5000/api/userPortal/:_id",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"userPortal",
+						":_id"
+					],
+					"variable": [
+						{
+							"key": "_id",
+							"value": "5deb2d2e357c3322202717dc"
+						}
+					]
+				},
+				"description": "Request handler for route /api/listings\nThis is a put request which uses object id as a path variable"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a user",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"disabled": false,
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:5000/api/userPortal/:_id",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"userPortal",
+						":_id"
+					],
+					"variable": [
+						{
+							"key": "_id",
+							"value": "5df3d0ecbe9f374c987f04d9"
+						}
+					]
+				},
+				"description": "Request handler for route /api/listings\nThis is a put request which uses object id as a path variable"
+			},
+			"response": []
+		},
+		{
+			"name": "save an user's contact information UserPortal",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"disabled": false,
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"userId\": 1,\n\t\"name\": \"testerName\",\n\t\"address\": \"testerAddress\",\n\t\"phone\": \"testerPhone\",\n\t\"emailAddress\": \"test@gmail.com\"\n}"
+				},
+				"url": {
+					"raw": "localhost:5000/api/UserPortal/",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"UserPortal",
+						""
+					]
+				},
+				"description": "Request handler for route /api/listings\nThis is a put request which uses object id as a path variable"
+			},
+			"response": []
+		},
+		{
+			"name": "create an user account for UserPortal",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"disabled": false,
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Paula Meadows\",\n\t\"emailAddress\": \"pmeadows85@gmail.com\",\n\t\"password\": \"12345\"\n}"
+				},
+				"url": {
+					"raw": "localhost:5000/api/UserPortal/",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"UserPortal",
+						""
+					]
+				},
+				"description": "Request handler for route /api/listings\nThis is a put request which uses object id as a path variable"
+			},
+			"response": []
+		},
+		{
+			"name": "get a specific user portal info by id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"disabled": false,
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:5000/api/userPortal/:_id",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"userPortal",
+						":_id"
+					],
+					"variable": [
+						{
+							"key": "_id",
+							"value": "5dec08e47050453886c3e1ec"
+						}
+					]
+				},
+				"description": "Request handler for route /api/listings"
+			},
+			"response": []
+		},
+		{
+			"name": "get a specific user's UserPortal info by id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"disabled": false,
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:5000/api/userPortal/:_id",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"userPortal",
+						":_id"
+					],
+					"variable": [
+						{
+							"key": "_id",
+							"value": "5dc895bd92b2831810ed2661"
+						}
+					]
+				},
+				"description": "Request handler for route /api/listings"
+			},
+			"response": []
+		},
+		{
+			"name": "get all user's UserPortal info",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"disabled": false,
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:5000/api/userPortal",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"userPortal"
+					]
+				},
+				"description": "Request handler for route /api/listings"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
