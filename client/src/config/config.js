@@ -1,5 +1,5 @@
 //This file holds any configuration variables we may need
-//'config.js' is ignored by git to protect sensitive information, such as your database's username and password
+// A sandbox key will need to be entered in order for the paypal SDK to be loaded.
 module.exports = {
     sandbox: ""
 };

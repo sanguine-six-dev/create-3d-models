@@ -9,7 +9,7 @@ import {Redirect} from 'react-router-dom';
 //Throws warnings when comparing in PriceDisplay
 //Needs selectedTier to be an number
 
-var CLIENT = (process.env.SANDBOX || require('../../config/config.js').sandbox);
+var CLIENT = (require('../../config/config.js').sandbox);
 const ENV = 'sandbox' //I only have access to sandbox testing currently
 
 class SubscriptionInfo extends React.Component {

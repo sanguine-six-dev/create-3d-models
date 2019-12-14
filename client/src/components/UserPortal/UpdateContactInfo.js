@@ -19,6 +19,9 @@ class UpdateContactInfo extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     };
 
+    /*
+    This function sets the state of the user's name after a submission
+     */
     handleNameChange = event => {
         this.setState({
             name: event.target.value
@@ -27,6 +30,9 @@ class UpdateContactInfo extends Component {
         })
     };
 
+    /*
+    This function sets the state of the user's phone number after a submission
+     */
     handlePhoneChange = event => {
         this.setState({
             phone: event.target.value
@@ -35,12 +41,18 @@ class UpdateContactInfo extends Component {
         })
     };
 
+    /*
+    This function sets the state of the user's address after a submission
+     */
     handleAddressChange = event => {
         this.setState({
             address: event.target.value
         })
     };
 
+    /*
+    This function is a validation checker of the user's name
+     */
     nameValidation = () => {
         const name = this.state.name;
         this.setState({
@@ -50,6 +62,9 @@ class UpdateContactInfo extends Component {
         )
     };
 
+    /*
+    This function is a validation checker of the user's phone number
+     */
     phoneValidation = () => {
         const phone = this.state.phone;
         this.setState({
@@ -77,6 +92,10 @@ class UpdateContactInfo extends Component {
 
     };
 
+    /*
+    This function does a http get request and passed the user object to the updateContactInfo function.
+    The sessionStrorage has the user id of the logged in user.
+     */
     findAndUpdate() {
         axios.get('/api/userPortal/' + sessionStorage.getItem(this.key))
             .then(res => {
@@ -96,6 +115,7 @@ class UpdateContactInfo extends Component {
             "listings": userInfo.listings
         })
             .then(res => {
+                // clear form input fields
                 this.setState({
                     name: "",
                     phone: "",
